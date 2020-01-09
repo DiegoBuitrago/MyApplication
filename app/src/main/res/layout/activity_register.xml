@@ -24,6 +24,9 @@
         app:layout_constraintTop_toBottomOf="@id/gl_top">
 
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <EditText
             android:id="@+id/et_firstName_register"
             android:layout_width="match_parent"
@@ -31,7 +34,11 @@
             android:hint="Nombres"
             android:inputType="textPersonName"
             android:text="Diego" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <EditText
             android:id="@+id/et_lastName_register"
             android:layout_width="match_parent"
@@ -39,7 +46,11 @@
             android:hint="Apellidos"
             android:inputType="textPersonName"
             android:text="Guerrero" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <EditText
             android:id="@+id/et_username_register"
             android:layout_width="match_parent"
@@ -47,6 +58,7 @@
             android:hint="Usuario"
             android:inputType="textPersonName"
             android:text="d" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

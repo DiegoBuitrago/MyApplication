@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
@@ -21,8 +22,7 @@ public class LogIn extends AppCompatActivity {
     private EditText etPassword;
 
     private Button btnIntro;
-    private Button btnCancel;
-    private ImageView btnAddUser;
+    private TextView txtAddUser;
 
     private ArrayList<Person> personList;
 
@@ -47,16 +47,8 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
-        btnCancel = findViewById(R.id.btn_cancelRegister);
-        btnCancel.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                getCancel(v);
-            }
-        });
-
-        btnAddUser = findViewById(R.id.btn_addUser);
-        btnAddUser.setOnClickListener(new View.OnClickListener(){
+        txtAddUser = findViewById(R.id.txt_add_user);
+        txtAddUser.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 getAddUserActivity(v);
@@ -86,11 +78,6 @@ public class LogIn extends AppCompatActivity {
         homeIntent.putExtra("user", person);
         startActivity(homeIntent);
         finish();
-    }
-
-    public void getCancel(View view){
-        etUsername.setText("");
-        etPassword.setText("");
     }
 
     public void getAddUserActivity(View view){
