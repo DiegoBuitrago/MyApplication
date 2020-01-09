@@ -24,6 +24,7 @@ public class Home extends AppCompatActivity {
     private String firstName;
     private String lastName;
     private String password;
+    private String typeUser;
     private BottomNavigationView buttonNav;
     private FrameLayout frameLayout;
 
@@ -36,6 +37,7 @@ public class Home extends AppCompatActivity {
             firstName = userCurrent.getFirstName();
             lastName = userCurrent.getLastName();
             password = userCurrent.getPassword();
+            typeUser = userCurrent.getTypeUser();
         init();
     }
 
@@ -62,7 +64,7 @@ public class Home extends AppCompatActivity {
                         launchFragment(serviceFragment);
                         break;
                     case R.id.item_settings:
-                        Fragment settingsFragment = SettingsFragment.newInstance(firstName, lastName, password);
+                        Fragment settingsFragment = SettingsFragment.newInstance(firstName, lastName, password, typeUser);
                         launchFragment(settingsFragment);
                         break;
                 }

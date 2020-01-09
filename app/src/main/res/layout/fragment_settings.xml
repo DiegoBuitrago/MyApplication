@@ -8,105 +8,298 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_topSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_end="479dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="103dp"
-            android:layout_height="103dp"
-            android:src="@drawable/photo_user"
-            app:layout_constraintBottom_toTopOf="@+id/gl_topSettings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.165"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
 
-        <EditText
-            android:id="@+id/txt_name_user"
-            android:layout_width="166dp"
-            android:layout_height="49dp"
-            android:ems="10"
-            android:enabled="true"
-            android:inputType="textPersonName"
-            android:selectAllOnFocus="false"
-            android:text="Nombre"
-            app:layout_constraintBottom_toTopOf="@+id/gl_topSettings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+                    <ImageView
+                        android:id="@+id/imageIconUserSettings"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="12dp"
+                        android:background="@drawable/icon_background"
+                        android:contentDescription="Aaaaaaaaaa"
+                        android:padding="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/photo_user"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btn_edit_user"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:autoLink="phone"
-            android:backgroundTint="#00FFFFFF"
-            android:padding="25dp"
-            android:text="Editar Usuario"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/gl_topSettings" />
+                    <TextView
+                        android:id="@+id/txt_name_person_settings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:gravity="center"
+                        android:text="Nombre de la persona"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btn_bought_user"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:autoLink="phone"
-            android:backgroundTint="#00FFFFFF"
-            android:padding="25dp"
-            android:text="Compras"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_edit_user" />
+                    <TextView
+                        android:id="@+id/txt_desc_user_settings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="40dp"
+                        android:gravity="center"
+                        android:text="@string/data_user_settings"
+                        android:textColor="@color/colorLightText"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_services_user"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:autoLink="phone"
-            android:backgroundTint="#00FFFFFF"
-            android:padding="25dp"
-            android:text="Servicios realizados"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_bought_user" />
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btn_close_session"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:autoLink="phone"
-            android:backgroundTint="#00FFFFFF"
-            android:padding="25dp"
-            android:text="Cerrar Sesion"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_services_user" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="101dp" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_edit_user_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cv_edit_user_set"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/dashboard_item_1_background">
+
+                                <View
+                                    android:layout_width="80dp"
+                                    android:layout_height="0dp"
+                                    android:background="@drawable/end_view_background"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+
+                                <ImageView
+                                    android:id="@+id/imageIconSettings1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="12dp"
+                                    android:background="@drawable/icon_background"
+                                    android:contentDescription="Aaaaaaaaaa"
+                                    android:padding="10dp"
+                                    android:src="@drawable/edit_data_user"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+
+                                <TextView
+                                    android:id="@+id/txtItemSettings1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="80dp"
+                                    android:padding="10dp"
+                                    android:text="@string/edit_user_text"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imageIconSettings1"
+                                    app:layout_constraintTop_toTopOf="@id/imageIconSettings1"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_services_completed_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cv_purchase_set"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/dashboard_item_2_background">
+
+                                <View
+                                    android:layout_width="80dp"
+                                    android:layout_height="0dp"
+                                    android:background="@drawable/end_view_background"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/imageIconSettings2"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="12dp"
+                                    android:background="@drawable/icon_background"
+                                    android:contentDescription="Aaaaaaaaaa"
+                                    android:padding="10dp"
+                                    android:src="@drawable/shopping"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+
+                                <TextView
+                                    android:id="@+id/txtItemSettings2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="80dp"
+                                    android:padding="10dp"
+                                    android:text="@string/purchases"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imageIconSettings2"
+                                    app:layout_constraintTop_toTopOf="@id/imageIconSettings2"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Termina -->
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_purchases_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cv_services_set"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/dashboard_item_3_background">
+
+                                <View
+                                    android:layout_width="80dp"
+                                    android:layout_height="0dp"
+                                    android:background="@drawable/end_view_background"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/imageIconSettings3"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="12dp"
+                                    android:background="@drawable/icon_background"
+                                    android:padding="10dp"
+                                    android:src="@drawable/made_services"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/txtItemSettings3"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="80dp"
+                                    android:padding="10dp"
+                                    android:text="Servicios"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imageIconSettings3"
+                                    app:layout_constraintTop_toTopOf="@id/imageIconSettings3" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Termina -->
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_log_out"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cv_logout_set"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/dashboard_item_4_background">
+
+                                <View
+                                    android:layout_width="80dp"
+                                    android:layout_height="0dp"
+                                    android:background="@drawable/end_view_background"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/imageIconSettings4"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="12dp"
+                                    android:background="@drawable/icon_background"
+                                    android:contentDescription="Aaaaaaaaaa"
+                                    android:padding="10dp"
+                                    android:src="@drawable/logout"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/txtItemSettings4"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="80dp"
+                                    android:padding="10dp"
+                                    android:text="@string/logout"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imageIconSettings4"
+                                    app:layout_constraintTop_toTopOf="@id/imageIconSettings4"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>

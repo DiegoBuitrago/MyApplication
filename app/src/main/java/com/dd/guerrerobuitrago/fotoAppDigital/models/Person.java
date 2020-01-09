@@ -19,7 +19,7 @@ public class Person implements Serializable {
         this.userName = userName;
         this.password = password;
         this.photo = photo;
-        this.typeUser = "Client";
+        this.typeUser = "Cliente";
     }
 
     public int getId() {

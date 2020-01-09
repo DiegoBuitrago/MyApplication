@@ -44,6 +44,8 @@ public class Register extends AppCompatActivity {
         password = findViewById(R.id.et_password_register);
 
         Button btnRegister = findViewById(R.id.btn_register);
+        Button btnChooseImage = findViewById(R.id.btn_choose_photo_user_register);
+
         btnRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -58,6 +60,17 @@ public class Register extends AppCompatActivity {
                 getCancel(v);
             }
         });
+
+        btnChooseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage();
+            }
+        });
+    }
+
+    private void chooseImage() {
+
     }
 
     //No acepta dos usuarios

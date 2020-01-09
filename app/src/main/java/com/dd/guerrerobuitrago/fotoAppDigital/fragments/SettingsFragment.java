@@ -9,28 +9,28 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.EditUser;
 import com.dd.guerrerobuitrago.fotoAppDigital.LogIn;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
-import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SettingsFragment extends Fragment {
 
-    private Button btnEdit;
-    private Button btnServices;
-    private Button btnBoughts;
-    private Button btnCloseSession;
-    private EditText txtNameUser;
+    private View cardEdit;
+    private View cardServices;
+    private View cardPurchases;
+    private View cardLogout;
+    private TextView txtNameUser;
+    private TextView txtDescUser;
 
     private String firstName;
     private String lastName;
     private String password;
+    private String typeUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,25 +41,26 @@ public class SettingsFragment extends Fragment {
     }
 
     private void init(View view) {
-        btnEdit = view.findViewById(R.id.btn_edit_user);
-        txtNameUser = view.findViewById(R.id.txt_name_user);
+        cardEdit = view.findViewById(R.id.cv_edit_user_set);
+        txtNameUser = view.findViewById(R.id.txt_name_person_settings);
+        txtDescUser = view.findViewById(R.id.txt_desc_user_settings);
         Bundle bun = getArguments();
         firstName = bun.getString("firstName");
         lastName = bun.getString("lastName");
         password = bun.getString("password");
         txtNameUser.setText(firstName + " " + lastName);
-
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        txtDescUser.setText(bun.getString("typeUser"));
+        cardEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editUser();
             }
         });
-        btnBoughts = view.findViewById(R.id.btn_bought_user);
-        btnServices = view.findViewById(R.id.btn_services_user);
-        btnCloseSession = view.findViewById(R.id.btn_close_session);
+        cardPurchases = view.findViewById(R.id.cv_purchase_set);
+        cardServices = view.findViewById(R.id.cv_services_set);
+        cardLogout = view.findViewById(R.id.cv_logout_set);
 
-        btnCloseSession.setOnClickListener(new View.OnClickListener() {
+        cardLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeSession();
@@ -80,11 +81,12 @@ public class SettingsFragment extends Fragment {
         startActivity(loginIntent);
     }
 
-    public static SettingsFragment newInstance(String firstName, String lastName, String password){
+    public static SettingsFragment newInstance(String firstName, String lastName, String password, String typeUser){
         Bundle args = new Bundle();
         args.putString("firstName", firstName);
         args.putString("lastName", lastName);
         args.putString("password", password);
+        args.putString("typeUser", typeUser);
         SettingsFragment fragment = new SettingsFragment();
         fragment.setArguments(args);
         return fragment;
