@@ -16,4 +16,20 @@
     <color name="md_grey_600">#757575</color>
 
     <color name="md_teal_800">#00695c</color>
+
+    <color name="colorItem1Start">#FE8D1B</color>
+    <color name="colorItem1End">#E4A401</color>
+
+    <color name="colorItem2Start">#4D79FF</color>
+    <color name="colorItem2End">#0039E6</color>
+
+    <color name="colorItem3Start">#993399</color>
+    <color name="colorItem3End">#602060</color>
+
+    <color name="colorItem4Start">#00B33C</color>
+    <color name="colorItem4End">#006622</color>
+
+    <color name="colorEndBackground">#50ffffff</color>
+    <color name="colorLightText">#ECECEC</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>
