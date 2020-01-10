@@ -42,8 +42,8 @@ public class SettingsFragment extends Fragment {
 
     private void init(View view) {
         cardEdit = view.findViewById(R.id.cv_edit_user_set);
-        txtNameUser = view.findViewById(R.id.txt_name_person_settings);
-        txtDescUser = view.findViewById(R.id.txt_desc_user_settings);
+        txtNameUser = view.findViewById(R.id.txt_name_person_edit);
+        txtDescUser = view.findViewById(R.id.txt_desc_user_edit);
         Bundle bun = getArguments();
         firstName = bun.getString("firstName");
         lastName = bun.getString("lastName");

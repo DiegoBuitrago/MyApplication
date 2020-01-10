@@ -56,11 +56,9 @@ public class Register extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Cancelar", Toast.LENGTH_LONG).show();
                 getCancel(v);
             }
         });
-
         btnChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
