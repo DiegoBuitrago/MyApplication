@@ -33,7 +33,6 @@ public class Register extends AppCompatActivity {
         }else{
             Toast.makeText(getBaseContext(), "Cancelar", Toast.LENGTH_LONG).show();
         }
-
     }
 
     private void init() {

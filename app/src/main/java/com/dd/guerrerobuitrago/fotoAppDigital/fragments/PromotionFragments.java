@@ -47,6 +47,7 @@ public class PromotionFragments extends Fragment {
         return promotionView;
     }
 
+
     private void initComponents(View view) {
         btnFloat = view.findViewById(R.id.btn_float);
         rvPromotion = view.findViewById(R.id.rv_promotion);

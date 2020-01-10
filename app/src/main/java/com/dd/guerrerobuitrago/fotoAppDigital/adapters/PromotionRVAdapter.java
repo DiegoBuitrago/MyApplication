@@ -65,6 +65,7 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
         return viewHolder;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull PromotionRVAdapter.PromotionViewHolder holder, int position) {
         Promotion promotion = promotions.get(position);

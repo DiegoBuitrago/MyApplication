@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class LogIn extends AppCompatActivity {
 
+
     private EditText etUsername;
     private EditText etPassword;
 

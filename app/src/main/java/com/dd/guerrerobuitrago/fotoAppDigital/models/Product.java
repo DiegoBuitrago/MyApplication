@@ -35,4 +35,5 @@ public class Product {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
 }
