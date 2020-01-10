@@ -39,14 +39,26 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/txt_userName_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="40dp"
+            android:text="fsfednjwkddlt"
+            android:gravity="center"
+            android:textColor="@color/colorLightText"
+            android:textSize="15sp" />
+
+        <TextView
             android:id="@+id/txt_desc_user_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="40dp"
+            android:text="fiosdlkcmsadñlvkascmasñdclmaslcñkamsdñl"
             android:gravity="center"
-            android:text="@string/data_user_settings"
             android:textColor="@color/colorLightText"
             android:textSize="15sp" />
     </LinearLayout>
@@ -56,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -88,16 +101,18 @@
                 android:hint="Contraseña"
                 android:inputType="textPassword" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/btn_change_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_two"
-                android:textColor="@color/colorWhite"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
+                android:background="@drawable/btn_two"
                 android:padding="25dp"
-                android:text="Cambiar Imagen" />
+                android:text="Cambiar Imagen"
+                android:textColor="@color/colorWhite"/>
 
             <Button
                 android:id="@+id/btn_update"
@@ -111,9 +126,6 @@
                 android:layout_marginEnd="20dp"
                 android:text="Actualizar"
                 android:textColor="@color/colorWhite" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -16,6 +15,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.fragments.PromotionFragments;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.ServicesFragment;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.SettingsFragment;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.StoreFragment;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,6 +25,8 @@ public class Home extends AppCompatActivity {
     private String lastName;
     private String password;
     private String typeUser;
+    private String userName;
+    private String photo;
     private BottomNavigationView buttonNav;
     private FrameLayout frameLayout;
 
@@ -38,6 +40,8 @@ public class Home extends AppCompatActivity {
             lastName = userCurrent.getLastName();
             password = userCurrent.getPassword();
             typeUser = userCurrent.getTypeUser();
+            userName = userCurrent.getUserName();
+            photo = userCurrent.getPhoto();
         init();
     }
 
@@ -64,7 +68,7 @@ public class Home extends AppCompatActivity {
                         launchFragment(serviceFragment);
                         break;
                     case R.id.item_settings:
-                        Fragment settingsFragment = SettingsFragment.newInstance(firstName, lastName, password, typeUser);
+                        Fragment settingsFragment = SettingsFragment.newInstance(firstName, lastName, password, typeUser, userName, photo);
                         launchFragment(settingsFragment);
                         break;
                 }
