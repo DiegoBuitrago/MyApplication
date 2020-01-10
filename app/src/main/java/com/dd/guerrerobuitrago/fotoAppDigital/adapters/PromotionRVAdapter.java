@@ -1,5 +1,6 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
     public void onBindViewHolder(@NonNull PromotionRVAdapter.PromotionViewHolder holder, int position) {
         Promotion promotion = promotions.get(position);
         holder.tvPromotionName.setText(promotion.getName());
-        holder.imagePromotion.setImageURI(promotion.getPhoto());
+        holder.imagePromotion.setImageURI(Uri.parse(promotion.getPhoto()));
     }
 
     @Override

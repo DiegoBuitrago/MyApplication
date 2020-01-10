@@ -60,7 +60,7 @@ public class PromotionFragments extends Fragment {
             public void onClick(View v) {
                 loadImage();
                 countTest();
-                promotionsList.add(new Promotion(String.valueOf(a), imagen));
+                promotionsList.add(new Promotion(String.valueOf(a), imagen.toString()));
                 rvAdapter.notifyItemInserted(promotionsList.size());
             }
         });

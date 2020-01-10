@@ -1,20 +1,17 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
-
-import android.net.Uri;
-
 public class Promotion {
     private int id_product;
     private String name;
-    private Uri photo;
+    private String photo;
 
-    public Promotion(int id_product, String name, Uri photo) {
+    public Promotion(int id_product, String name, String photo) {
         this.id_product = id_product;
         this.name = name;
         this.photo = photo;
     }
 
-    public Promotion(String name, Uri photo){
+    public Promotion(String name, String photo){
         this.id_product = 0;
         this.name = name;
         this.photo = photo;
@@ -28,7 +25,7 @@ public class Promotion {
         return name;
     }
 
-    public Uri getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
@@ -40,7 +37,7 @@ public class Promotion {
         this.name = name;
     }
 
-    public void setPhoto(Uri photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
