@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +31,7 @@ public class EditUser extends AppCompatActivity {
     private TextView tvUserName;
 
     private ImageView imageUser;
+    private Uri imageUri;
 
     private Button btnChangeImageEdit;
     private Button btnUpdateUser;
@@ -37,14 +41,10 @@ public class EditUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-
         init();
     }
 
     private void init(){
-        for (int i = 0; i < Manager.getPersonList().size(); i++){
-            //Toast.makeText(getBaseContext(), Manager.getPersonList().get(i).getUserName(), Toast.LENGTH_LONG).show();
-        }
         firstNameChange = findViewById(R.id.et_firstName_change);
         lastNameChange = findViewById(R.id.et_lastName_change);
         passwordChange = findViewById(R.id.et_password_change);
@@ -63,6 +63,9 @@ public class EditUser extends AppCompatActivity {
             firstNameChange.setText(bundleFN.getString("firstName"));
             lastNameChange.setText(bundleFN.getString("lastName"));
             passwordChange.setText(bundleFN.getString("password"));
+            //Toast.makeText(getBaseContext(), bundleFN.getString("photo"), Toast.LENGTH_LONG).show();
+            loadPathImage(bundleFN.getString("photo"));
+
             tvTypePerson.setText(bundleFN.getString("typeUser"));
             tvNamePerson.setText(bundleFN.getString("firstName") + " " + bundleFN.getString("lastName"));
             tvUserName.setText(bundleFN.getString("userName"));
@@ -84,17 +87,18 @@ public class EditUser extends AppCompatActivity {
     }
 
     private void changeImage() {
-
+        loadImage();
     }
 
     private void updateUser() {
         //Arreglar la lista de usuarios
         for (int i = 0; i < Manager.getPersonList().size(); i++){
-            Toast.makeText(getBaseContext(), Manager.getPersonList().get(i).getUserName(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), Manager.getPersonList().get(i).getUserName(), Toast.LENGTH_LONG).show();
             if(tvUserName.getText().toString().equals(Manager.getPersonList().get(i).getUserName())){
                 Manager.getPersonList().get(i).setFirstName(firstNameChange.getText().toString());
                 Manager.getPersonList().get(i).setLastName(lastNameChange.getText().toString());
                 Manager.getPersonList().get(i).setPassword(passwordChange.getText().toString());
+                Manager.getPersonList().get(i).setPhoto(imageUri.toString());
                 goToHome(Manager.getPersonList().get(i));
                 return;
             }
@@ -102,11 +106,33 @@ public class EditUser extends AppCompatActivity {
     }
 
     private void goToHome(Person current) {
-        Toast.makeText(getBaseContext(), "Usuario actualizado con exito", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(), "Usuario actualizado con exito", Toast.LENGTH_LONG).show();
         Intent homeIntent = new Intent(this, Home.class);
         homeIntent.putExtra("user", current);
         startActivity(homeIntent);
         finish();
     }
 
+    private void loadImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Toast.makeText(getBaseContext(), "dfhdhgsevsdgsd", Toast.LENGTH_LONG).show();
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            this.imageUri = data.getData();
+            imageUser.setImageURI(imageUri);
+        }
+    }
+
+    private void loadPathImage(String pathString){
+        if(!(pathString == null || pathString =="")) {
+            this.imageUri = Uri.parse(pathString);
+            this.imageUser.setImageURI(imageUri);
+        }
+    }
 }

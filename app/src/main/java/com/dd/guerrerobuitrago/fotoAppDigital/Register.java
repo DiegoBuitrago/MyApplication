@@ -133,6 +133,7 @@ public class Register extends AppCompatActivity {
             this.path = data.getData();
 //          this.imagen = (ImageView) findViewById(R.id.image_user_change);
             imagen.setImageURI(path);
+            Toast.makeText(getBaseContext(), path.toString(), Toast.LENGTH_LONG).show();
         }
     }
 

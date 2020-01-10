@@ -1,6 +1,5 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.fragments;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +31,7 @@ public class SettingsFragment extends Fragment {
     private TextView txtDescUser;
     private TextView txtUserName;
     private ImageView imageUser;
+    private Uri photoUri;
 
     private String firstName;
     private String lastName;
@@ -39,6 +39,7 @@ public class SettingsFragment extends Fragment {
     private String typeUser;
     private String userName;
     private String photo;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +54,7 @@ public class SettingsFragment extends Fragment {
         txtNameUser = view.findViewById(R.id.txt_name_person_set);
         txtDescUser = view.findViewById(R.id.txt_desc_user_set);
         txtUserName = view.findViewById(R.id.txt_userName_set);
-        imageUser = view.findViewById(R.id.image_user_change);
+        imageUser = (ImageView) view.findViewById(R.id.image_user_change);
         Bundle bun = getArguments();
         firstName = bun.getString("firstName");
         lastName = bun.getString("lastName");
@@ -61,6 +62,9 @@ public class SettingsFragment extends Fragment {
         typeUser = bun.getString("typeUser");
         userName = bun.getString("userName");
         photo = bun.getString("photo");
+        loadPathImage(photo);
+        Toast.makeText(getContext(), photo, Toast.LENGTH_LONG).show();
+
         txtNameUser.setText(firstName + " " + lastName);
         txtUserName.setText(userName);
         txtDescUser.setText(typeUser);
@@ -111,4 +115,10 @@ public class SettingsFragment extends Fragment {
         return fragment;
     }
 
+    private void loadPathImage(String pathString){
+        if(!(pathString == null || pathString =="")) {
+            this.photoUri = Uri.parse(pathString);
+            this.imageUser.setImageURI(photoUri);
+        }
+    }
 }
