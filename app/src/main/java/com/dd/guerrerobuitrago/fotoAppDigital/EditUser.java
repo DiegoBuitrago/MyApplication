@@ -90,7 +90,7 @@ public class EditUser extends AppCompatActivity {
     private void updateUser() {
         //Arreglar la lista de usuarios
         for (int i = 0; i < Manager.getPersonList().size(); i++){
-            Toast.makeText(getBaseContext(), Manager.getPersonList().get(i).getUserName(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), Manager.getPersonList().get(i).getUserName(), Toast.LENGTH_LONG).show();
             if(tvUserName.getText().toString().equals(Manager.getPersonList().get(i).getUserName())){
                 Manager.getPersonList().get(i).setFirstName(firstNameChange.getText().toString());
                 Manager.getPersonList().get(i).setLastName(lastNameChange.getText().toString());
