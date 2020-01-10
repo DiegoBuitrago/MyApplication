@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,11 +30,14 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
     static class PromotionViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvPromotionName;
+        ImageView imagePromotion;
         ImageButton btnDelete;
 
         public PromotionViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);
             tvPromotionName = itemView.findViewById(R.id.tv_promotions_name);
+            // image promotion para probar
+            imagePromotion = itemView.findViewById(R.id.iv_promotion);
             btnDelete = itemView.findViewById(R.id.btn_delete);
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -53,7 +57,6 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
         this.promotions = promotions;
     }
 
-
     @NonNull
     @Override
     public PromotionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,6 +69,7 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
     public void onBindViewHolder(@NonNull PromotionRVAdapter.PromotionViewHolder holder, int position) {
         Promotion promotion = promotions.get(position);
         holder.tvPromotionName.setText(promotion.getName());
+        holder.imagePromotion.setImageURI(promotion.getPhoto());
     }
 
     @Override
