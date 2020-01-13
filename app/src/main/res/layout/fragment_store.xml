@@ -12,6 +12,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/txtHeaderStore"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="cursive"
+            android:paddingVertical="50dp"
+            android:text="Tienda"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_store"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtHeaderStore" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_float_store"
             android:layout_width="wrap_content"
@@ -22,5 +46,4 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>
