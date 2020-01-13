@@ -10,7 +10,7 @@
         android:id="@+id/txtHeader"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@color/md_teal_800"
+        android:background="@color/colorPrimary"
         android:fontFamily="cursive"
         android:paddingVertical="50dp"
         android:text="Promociones"

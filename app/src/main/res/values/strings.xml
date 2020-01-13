@@ -12,4 +12,13 @@
     <string name="purchases">Compras</string>
     <string name="logout">Cerrar Sesion</string>
     <string name="search">Consultas</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+
+    <string-array name="types">
+        <item>Seleccione</item>
+        <item>Foto Documento</item>
+        <item>Diseños</item>
+        <item>Restauraciones</item>
+    </string-array>
 </resources>

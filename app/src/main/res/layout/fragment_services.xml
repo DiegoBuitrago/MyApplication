@@ -29,7 +29,6 @@
                     android:id="@+id/txtHeader"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:background="@color/md_teal_800"
                     android:fontFamily="cursive"
                     android:paddingVertical="50dp"
                     android:text="Servicios"
@@ -51,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="120dp">
+                    android:layout_marginTop="20dp">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_search_services"
@@ -65,8 +64,8 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cv_edit_user_set"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="397dp"
+                            android:layout_height="match_parent"
                             android:background="@drawable/dashboard_item_1_background">
 
                             <View
@@ -75,7 +74,7 @@
                                 android:background="@drawable/end_view_background"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"/>
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
                                 android:id="@+id/imageIconSettings1"
@@ -87,7 +86,7 @@
                                 android:padding="10dp"
                                 android:src="@drawable/search"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"/>
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/txtItemSettings1"
@@ -102,7 +101,7 @@
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/imageIconSettings1"
-                                app:layout_constraintTop_toTopOf="@id/imageIconSettings1"/>
+                                app:layout_constraintTop_toTopOf="@id/imageIconSettings1" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

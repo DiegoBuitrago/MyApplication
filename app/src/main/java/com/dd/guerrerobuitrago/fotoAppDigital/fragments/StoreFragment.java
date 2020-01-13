@@ -54,7 +54,7 @@ public class StoreFragment extends Fragment {
 
         alert.setView(mView);
         final AlertDialog alertDialog = alert.create();
-        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCanceledOnTouchOutside(true);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
