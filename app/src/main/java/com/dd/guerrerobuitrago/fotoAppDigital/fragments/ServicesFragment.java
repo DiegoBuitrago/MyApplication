@@ -16,17 +16,39 @@ import com.dd.guerrerobuitrago.fotoAppDigital.R;
  */
 public class ServicesFragment extends Fragment {
 
-
-    public ServicesFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_services, container, false);
+        View servicesView = inflater.inflate(R.layout.fragment_services, container, false);
+        init(servicesView);
+        return servicesView;
+    }
+
+    private void init(View view) {
+        View cvSearch = view.findViewById(R.id.cv_search_services);
+        View cvBooked = view.findViewById(R.id.cv_booked_services);
+
+        cvSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSearch();
+            }
+        });
+
+        cvBooked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBooked();
+            }
+        });
+    }
+
+    private void onSearch() {
+
+    }
+
+    private void onBooked() {
     }
 
     public static ServicesFragment newInstance(){

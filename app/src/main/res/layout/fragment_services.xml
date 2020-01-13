@@ -1,4 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.SettingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/txtHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:background="@color/md_teal_800"
+                    android:fontFamily="cursive"
+                    android:paddingVertical="50dp"
+                    android:text="Servicios"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="120dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_search_services"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="6dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cv_edit_user_set"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/dashboard_item_1_background">
+
+                            <View
+                                android:layout_width="80dp"
+                                android:layout_height="0dp"
+                                android:background="@drawable/end_view_background"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                            <ImageView
+                                android:id="@+id/imageIconSettings1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="12dp"
+                                android:background="@drawable/icon_background"
+                                android:contentDescription="Aaaaaaaaaa"
+                                android:padding="10dp"
+                                android:src="@drawable/search"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                            <TextView
+                                android:id="@+id/txtItemSettings1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="80dp"
+                                android:padding="10dp"
+                                android:text="@string/search"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/imageIconSettings1"
+                                app:layout_constraintTop_toTopOf="@id/imageIconSettings1"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_booked_services"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="6dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cv_purchase_set"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/dashboard_item_2_background">
+
+                            <View
+                                android:layout_width="80dp"
+                                android:layout_height="0dp"
+                                android:background="@drawable/end_view_background"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/imageIconSettings2"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="12dp"
+                                android:background="@drawable/icon_background"
+                                android:contentDescription="Aaaaaaaaaa"
+                                android:padding="10dp"
+                                android:src="@drawable/edit"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                            <TextView
+                                android:id="@+id/txtItemSettings2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="80dp"
+                                android:padding="10dp"
+                                android:text="Reservas"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/imageIconSettings2"
+                                app:layout_constraintTop_toTopOf="@id/imageIconSettings2"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Termina -->
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -55,3 +233,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+-->

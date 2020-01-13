@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dd.guerrerobuitrago.fotoAppDigital.Home;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -67,7 +66,7 @@ public class StoreFragment extends Fragment {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "ddd", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Falta hacer xd", Toast.LENGTH_LONG).show();
                 alertDialog.dismiss();
             }
         });
@@ -78,7 +77,6 @@ public class StoreFragment extends Fragment {
 
             }
         });
-
         alertDialog.show();
 
     }
