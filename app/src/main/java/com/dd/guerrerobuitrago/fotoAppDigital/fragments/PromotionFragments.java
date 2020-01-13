@@ -35,7 +35,7 @@ public class PromotionFragments extends Fragment {
     private FloatingActionButton btnFloat;
     private int a;
 
-    private Uri imagen;
+    private Uri imageUri;
 
 //    private ImageView imagen;
 
@@ -51,17 +51,14 @@ public class PromotionFragments extends Fragment {
     private void initComponents(View view) {
         btnFloat = view.findViewById(R.id.btn_float);
         rvPromotion = view.findViewById(R.id.rv_promotion);
+        this.imageUri = Uri.parse("");
         initRecyclerView();
 //      imagen = (ImageView) view.findViewById(R.id.iv_promotion);
-
         btnFloat.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 loadImage();
                 countTest();
-                promotionsList.add(new Promotion(String.valueOf(a), imagen.toString()));
-                rvAdapter.notifyItemInserted(promotionsList.size());
             }
         });
     }
@@ -93,18 +90,19 @@ public class PromotionFragments extends Fragment {
             });
     }
 
-    private boolean loadImage() {
+    private void loadImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
         startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
-        return true;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
-              this.imagen = data.getData();
+            this.imageUri = data.getData();
+            promotionsList.add(new Promotion(String.valueOf(a), imageUri.toString()));
+            rvAdapter.notifyItemInserted(promotionsList.size());
 //            setPathImage(data.getData());
 //            Uri path = data.getData();
 //            ImageView image = getView().findViewById(R.id.iv_promotion);
@@ -118,19 +116,6 @@ public class PromotionFragments extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-    /*
-    Metodo de prueba que ingresa por parametro un path(Uri) e inicializa una image para usarla en el objeto correspondiente.
-
-    private void createImage(Uri path){
-        this.imagen = getView().findViewById(R.id.iv_promotion);
-        imagen.setImageURI(path);
-    }
-    */
-
-//   private void setPathImage(Uri path){
-//       this.imagen = path;
-//   }
 
     private void countTest(){
         this.a++;
