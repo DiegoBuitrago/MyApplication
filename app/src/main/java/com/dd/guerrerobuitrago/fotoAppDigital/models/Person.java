@@ -22,16 +22,6 @@ public class Person implements Serializable {
         this.typeUser = "Cliente";
     }
 
-    public Person(int id, String firstName, String lastName, String userName, String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-        this.photo = null;
-        this.typeUser = "Cliente";
-    }
-
     public int getId() {
         return id;
     }
@@ -82,9 +72,5 @@ public class Person implements Serializable {
 
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 }

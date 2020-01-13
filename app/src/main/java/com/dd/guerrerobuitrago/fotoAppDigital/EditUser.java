@@ -99,6 +99,7 @@ public class EditUser extends AppCompatActivity {
                 Manager.getPersonList().get(i).setLastName(lastNameChange.getText().toString());
                 Manager.getPersonList().get(i).setPassword(passwordChange.getText().toString());
                 Manager.getPersonList().get(i).setPhoto(imageUri.toString());
+                Toast.makeText(getBaseContext(), Manager.getPersonList().get(i).getPhoto(), Toast.LENGTH_LONG).show();
                 goToHome(Manager.getPersonList().get(i));
                 return;
             }
@@ -121,7 +122,7 @@ public class EditUser extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Toast.makeText(getBaseContext(), "dfhdhgsevsdgsd", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(), "dfhdhgsevsdgsd", Toast.LENGTH_LONG).show();
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
             this.imageUri = data.getData();
@@ -131,6 +132,7 @@ public class EditUser extends AppCompatActivity {
 
     private void loadPathImage(String pathString){
         if(!(pathString == null || pathString =="")) {
+            //Toast.makeText(getBaseContext(), pathString, Toast.LENGTH_LONG).show();
             this.imageUri = Uri.parse(pathString);
             this.imageUser.setImageURI(imageUri);
         }

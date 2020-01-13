@@ -50,7 +50,7 @@ public class Register extends AppCompatActivity {
         lastName = findViewById(R.id.et_lastName_register);
         userName = findViewById(R.id.et_username_register);
         password = findViewById(R.id.et_password_register);
-        this.imagen = (ImageView) findViewById(R.id.image_user_change);
+        this.imagen = findViewById(R.id.image_user_change);
         this.path = null;
 
         Button btnRegister = findViewById(R.id.btn_register);
@@ -117,7 +117,7 @@ public class Register extends AppCompatActivity {
         userName.setText("");
         password.setText("");
         path = null;
-        this.imagen = (ImageView) findViewById(R.id.image_user_change);
+        this.imagen = findViewById(R.id.image_user_change);
     }
 
     private void loadImage() {
@@ -144,7 +144,7 @@ public class Register extends AppCompatActivity {
                 lastName.getText(), "" + userName.getText(), "" + password.getText(), this.path.toString());
         } else {
         person =  new Person(personList.size()+1, "" + firstName.getText(), "" +
-                lastName.getText(), "" + userName.getText(), "" + password.getText());
+                lastName.getText(), "" + userName.getText(), password.getText().toString(), imagen.toString());
         }
         return person;
     }

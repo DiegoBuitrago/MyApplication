@@ -1,5 +1,5 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
 public enum TypeBooked {
-    PHOTO_DOCUMENT, PHOTO_DESIGN;
+    PHOTO_DOCUMENT, PHOTO_DESIGN, RESTAURATION;
 }
