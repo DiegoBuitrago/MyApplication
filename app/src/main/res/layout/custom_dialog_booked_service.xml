@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:background="@drawable/btn_two"
-        android:text="Seleccionar Fecha"
+        android:text="@string/choose_date"
         android:textColor="@color/colorWhite" />
 
     <TextView
@@ -20,8 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Fecha"
-        android:inputType="textPersonName"
+        android:text="@string/date_title"
         android:padding="13dp" />
     <TextView
         android:id="@+id/txt_date_service"
@@ -34,8 +33,7 @@
         android:id="@+id/txt_title_hour_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hora"
-        android:inputType="textPersonName"
+        android:text="@string/hour"
         android:padding="13dp" />
 
     <Spinner
@@ -49,8 +47,7 @@
         android:id="@+id/txt_title_type_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tipo de Servcio"
-        android:inputType="textPersonName"
+        android:text="@string/type_service"
         android:padding="13dp" />
 
     <Spinner

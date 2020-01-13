@@ -64,7 +64,7 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cv_edit_user_set"
-                            android:layout_width="397dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/dashboard_item_1_background">
 
@@ -150,13 +150,13 @@
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="80dp"
                                 android:padding="10dp"
-                                android:text="Reservas"
+                                android:text="@string/reservas"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="25sp"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/imageIconSettings2"
-                                app:layout_constraintTop_toTopOf="@id/imageIconSettings2"/>
+                                app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

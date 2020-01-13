@@ -14,6 +14,11 @@
     <string name="search">Consultas</string>
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="date_title">Fecha</string>
+    <string name="hour">Hora</string>
+    <string name="type_service">Tipo de Servcio</string>
+    <string name="choose_date">Seleccionar Fecha</string>
+    <string name="reservas">Reservas</string>
 
     <string-array name="types">
         <item>Seleccione</item>

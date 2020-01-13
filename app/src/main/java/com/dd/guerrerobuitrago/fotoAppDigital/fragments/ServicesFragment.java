@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,10 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,16 +36,14 @@ public class ServicesFragment extends Fragment {
     private int month;
     private int year;
 
+    private Spinner spHour;
     private Calendar currentDate;
 
-    private int currentDay;
-    private int currentMonth;
-    private int currentYear;
+    private ArrayList<String> hourList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View servicesView = inflater.inflate(R.layout.fragment_services, container, false);
         init(servicesView);
         return servicesView;
@@ -76,10 +76,11 @@ public class ServicesFragment extends Fragment {
         AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
         View mView = getLayoutInflater().inflate(R.layout.custom_dialog_booked_service, null);
 
+        hourList = new ArrayList<>();
         Button btnChooseDate = mView.findViewById(R.id.btn_choose_date);
         txtDate = mView.findViewById(R.id.txt_date_service);
-        Spinner spHour = mView.findViewById(R.id.sp_hour_serivce);
-        Spinner spTypeBooked = mView.findViewById(R.id.sp_type_service);
+        spHour = mView.findViewById(R.id.sp_hour_serivce);
+        //Spinner spTypeBooked = mView.findViewById(R.id.sp_type_service);
         Button btnCancel = mView.findViewById(R.id.btn_cancel_service);
         Button btnAccept = mView.findViewById(R.id.btn_accept_service);
 
@@ -124,6 +125,7 @@ public class ServicesFragment extends Fragment {
                     if(month <= monthC){
                         if(day < dayOfMonth){
                             txtDate.setText(dayOfMonth + "/" + (monthC+1) + "/" + yearC);
+                            verifyHours(view);
                         }else{
                             Toast.makeText(getContext(), "Fecha no valida", Toast.LENGTH_LONG).show();
                         }
@@ -143,11 +145,51 @@ public class ServicesFragment extends Fragment {
 
     }
 
-    private void getCurrentDate(){
-        currentDate = Calendar.getInstance();
-//        currentDate.set(Calendar.HOUR_OF_DAY, 0);
-//        currentDate.set(Calendar.MINUTE, 0);
-//        currentDate.set(Calendar.SECOND, 0);
+    private void verifyHours(View view) {
+        fillListHours();
+        for(int i = 0; i < Manager.getBookedList().size(); i++){
+            Booked currentBooked = Manager.getBookedList().get(i);
+            if(year ==  currentBooked.getYear()){
+                if (month == currentBooked.getMonth()){
+                    if (day == currentBooked.getDay()){
+                        removeHour(currentBooked.getHour());
+                    }
+                }
+            }
+        }
+        spHour.setAdapter(new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, hourList));
+    }
+
+    private void fillListHours(){
+        hourList.add("09:00am");
+        hourList.add("09:30am");
+        hourList.add("10:00am");
+        hourList.add("10:30am");
+        hourList.add("11:00am");
+        hourList.add("11:30am");
+        hourList.add("12:00m");
+        hourList.add("12:30pm");
+        hourList.add("01:00pm");
+        hourList.add("01:30pm");
+        hourList.add("02:00pm");
+        hourList.add("02:30pm");
+        hourList.add("03:00pm");
+        hourList.add("03:30pm");
+        hourList.add("04:00pm");
+        hourList.add("04:30pm");
+        hourList.add("05:00pm");
+        hourList.add("05:30pm");
+        hourList.add("06:00pm");
+        hourList.add("06:30pm");
+    }
+
+    public void removeHour(String hour){
+        for (int i=0; i< hourList.size(); i++){
+            if(hour == hourList.get(i).toString()){
+                hourList.remove(hourList.get(i));
+                return;
+            }
+        }
     }
 
     public static ServicesFragment newInstance(){

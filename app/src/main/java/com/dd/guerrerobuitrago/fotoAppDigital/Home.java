@@ -15,7 +15,6 @@ import com.dd.guerrerobuitrago.fotoAppDigital.fragments.PromotionFragments;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.ServicesFragment;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.SettingsFragment;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.StoreFragment;
-import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
