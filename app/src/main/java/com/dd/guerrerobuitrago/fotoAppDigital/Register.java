@@ -16,15 +16,16 @@ import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
 public class Register extends AppCompatActivity {
 
-    private EditText firstName;
-    private EditText lastName;
-    private EditText userName;
-    private EditText password;
+    private TextInputLayout firstName;
+    private TextInputLayout lastName;
+    private TextInputLayout userName;
+    private TextInputLayout password;
     private ImageView imageUser;
     private Uri path;
 
@@ -81,7 +82,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void getRegister(View view){
-        if(firstName.getText().toString().equals("") || lastName.getText().toString() == null || userName.getText().toString().equals("") || password.getText().toString().equals("")){
+        if(firstName.getEditText().getText().toString().equals("") || lastName.getEditText().getText().toString() == null || userName.getEditText().getText().toString().equals("") || password.getEditText().getText().toString().equals("")){
             Toast.makeText(getBaseContext(), "Faltan datos", Toast.LENGTH_LONG).show();
         }else{
             if(personList.size() == 0){
@@ -89,7 +90,7 @@ public class Register extends AppCompatActivity {
                 sendPersons();
             }else{
                 for (int i= 0; i < personList.size(); i++){
-                    if(!userName.getText().toString().equals(personList.get(i).getUserName())){
+                    if(!userName.getEditText().getText().toString().equals(personList.get(i).getUserName())){
                         personList.add(myNewPerson());
                         sendPersons();
                     }else{
@@ -101,6 +102,31 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    private boolean userNameIsCorrect(){
+        String userNameInput = userName.getEditText().getText().toString().trim();
+        if(userNameInput.isEmpty()){
+            userName.setError("Vaciooo...");
+            return false;
+        }else if(validateList(userNameInput)){
+            userName.setError("Nombre de usuario existente");
+            return false;
+        }else{
+            userName.setError(null);
+            userName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateList(String userNameInput){
+        for (int i= 0; i < personList.size(); i++){
+            if(personList.get(i).getUserName().equals(userNameInput)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public void sendPersons(){
         Manager.setPersonList(personList);
         Toast.makeText(getBaseContext(), "Usuario creado con exito", Toast.LENGTH_LONG).show();
@@ -109,10 +135,10 @@ public class Register extends AppCompatActivity {
     }
 
     public void getCancel(View view){
-        firstName.setText("");
-        lastName.setText("");
-        userName.setText("");
-        password.setText("");
+//        firstName.setText("");
+//        lastName.setText("");
+//        userName.setText("");
+//        password.setText("");
         path = null;
         this.imageUser = findViewById(R.id.image_user_change);
     }
@@ -136,11 +162,11 @@ public class Register extends AppCompatActivity {
     public Person myNewPerson(){
         Person person;
         if(path != null){
-        person =  new Person(personList.size()+1, "" + firstName.getText(), "" +
-                lastName.getText(), "" + userName.getText(), "" + password.getText(), this.path.toString());
+        person =  new Person(personList.size()+1, "" + firstName.getEditText().getText(), "" +
+                lastName.getEditText().getText(), "" + userName.getEditText().getText(), "" + password.getEditText().getText(), this.path.toString());
         } else {
-        person =  new Person(personList.size()+1, "" + firstName.getText(), "" +
-                lastName.getText(), "" + userName.getText(), password.getText().toString(), imageUser.toString());
+        person =  new Person(personList.size()+1, "" + firstName.getEditText().getText(), "" +
+                lastName.getEditText().getText(), "" + userName.getEditText().getText(), password.getEditText().getText().toString(), imageUser.toString());
         }
         return person;
     }

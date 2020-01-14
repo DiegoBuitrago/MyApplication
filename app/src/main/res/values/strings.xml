@@ -23,6 +23,7 @@
     <string name="description">Descripcion</string>
     <string name="desc_photo_product">Imagen del Producto</string>
     <string name="delete_product">Borrar Producto</string>
+    <string name="name">Nombre</string>
 
     <string-array name="types">
         <item>Seleccione</item>
