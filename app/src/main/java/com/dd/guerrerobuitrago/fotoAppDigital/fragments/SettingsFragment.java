@@ -39,6 +39,8 @@ public class SettingsFragment extends Fragment {
     private String userName;
     private String photo;
 
+    private Uri pathUri;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +56,8 @@ public class SettingsFragment extends Fragment {
         txtDescUser = view.findViewById(R.id.txt_desc_user_set);
         txtUserName = view.findViewById(R.id.txt_userName_set);
         imageUser = view.findViewById(R.id.image_user_change);
+        //
+
         Bundle bun = getArguments();
         firstName = bun.getString("firstName");
         lastName = bun.getString("lastName");
@@ -61,11 +65,15 @@ public class SettingsFragment extends Fragment {
         typeUser = bun.getString("typeUser");
         userName = bun.getString("userName");
         photo = bun.getString("photo");
-        loadPathImage(photo);
-        //Toast.makeText(getContext(), photo, Toast.LENGTH_LONG).show();
+
+
+
+        pathUri = Uri.parse(photo);
+        Toast.makeText(getContext(), pathUri.toString() , Toast.LENGTH_LONG).show();
+        loadPathImage();
 
         txtNameUser.setText(firstName + " " + lastName);
-        txtUserName.setText(photo);
+        txtUserName.setText(userName);
         txtDescUser.setText(typeUser);
         cardEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,10 +122,9 @@ public class SettingsFragment extends Fragment {
         return fragment;
     }
 
-    private void loadPathImage(String pathString){
-        if(!(pathString == null || pathString =="")) {
-            Toast.makeText(getContext(), pathString, Toast.LENGTH_LONG).show();
-            this.imageUser.setImageURI(Uri.parse(pathString));
+    private void loadPathImage(){
+        if(!(pathUri == null)) {
+            imageUser.setImageURI(pathUri);
         }
     }
 }

@@ -200,5 +200,4 @@ public class ServicesFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
 }
