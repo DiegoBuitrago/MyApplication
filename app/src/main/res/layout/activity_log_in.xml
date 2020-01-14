@@ -26,8 +26,8 @@
         android:id="@+id/ln_dataLogIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="40dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/txtVLogIn"
         app:layout_constraintTop_toBottomOf="@+id/txtVLogIn">
@@ -71,26 +71,56 @@
         android:id="@+id/btn_intro"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/btn_two"
         android:text="Ingresar"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ln_dataLogIn"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/ln_dataLogIn" />
 
     <TextView
         android:id="@+id/txt_add_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
         android:text="¿No tienes una cuenta aun?"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_intro"
-        android:layout_marginTop="35dp"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btn_intro" />
+
+    <LinearLayout
+        android:id="@+id/layout_social"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_user">
+
+        <ImageButton
+            android:id="@+id/btn_facebook"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_instagram"
+            app:srcCompat="@drawable/remove" />
+
+        <ImageButton
+            android:id="@+id/btn_instagram"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toEndOf="@id/btn_facebook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/remove" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     <!--android:textColorHint="@color/md_blue_900"-->
