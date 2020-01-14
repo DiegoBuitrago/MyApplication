@@ -31,8 +31,6 @@ public class Register extends AppCompatActivity {
 
     private ArrayList<Person> personList;
 
-//    private boolean flagImage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +45,10 @@ public class Register extends AppCompatActivity {
 
     private void init() {
         personList = Manager.getPersonList();
-        firstName = findViewById(R.id.et_firstName_register);
-        lastName = findViewById(R.id.et_lastName_register);
-        userName = findViewById(R.id.et_username_register);
-        password = findViewById(R.id.et_password_register);
+        firstName = findViewById(R.id.text_input_name);
+        lastName = findViewById(R.id.text_input_surname);
+        userName = findViewById(R.id.text_input_userName);
+        password = findViewById(R.id.text_input_password);
         imageUser = findViewById(R.id.image_user_change);
         this.path = null;
 
@@ -59,6 +57,7 @@ public class Register extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                //userNameIsCorrect();
                 getRegister(v);
             }
         });
@@ -82,30 +81,17 @@ public class Register extends AppCompatActivity {
     }
 
     public void getRegister(View view){
-        if(firstName.getEditText().getText().toString().equals("") || lastName.getEditText().getText().toString() == null || userName.getEditText().getText().toString().equals("") || password.getEditText().getText().toString().equals("")){
-            Toast.makeText(getBaseContext(), "Faltan datos", Toast.LENGTH_LONG).show();
-        }else{
-            if(personList.size() == 0){
+
+            if(userNameIsCorrect() && firstNameIsCorrect() && lastNameIsCorrect() && passwordIsCorrect()){
                 personList.add(myNewPerson());
                 sendPersons();
-            }else{
-                for (int i= 0; i < personList.size(); i++){
-                    if(!userName.getEditText().getText().toString().equals(personList.get(i).getUserName())){
-                        personList.add(myNewPerson());
-                        sendPersons();
-                    }else{
-                        Toast.makeText(getBaseContext(), "Nombre de usuario ya existente", Toast.LENGTH_LONG).show();
-                    }
-                }
             }
-
-        }
     }
 
     private boolean userNameIsCorrect(){
         String userNameInput = userName.getEditText().getText().toString().trim();
         if(userNameInput.isEmpty()){
-            userName.setError("Vaciooo...");
+            userName.setError("El campo se encuentra vacio");
             return false;
         }else if(validateList(userNameInput)){
             userName.setError("Nombre de usuario existente");
@@ -113,6 +99,51 @@ public class Register extends AppCompatActivity {
         }else{
             userName.setError(null);
             userName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean firstNameIsCorrect(){
+        String firstNameInput = firstName.getEditText().getText().toString().trim();
+        if(firstNameInput.isEmpty()){
+            firstName.setError("El campo se encuentra vacio");
+            return false;
+        }else if(firstNameInput.length() > 30){
+            firstName.setError("Excede el numero maximo de caracteres");
+            return false;
+        } else{
+            firstName.setError(null);
+            firstName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean lastNameIsCorrect(){
+        String lastNameInput = lastName.getEditText().getText().toString().trim();
+        if(lastNameInput.isEmpty()){
+            userName.setError("El campo se encuentra vacio");
+            return false;
+        }else if(lastNameInput.length() > 30){
+            firstName.setError("Excede el numero maximo de caracteres");
+            return false;
+        }else{
+            lastName.setError(null);
+            lastName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean passwordIsCorrect(){
+        String passwordInput = password.getEditText().getText().toString().trim();
+        if(passwordInput.isEmpty()){
+            password.setError("El campo se encuentra vacio");
+            return false;
+        }else if(passwordInput.length() < 8){
+            password.setError("Contraseña debe tener minimo 8 caracteres");
+            return false;
+        }else{
+            password.setError(null);
+            password.setErrorEnabled(false);
             return true;
         }
     }
