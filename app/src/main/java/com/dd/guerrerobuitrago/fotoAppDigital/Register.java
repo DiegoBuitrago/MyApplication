@@ -25,7 +25,7 @@ public class Register extends AppCompatActivity {
     private EditText lastName;
     private EditText userName;
     private EditText password;
-    private ImageView imagen;
+    private ImageView imageUser;
     private Uri path;
 
     private ArrayList<Person> personList;
@@ -50,11 +50,10 @@ public class Register extends AppCompatActivity {
         lastName = findViewById(R.id.et_lastName_register);
         userName = findViewById(R.id.et_username_register);
         password = findViewById(R.id.et_password_register);
-        this.imagen = findViewById(R.id.image_user_change);
+        imageUser = findViewById(R.id.image_user_change);
         this.path = null;
 
         Button btnRegister = findViewById(R.id.btn_register);
-        Button btnChooseImage = findViewById(R.id.btn_choose_photo_user_register);
 
         btnRegister.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -69,7 +68,7 @@ public class Register extends AppCompatActivity {
                 getCancel(v);
             }
         });
-        btnChooseImage.setOnClickListener(new View.OnClickListener() {
+        imageUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chooseImage();
@@ -81,11 +80,9 @@ public class Register extends AppCompatActivity {
         loadImage();
     }
 
-    //No acepta dos usuarios
     public void getRegister(View view){
-        Log.d("jj", lastName.getText().toString());
         if(firstName.getText().toString().equals("") || lastName.getText().toString() == null || userName.getText().toString().equals("") || password.getText().toString().equals("")){
-            Toast.makeText(getBaseContext(), "Faltan algunos datos", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Faltan datos", Toast.LENGTH_LONG).show();
         }else{
             if(personList.size() == 0){
                 personList.add(myNewPerson());
@@ -117,7 +114,7 @@ public class Register extends AppCompatActivity {
         userName.setText("");
         password.setText("");
         path = null;
-        this.imagen = findViewById(R.id.image_user_change);
+        this.imageUser = findViewById(R.id.image_user_change);
     }
 
     private void loadImage() {
@@ -131,9 +128,8 @@ public class Register extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
             this.path = data.getData();
-//          this.imagen = (ImageView) findViewById(R.id.image_user_change);
-            imagen.setImageURI(path);
-            Toast.makeText(getBaseContext(), path.toString(), Toast.LENGTH_LONG).show();
+//          this.imageUser = (ImageView) findViewById(R.id.image_user_change);
+            imageUser.setImageURI(path);
         }
     }
 
@@ -144,7 +140,7 @@ public class Register extends AppCompatActivity {
                 lastName.getText(), "" + userName.getText(), "" + password.getText(), this.path.toString());
         } else {
         person =  new Person(personList.size()+1, "" + firstName.getText(), "" +
-                lastName.getText(), "" + userName.getText(), password.getText().toString(), imagen.toString());
+                lastName.getText(), "" + userName.getText(), password.getText().toString(), imageUser.toString());
         }
         return person;
     }
