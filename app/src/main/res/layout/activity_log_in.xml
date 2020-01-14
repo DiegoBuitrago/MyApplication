@@ -106,20 +106,25 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"
+            android:layout_marginStart="150dp"
             android:scaleType="fitXY"
+            android:onClick="facebookIntent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_instagram"
-            app:srcCompat="@drawable/remove" />
+            app:srcCompat="@drawable/facebook" />
 
         <ImageButton
             android:id="@+id/btn_instagram"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
             android:scaleType="fitXY"
-            app:layout_constraintStart_toEndOf="@id/btn_facebook"
+            android:onClick="instagramIntent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/remove" />
+            app:layout_constraintStart_toEndOf="@id/btn_facebook"
+            app:srcCompat="@drawable/instagram" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

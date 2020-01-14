@@ -25,6 +25,9 @@
     <string name="delete_product">Borrar Producto</string>
     <string name="name">Nombre</string>
 
+    <string name="urlFacebook">https://www.facebook.com/FOTO-Digital-1147679955261694/</string>
+    <string name="urlInstagram">"https://instagram.com/fotodigital_tunja?igshid=1odjoksrhkzh1"</string>
+
     <string-array name="types">
         <item>Seleccione</item>
         <item>Foto Documento</item>
