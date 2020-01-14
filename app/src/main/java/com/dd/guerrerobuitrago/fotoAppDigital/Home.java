@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.PromotionFragments;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.ServicesFragment;

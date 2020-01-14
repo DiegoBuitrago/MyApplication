@@ -63,11 +63,11 @@ public class EditUser extends AppCompatActivity {
             firstNameChange.setText(bundleFN.getString("firstName"));
             lastNameChange.setText(bundleFN.getString("lastName"));
             passwordChange.setText(bundleFN.getString("password"));
-            //Toast.makeText(getBaseContext(), bundleFN.getString("photo"), Toast.LENGTH_LONG).show();
+            imageUri = Uri.parse(bundleFN.getString("photo"));
             loadPathImage(bundleFN.getString("photo"));
 
             tvTypePerson.setText(bundleFN.getString("typeUser"));
-            tvNamePerson.setText(bundleFN.getString("firstName") + " " + bundleFN.getString("lastName"));
+            tvNamePerson.setText(firstNameChange + " " + lastNameChange);
             tvUserName.setText(bundleFN.getString("userName"));
         }
 
@@ -99,7 +99,6 @@ public class EditUser extends AppCompatActivity {
                 Manager.getPersonList().get(i).setLastName(lastNameChange.getText().toString());
                 Manager.getPersonList().get(i).setPassword(passwordChange.getText().toString());
                 Manager.getPersonList().get(i).setPhoto(imageUri.toString());
-                Toast.makeText(getBaseContext(), Manager.getPersonList().get(i).getPhoto(), Toast.LENGTH_LONG).show();
                 goToHome(Manager.getPersonList().get(i));
                 return;
             }
@@ -107,11 +106,10 @@ public class EditUser extends AppCompatActivity {
     }
 
     private void goToHome(Person current) {
-        //Toast.makeText(getBaseContext(), "Usuario actualizado con exito", Toast.LENGTH_LONG).show();
         Intent homeIntent = new Intent(this, Home.class);
         homeIntent.putExtra("user", current);
         startActivity(homeIntent);
-        finish();
+        //finish();
     }
 
     private void loadImage() {
@@ -122,11 +120,10 @@ public class EditUser extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //Toast.makeText(getBaseContext(), "dfhdhgsevsdgsd", Toast.LENGTH_LONG).show();
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
-            this.imageUri = data.getData();
-            imageUser.setImageURI(imageUri);
+            imageUser.setImageURI(data.getData());
+            imageUri = data.getData();
         }
     }
 

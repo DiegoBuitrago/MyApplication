@@ -70,8 +70,6 @@ public class SettingsFragment extends Fragment {
         userName = bun.getString("userName");
         photo = bun.getString("photo");
 
-
-
         pathUri = Uri.parse(photo);
         Toast.makeText(getContext(), pathUri.toString() , Toast.LENGTH_LONG).show();
         loadPathImage();
@@ -169,7 +167,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void loadPathImage(){
-        if(!(pathUri == null)) {
+        if(pathUri != null) {
             imageUser.setImageURI(pathUri);
         }
     }
