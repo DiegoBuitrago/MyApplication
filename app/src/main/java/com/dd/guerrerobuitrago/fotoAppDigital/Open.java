@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
@@ -21,6 +23,9 @@ public class Open extends AppCompatActivity {
     private int month;
     private int year;
 
+    private static int SPLASH_TIME = 2000;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,20 +34,34 @@ public class Open extends AppCompatActivity {
         new Manager();
 
         ImageView btnIsOpen = findViewById(R.id.btnIsOpen);
-        btnIsOpen.setOnClickListener(new View.OnClickListener(){
+        progressBar = findViewById(R.id.progressBar);
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                //Si esta abierto
-                getLogIn(v);
-                //choose();
-                //Si esta cerrado
-                //Snackbar.make(view, "No disponible aun", Snackbar.LENGTH_LONG)
-                        //.setAction("Action", null).show();
+            public void run() {
+                getLogIn();
+                progressBar.setVisibility(View.GONE);
+                finish();
             }
-        });
+        },SPLASH_TIME);
+
+//        ImageView btnIsOpen = findViewById(R.id.btnIsOpen);
+//        btnIsOpen.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                //Si esta abierto
+//                getLogIn(v);
+//                //choose();
+//                //Si esta cerrado
+//                //Snackbar.make(view, "No disponible aun", Snackbar.LENGTH_LONG)
+//                        //.setAction("Action", null).show();
+//            }
+//        });
     }
 
-    public void getLogIn(View view){
+    public void getLogIn(){
         Intent logInIntent = new Intent(this, LogIn.class);
         //Toast.makeText(getBaseContext(), "Abierto", Toast.LENGTH_LONG).show();
         startActivity(logInIntent);
