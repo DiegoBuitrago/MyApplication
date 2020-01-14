@@ -67,7 +67,7 @@ public class EditUser extends AppCompatActivity {
             loadPathImage(bundleFN.getString("photo"));
 
             tvTypePerson.setText(bundleFN.getString("typeUser"));
-            tvNamePerson.setText(firstNameChange + " " + lastNameChange);
+            tvNamePerson.setText(firstNameChange.getText().toString() + " " + lastNameChange.getText().toString());
             tvUserName.setText(bundleFN.getString("userName"));
         }
 
@@ -129,7 +129,6 @@ public class EditUser extends AppCompatActivity {
 
     private void loadPathImage(String pathString){
         if(!(pathString == null || pathString =="")) {
-            //Toast.makeText(getBaseContext(), pathString, Toast.LENGTH_LONG).show();
             this.imageUri = Uri.parse(pathString);
             this.imageUser.setImageURI(imageUri);
         }
