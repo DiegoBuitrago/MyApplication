@@ -71,7 +71,6 @@ public class SettingsFragment extends Fragment {
         photo = bun.getString("photo");
 
         pathUri = Uri.parse(photo);
-        Toast.makeText(getContext(), pathUri.toString() , Toast.LENGTH_LONG).show();
         loadPathImage();
 
         txtNameUser.setText(firstName + " " + lastName);
