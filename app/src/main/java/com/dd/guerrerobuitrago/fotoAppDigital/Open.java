@@ -23,7 +23,7 @@ public class Open extends AppCompatActivity {
     private int month;
     private int year;
 
-    private static int SPLASH_TIME = 2000;
+    private static int SPLASH_TIME = 3000;
     private ProgressBar progressBar;
 
     @Override
@@ -42,8 +42,8 @@ public class Open extends AppCompatActivity {
             @Override
             public void run() {
                 getLogIn();
-                progressBar.setVisibility(View.GONE);
                 finish();
+                progressBar.setVisibility(View.GONE);
             }
         },SPLASH_TIME);
 
