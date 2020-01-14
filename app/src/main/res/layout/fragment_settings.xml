@@ -169,7 +169,6 @@
                                     android:layout_height="50dp"
                                     android:layout_marginStart="12dp"
                                     android:background="@drawable/icon_background"
-                                    android:contentDescription="Aaaaaaaaaa"
                                     android:padding="10dp"
                                     android:src="@drawable/shopping"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -302,6 +301,60 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@id/imageIconSettings4"
                                     app:layout_constraintTop_toTopOf="@id/imageIconSettings4"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_remove_user_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cv_remove_user_set"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/md_red_700">
+
+                                <View
+                                    android:layout_width="80dp"
+                                    android:layout_height="0dp"
+                                    android:background="@drawable/end_view_background"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/imageIconSettings5"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="12dp"
+                                    android:background="@drawable/icon_background"
+                                    android:padding="10dp"
+                                    android:src="@drawable/made_services"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/txtItemSettings5"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="80dp"
+                                    android:padding="10dp"
+                                    android:text="Eliminar Cuenta"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imageIconSettings5"
+                                    app:layout_constraintTop_toTopOf="@id/imageIconSettings5" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,5 +1,7 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.dd.guerrerobuitrago.fotoAppDigital.EditUser;
 import com.dd.guerrerobuitrago.fotoAppDigital.LogIn;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
 /**
@@ -27,6 +30,7 @@ public class SettingsFragment extends Fragment {
     private View cardServices;
     private View cardPurchases;
     private View cardLogout;
+    private View cardRemoveUser;
     private TextView txtNameUser;
     private TextView txtDescUser;
     private TextView txtUserName;
@@ -88,9 +92,51 @@ public class SettingsFragment extends Fragment {
         cardLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showAlert(v, "Salir de la cuenta", "¿Desea salir de la cuenta?");
+            }
+        });
+
+        cardRemoveUser = view.findViewById(R.id.cv_remove_user_set);
+        cardRemoveUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlert(v, "Eliminar Usuario", "¿Desea eliminar el usuario de manera permanente?");
+            }
+        });
+    }
+
+    private void removeUser() {
+        //Mejorar enviando el id
+        for (int i= 0; i < Manager.getPersonList().size(); i++){
+            if(Manager.getPersonList().get(i).getUserName().equals(userName)){
+                Manager.removePerson(i);
+            }
+        }
+    }
+
+    private void showAlert(View view, final String titleMesage, String descMessage) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+        alert.setMessage(descMessage);
+        alert.setCancelable(false);
+        alert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(titleMesage.equals("Eliminar Usuario")){
+                    removeUser();
+                    Toast.makeText(getContext(), "Usuario borrado con exito.", Toast.LENGTH_LONG).show();
+                }
                 closeSession();
             }
         });
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog title = alert.create();
+        title.setTitle(titleMesage);
+        title.show();
     }
 
     public void editUser(){

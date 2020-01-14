@@ -19,6 +19,10 @@
     <string name="type_service">Tipo de Servcio</string>
     <string name="choose_date">Seleccionar Fecha</string>
     <string name="reservas">Reservas</string>
+    <string name="title">Titulo</string>
+    <string name="description">Descripcion</string>
+    <string name="desc_photo_product">Imagen del Producto</string>
+    <string name="delete_product">Borrar Producto</string>
 
     <string-array name="types">
         <item>Seleccione</item>
