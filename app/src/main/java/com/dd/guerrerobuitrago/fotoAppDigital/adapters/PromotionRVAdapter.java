@@ -30,13 +30,13 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
 
     static class PromotionViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvPromotionName;
-        ImageView imagePromotion;
-        ImageButton btnDelete;
+//        private TextView tvPromotionName;
+        private ImageView imagePromotion;
+        private ImageButton btnDelete;
 
         public PromotionViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);
-            tvPromotionName = itemView.findViewById(R.id.tv_promotions_name);
+//            tvPromotionName = itemView.findViewById(R.id.tv_promotions_name);
             // image promotion para probar
             imagePromotion = itemView.findViewById(R.id.iv_promotion);
             btnDelete = itemView.findViewById(R.id.btn_delete);
@@ -70,7 +70,7 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
     @Override
     public void onBindViewHolder(@NonNull PromotionRVAdapter.PromotionViewHolder holder, int position) {
         Promotion promotion = promotions.get(position);
-        holder.tvPromotionName.setText(promotion.getName());
+//        holder.tvPromotionName.setText(promotion.getName());
         holder.imagePromotion.setImageURI(Uri.parse(promotion.getPhoto()));
     }
 

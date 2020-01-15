@@ -27,13 +27,13 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
 
     static class ServicesViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvNameOwner;
-        private TextView tvNameUser;
-        private TextView tvYear;
-        private TextView tvMonth;
-        private TextView tvDay;
-        private TextView tvHour;
-        private TextView tvType;
+        TextView tvNameOwner;
+        TextView tvNameUser;
+        TextView tvYear;
+        TextView tvMonth;
+        TextView tvDay;
+        TextView tvHour;
+        TextView tvType;
 
         public ServicesViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);
