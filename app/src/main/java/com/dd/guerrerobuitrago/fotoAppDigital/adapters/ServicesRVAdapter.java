@@ -1,11 +1,8 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.adapters;
 
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,13 +62,17 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
     @Override
     public void onBindViewHolder(@NonNull ServicesRVAdapter.ServicesViewHolder holder, int position) {
         Booked booked = bookeds.get(position);
-        holder.tvYear.setText();
-        holder.tvProductName.setText(booked.getName());
-        holder.tvProductDes.setText(booked.getDescription());
+        holder.tvNameOwner.setText(booked.getOwner().getFirstName() +" "+ booked.getOwner().getLastName());
+        holder.tvNameUser.setText(booked.getOwner().getUserName());
+        holder.tvYear.setText(booked.getYear());
+        holder.tvMonth.setText(booked.getMonth());
+        holder.tvDay.setText(booked.getDay());
+        holder.tvHour.setText(booked.getHour());
+        holder.tvType.setText(booked.getTypeBooked().getMyName());
     }
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return bookeds.size();
     }
 }
