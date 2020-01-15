@@ -2,7 +2,6 @@ package com.dd.guerrerobuitrago.fotoAppDigital;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -94,7 +92,7 @@ public class LogIn extends AppCompatActivity {
     }
 
     public void facebookIntent(View view) {
-        String url = "https://www.facebook.com/FOTO-Digital-1147679955261694/";
+        String url = "https://facebook.com/FOTO-Digital-1147679955261694";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
