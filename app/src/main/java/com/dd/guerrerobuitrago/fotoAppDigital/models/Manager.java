@@ -9,7 +9,7 @@ public class Manager {
 
     public Manager(){
         personList = new ArrayList<>();
-        //personList.add(new Person(1, "Diego", "Guerrero", "d", "1", "photo"));
+        personList.add(new Person(1, "Diego", "Guerrero", "d", "12345678", null));
 
         bookedList = new ArrayList<>();
     }

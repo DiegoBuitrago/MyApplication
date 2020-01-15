@@ -32,9 +32,8 @@ public class ServicesFragment extends Fragment {
 
     private TextView txtDate;
 
-    private int day;
-    private int month;
-    private int year;
+//    private int day;
+//    private int month;
 
     private Spinner spHour;
     private Calendar currentDate;
@@ -76,7 +75,6 @@ public class ServicesFragment extends Fragment {
         AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
         View mView = getLayoutInflater().inflate(R.layout.custom_dialog_booked_service, null);
 
-        hourList = new ArrayList<>();
         Button btnChooseDate = mView.findViewById(R.id.btn_choose_date);
         txtDate = mView.findViewById(R.id.txt_date_service);
         spHour = mView.findViewById(R.id.sp_hour_serivce);
@@ -114,9 +112,9 @@ public class ServicesFragment extends Fragment {
 
     private void chooseDate(View view) {
         final Calendar calendar = Calendar.getInstance();
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        month = calendar.get(Calendar.MONTH);
-        year = calendar.get(Calendar.YEAR);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+        final int month = calendar.get(Calendar.MONTH);
+        final int year = calendar.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -125,7 +123,7 @@ public class ServicesFragment extends Fragment {
                     if(month <= monthC){
                         if(day < dayOfMonth){
                             txtDate.setText(dayOfMonth + "/" + (monthC+1) + "/" + yearC);
-                            verifyHours(view);
+                            verifyHours(view, dayOfMonth, monthC+1, yearC);
                         }else{
                             Toast.makeText(getContext(), "Fecha no valida", Toast.LENGTH_LONG).show();
                         }
@@ -145,13 +143,13 @@ public class ServicesFragment extends Fragment {
 
     }
 
-    private void verifyHours(View view) {
+    private void verifyHours(View view, int dayC, int monthC, int yearC) {
         fillListHours();
         for(int i = 0; i < Manager.getBookedList().size(); i++){
             Booked currentBooked = Manager.getBookedList().get(i);
-            if(year ==  currentBooked.getYear()){
-                if (month == currentBooked.getMonth()){
-                    if (day == currentBooked.getDay()){
+            if(yearC ==  currentBooked.getYear()){
+                if (monthC == currentBooked.getMonth()){
+                    if (dayC == currentBooked.getDay()){
                         removeHour(currentBooked.getHour());
                     }
                 }
@@ -160,7 +158,17 @@ public class ServicesFragment extends Fragment {
         spHour.setAdapter(new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, hourList));
     }
 
+    public void removeHour(String hour){
+        for (int i=0; i< hourList.size(); i++){
+            if(hour.equals(hourList.get(i))){
+                hourList.remove(i);
+                return;
+            }
+        }
+    }
+
     private void fillListHours(){
+        hourList = new ArrayList<>();
         hourList.add("09:00am");
         hourList.add("09:30am");
         hourList.add("10:00am");
@@ -181,15 +189,6 @@ public class ServicesFragment extends Fragment {
         hourList.add("05:30pm");
         hourList.add("06:00pm");
         hourList.add("06:30pm");
-    }
-
-    public void removeHour(String hour){
-        for (int i=0; i< hourList.size(); i++){
-            if(hour == hourList.get(i).toString()){
-                hourList.remove(hourList.get(i));
-                return;
-            }
-        }
     }
 
     public static ServicesFragment newInstance(){
