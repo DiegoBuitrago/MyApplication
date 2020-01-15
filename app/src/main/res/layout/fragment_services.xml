@@ -19,8 +19,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:layout_height="100dp"
+                android:background="@drawable/abstract7"
                 android:orientation="vertical"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp">
@@ -28,9 +28,9 @@
                 <TextView
                     android:id="@+id/txtHeader"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="100dp"
                     android:fontFamily="cursive"
-                    android:paddingVertical="50dp"
+                    android:paddingVertical="20dp"
                     android:text="Servicios"
                     android:textAlignment="center"
                     android:textColor="#000000"

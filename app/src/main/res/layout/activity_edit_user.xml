@@ -9,8 +9,8 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="200dp"
+        android:background="@drawable/abstract6"
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -34,7 +34,6 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:gravity="center"
-            android:text="Nombre de la persona"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -43,11 +42,8 @@
             android:id="@+id/txt_userName_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="40dp"
-            android:text="fsfednjwkddlt"
-            android:gravity="center"
+            android:textAlignment="center"
             android:textColor="@color/colorLightText"
             android:textSize="15sp" />
 
@@ -55,11 +51,8 @@
             android:id="@+id/txt_desc_user_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="40dp"
-            android:text="fiosdlkcmsadñlvkascmasñdclmaslcñkamsdñl"
-            android:gravity="center"
+            android:textAlignment="center"
             android:textColor="@color/colorLightText"
             android:textSize="15sp" />
     </LinearLayout>
@@ -79,14 +72,14 @@
             android:id="@+id/et_firstName_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombres"
+            android:hint="@string/names"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/et_lastName_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Apellidos"
+            android:hint="@string/surname"
             android:inputType="textPersonName" />
 
 
@@ -112,7 +105,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/btn_two"
                 android:padding="25dp"
-                android:text="Cambiar Imagen"
+                android:text="@string/change_image"
                 android:textColor="@color/colorWhite"/>
 
             <Button
@@ -125,7 +118,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="Actualizar"
+                android:text="@string/update"
                 android:textColor="@color/colorWhite" />
     </LinearLayout>
 

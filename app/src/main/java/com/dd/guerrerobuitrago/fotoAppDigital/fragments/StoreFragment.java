@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.StoreRVAdapter;

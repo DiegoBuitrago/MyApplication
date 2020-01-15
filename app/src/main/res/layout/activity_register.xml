@@ -9,10 +9,10 @@
     <TextView
         android:id="@+id/txtVLogIn"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="@color/md_teal_800"
+        android:layout_height="100dp"
+        android:background="@drawable/abstract1"
         android:fontFamily="cursive"
-        android:paddingVertical="50dp"
+        android:paddingVertical="25dp"
         android:text="Registro"
         android:textAlignment="center"
         android:textColor="#000000"

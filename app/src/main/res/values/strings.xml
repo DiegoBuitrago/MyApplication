@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">FotoAppDigital</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="tab_promo">Promociones</string>
     <string name="tab_store">Tienda</string>
@@ -10,7 +10,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="edit_user_text">Editar Usuario</string>
     <string name="purchases">Compras</string>
-    <string name="logout">Cerrar Sesion</string>
+    <string name="logout">Cerrar Sesión</string>
     <string name="search">Consultas</string>
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
@@ -19,8 +19,8 @@
     <string name="type_service">Tipo de Servcio</string>
     <string name="choose_date">Seleccionar Fecha</string>
     <string name="reservas">Reservas</string>
-    <string name="title">Titulo</string>
-    <string name="description">Descripcion</string>
+    <string name="title">Título</string>
+    <string name="description">Descripción</string>
     <string name="desc_photo_product">Imagen del Producto</string>
     <string name="delete_product">Borrar Producto</string>
     <string name="name">Nombre</string>
@@ -28,6 +28,14 @@
     <string name="urlFacebook">https://www.facebook.com/FOTO-Digital-1147679955261694/</string>
     <string name="urlInstagram">"https://instagram.com/fotodigital_tunja?igshid=1odjoksrhkzh1"</string>
     <string name="date">Fecha</string>
+    <string name="promotions">Promociones</string>
+    <string name="store">Tienda</string>
+    <string name="services">Servicios</string>
+    <string name="my_account">Mi cuenta</string>
+    <string name="names">Nombres</string>
+    <string name="surname">Apellidos</string>
+    <string name="change_image">Cambiar Imagen</string>
+    <string name="update">Actualizar</string>
 
     <string-array name="types">
         <item>Seleccione</item>
