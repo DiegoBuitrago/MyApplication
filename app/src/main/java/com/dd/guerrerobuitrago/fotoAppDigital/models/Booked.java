@@ -8,14 +8,16 @@ public class Booked {
     private int day;
     private String hour;
     private TypeBooked typeBooked;
+    private Person owner;
 
-    public Booked(int id, int year, int month, int day, String hour, TypeBooked typeBooked){
+    public Booked(int id, int year, int month, int day, String hour, TypeBooked typeBooked, Person owner){
         this.id = id;
         this.year = year;
         this.month = month;
         this.day = day;
         this.hour = hour;
         this.typeBooked = typeBooked;
+        this.owner = owner;
     }
 
     public int getId() {
@@ -64,5 +66,13 @@ public class Booked {
 
     public void setHour(String hour) {
         this.hour = hour;
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
 }
