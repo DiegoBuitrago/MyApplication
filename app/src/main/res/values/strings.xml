@@ -27,6 +27,7 @@
 
     <string name="urlFacebook">https://www.facebook.com/FOTO-Digital-1147679955261694/</string>
     <string name="urlInstagram">"https://instagram.com/fotodigital_tunja?igshid=1odjoksrhkzh1"</string>
+    <string name="date">Fecha</string>
 
     <string-array name="types">
         <item>Seleccione</item>
