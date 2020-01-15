@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.dd.guerrerobuitrago.fotoAppDigital.EditUser;
 import com.dd.guerrerobuitrago.fotoAppDigital.LogIn;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
+import com.dd.guerrerobuitrago.fotoAppDigital.ServicesActivity;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
@@ -85,6 +86,7 @@ public class SettingsFragment extends Fragment {
         cardPurchases = view.findViewById(R.id.cv_purchase_set);
         cardServices = view.findViewById(R.id.cv_services_set);
         cardLogout = view.findViewById(R.id.cv_logout_set);
+        cardRemoveUser = view.findViewById(R.id.cv_remove_user_set);
 
         cardLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,11 +95,18 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        cardRemoveUser = view.findViewById(R.id.cv_remove_user_set);
         cardRemoveUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showAlert(v, "Eliminar Usuario", "¿Desea eliminar el usuario de manera permanente?");
+            }
+        });
+
+        cardServices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent servicesIntent = new Intent(getActivity(), ServicesActivity.class);
+                startActivity(servicesIntent);
             }
         });
     }
