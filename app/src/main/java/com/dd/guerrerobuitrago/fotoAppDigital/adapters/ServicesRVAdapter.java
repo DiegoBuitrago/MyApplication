@@ -27,23 +27,19 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
 
     static class ServicesViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvNameOwner;
-        TextView tvNameUser;
-        TextView tvYear;
-        TextView tvMonth;
-        TextView tvDay;
-        TextView tvHour;
-        TextView tvType;
+        private TextView tvNameOwner;
+        private TextView tvNameUser;
+        private TextView tvDate;
+        private TextView tvHour;
+        private TextView tvType;
 
         public ServicesViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);
-            tvNameOwner = itemView.findViewById(R.id.tv_products_name);
-            tvNameUser = itemView.findViewById(R.id.iv_product);
-            tvYear = itemView.findViewById(R.id.tv_products_des);
-            tvMonth = itemView.findViewById(R.id.tv_products_des);
-            tvDay = itemView.findViewById(R.id.tv_products_des);
-            tvHour = itemView.findViewById(R.id.tv_products_des);
-            tvType = itemView.findViewById(R.id.tv_products_des);
+            tvNameOwner = itemView.findViewById(R.id.tv_name_person_service);
+            tvNameUser = itemView.findViewById(R.id.tv_userName_person_service);
+            tvDate = itemView.findViewById(R.id.tv_date_input_service);
+            tvHour = itemView.findViewById(R.id.tv_hour_input_service);
+            tvType = itemView.findViewById(R.id.tv_type_input_service);
         }
     }
 
@@ -54,7 +50,7 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
     @NonNull
     @Override
     public ServicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View cardViewServices = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_store, parent, false);
+        View cardViewServices = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_service, parent, false);
         ServicesViewHolder viewHolder = new ServicesViewHolder(cardViewServices, listener);
         return viewHolder;
     }
@@ -64,9 +60,7 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
         Booked booked = bookeds.get(position);
         holder.tvNameOwner.setText(booked.getOwner().getFirstName() +" "+ booked.getOwner().getLastName());
         holder.tvNameUser.setText(booked.getOwner().getUserName());
-        holder.tvYear.setText(booked.getYear());
-        holder.tvMonth.setText(booked.getMonth());
-        holder.tvDay.setText(booked.getDay());
+        holder.tvDate.setText(booked.getDay()+"/"+booked.getMonth()+"/"+booked.getYear());
         holder.tvHour.setText(booked.getHour());
         holder.tvType.setText(booked.getTypeBooked().getMyName());
     }

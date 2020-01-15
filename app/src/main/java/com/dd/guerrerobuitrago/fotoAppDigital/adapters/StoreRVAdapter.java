@@ -30,10 +30,10 @@ public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreVie
 
     static class StoreViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvProductName;
-        TextView tvProductDes;
-        ImageView imageProduct;
-        ImageButton btnDelete;
+        private TextView tvProductName;
+        private TextView tvProductDes;
+        private ImageView imageProduct;
+        private ImageButton btnDelete;
 
         public StoreViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);
