@@ -29,7 +29,6 @@
         android:layout_marginTop="40dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/txtVLogIn"
         app:layout_constraintTop_toBottomOf="@+id/txtVLogIn">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -88,7 +87,7 @@
         android:id="@+id/txt_add_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:padding="30dp"
         android:text="¿No tienes una cuenta aun?"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -99,7 +98,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_add_user">
@@ -109,24 +107,23 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"
-            android:layout_marginStart="150dp"
-            android:scaleType="fitXY"
             android:onClick="facebookIntent"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_marginStart="70dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_instagram"
             app:srcCompat="@drawable/facebook" />
 
         <ImageButton
             android:id="@+id/btn_instagram"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@android:color/transparent"
             android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
             android:onClick="instagramIntent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_facebook"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_marginEnd="70dp"
             app:srcCompat="@drawable/instagram" />
     </LinearLayout>
 

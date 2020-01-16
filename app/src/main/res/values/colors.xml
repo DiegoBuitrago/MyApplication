@@ -34,4 +34,6 @@
     <color name="colorEndBackground">#50ffffff</color>
     <color name="colorLightText">#ECECEC</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+
 </resources>
