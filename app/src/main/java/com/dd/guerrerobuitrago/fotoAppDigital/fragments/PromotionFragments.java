@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.PromotionRVAdapter;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,7 +29,7 @@ import java.util.ArrayList;
  */
 public class PromotionFragments extends Fragment {
 
-    private ArrayList<Promotion> promotionsList;
+//  private ArrayList<Promotion> promotionsList;
 
     private RecyclerView rvPromotion;
     private PromotionRVAdapter rvAdapter;
@@ -36,8 +37,6 @@ public class PromotionFragments extends Fragment {
     private int a;
 
     private Uri imageUri;
-
-//    private ImageView imagen;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +52,6 @@ public class PromotionFragments extends Fragment {
         rvPromotion = view.findViewById(R.id.rv_promotion);
         this.imageUri = Uri.parse("");
         initRecyclerView();
-//      imagen = (ImageView) view.findViewById(R.id.iv_promotion);
         btnFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,14 +62,14 @@ public class PromotionFragments extends Fragment {
     }
 
     private void initRecyclerView() {
-        promotionsList = new ArrayList<>();
+//      promotionsList = Manager.getSizePromotionList();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,
                 false);
-            rvAdapter = new PromotionRVAdapter(promotionsList);
+            rvAdapter = new PromotionRVAdapter(Manager.getPromotionList());
             rvAdapter.setListener(new PromotionRVAdapter.onItemClickListener() {
                 @Override
                 public void onDeleteClick(int position) {
-                    promotionsList.remove(position);
+                    Manager.removePromotion(position);
                     rvAdapter.notifyItemRemoved(position);
                 }
             });
@@ -81,7 +79,7 @@ public class PromotionFragments extends Fragment {
                 @Override
                 public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
-                    if (!recyclerView.canScrollVertically(1) && promotionsList.size() > 2) {
+                    if (!recyclerView.canScrollVertically(1) && Manager.getSizePromotionList() > 2) {
                         btnFloat.hide();
                     } else {
                         btnFloat.show();
@@ -101,8 +99,11 @@ public class PromotionFragments extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
             this.imageUri = data.getData();
-            promotionsList.add(new Promotion(String.valueOf(a), imageUri.toString()));
-            rvAdapter.notifyItemInserted(promotionsList.size());
+            Manager.addPromotion(new Promotion(String.valueOf(a), imageUri.toString()));
+            rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
+
+//            promotionsList.add(new Promotion(String.valueOf(a), imageUri.toString()));
+//            rvAdapter.notifyItemInserted(promotionsList.size());
 //            setPathImage(data.getData());
 //            Uri path = data.getData();
 //            ImageView image = getView().findViewById(R.id.iv_promotion);

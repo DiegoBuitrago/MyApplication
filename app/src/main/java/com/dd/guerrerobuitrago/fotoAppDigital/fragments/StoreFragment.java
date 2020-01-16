@@ -21,6 +21,7 @@ import android.widget.ImageView;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.StoreRVAdapter;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,8 +31,6 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class StoreFragment extends Fragment {
-
-    private ArrayList<Product> productList;
 
     private RecyclerView rvStore;
     private StoreRVAdapter rvAdapter;
@@ -68,14 +67,13 @@ public class StoreFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        productList = new ArrayList<>();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,
                 false);
-        rvAdapter = new StoreRVAdapter(productList);
+        rvAdapter = new StoreRVAdapter(Manager.getProductList());
         rvAdapter.setListener(new StoreRVAdapter.onItemClickListener() {
             @Override
             public void onDeleteClick(int position) {
-                productList.remove(position);
+                Manager.removeProduct(position);
                 rvAdapter.notifyItemRemoved(position);
             }
         });
@@ -85,7 +83,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (!recyclerView.canScrollVertically(1) && productList.size() > 2) {
+                if (!recyclerView.canScrollVertically(1) && Manager.getSizeProductList() > 2) {
                     btnFloatStore.hide();
                 } else {
                     btnFloatStore.show();
@@ -119,8 +117,8 @@ public class StoreFragment extends Fragment {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productList.add(new Product(txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), imageUri.toString()));
-                rvAdapter.notifyItemInserted(productList.size());
+                Manager.addProduct(new Product(txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), imageUri.toString()));
+                rvAdapter.notifyItemInserted(Manager.getSizeProductList());
                 alertDialog.dismiss();
             }
         });
@@ -153,10 +151,6 @@ public class StoreFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             this.imageUri = data.getData();
             this.imageCustomDialog.setImageURI(imageUri);
-
-//            Uri path = data.getData();
-//            ImageView image = getView().findViewById(R.id.iv_promotion);
-//            image.setImageURI(path);
         }
     }
 }
