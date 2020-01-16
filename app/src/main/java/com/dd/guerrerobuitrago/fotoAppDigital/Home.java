@@ -19,12 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {
 
-    private String firstName;
-    private String lastName;
-    private String password;
-    private String typeUser;
-    private String userName;
-    private String photo;
     private BottomNavigationView buttonNav;
     private FrameLayout frameLayout;
     private Person person;
@@ -34,14 +28,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Intent i = getIntent();
-        Person userCurrent = (Person) i.getSerializableExtra("user");
         this.person = (Person) i.getSerializableExtra("user");
-            firstName = userCurrent.getFirstName();
-            lastName = userCurrent.getLastName();
-            password = userCurrent.getPassword();
-            typeUser = userCurrent.getTypeUser();
-            userName = userCurrent.getUserName();
-            photo = userCurrent.getPhoto();
         init();
     }
 

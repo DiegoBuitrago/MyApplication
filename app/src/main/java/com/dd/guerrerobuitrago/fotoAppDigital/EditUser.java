@@ -33,6 +33,8 @@ public class EditUser extends AppCompatActivity {
     private ImageView imageUser;
     private Uri imageUri;
 
+    private Person person;
+
     private Button btnChangeImageEdit;
     private Button btnUpdateUser;
 
@@ -58,18 +60,17 @@ public class EditUser extends AppCompatActivity {
         btnChangeImageEdit = findViewById(R.id.btn_change_image);
         btnUpdateUser = findViewById(R.id.btn_update);
 
-        Bundle bundleFN = getIntent().getExtras();
-        if(bundleFN != null){
-            firstNameChange.setText(bundleFN.getString("firstName"));
-            lastNameChange.setText(bundleFN.getString("lastName"));
-            passwordChange.setText(bundleFN.getString("password"));
-            imageUri = Uri.parse(bundleFN.getString("photo"));
-            loadPathImage(bundleFN.getString("photo"));
+        Intent i = getIntent();
+        person = (Person) i.getSerializableExtra("user");
+        firstNameChange.setText(person.getFirstName());
+        lastNameChange.setText(person.getLastName());
+        tvUserName.setText(person.getUserName());
+        passwordChange.setText(person.getPassword());
+        imageUri = Uri.parse(person.getPhoto());
+        tvTypePerson.setText(person.getTypeUser());
+        tvNamePerson.setText(firstNameChange.getText().toString() + " " + lastNameChange.getText().toString());
 
-            tvTypePerson.setText(bundleFN.getString("typeUser"));
-            tvNamePerson.setText(firstNameChange.getText().toString() + " " + lastNameChange.getText().toString());
-            tvUserName.setText(bundleFN.getString("userName"));
-        }
+        loadPathImage(person.getPhoto());
 
         btnChangeImageEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,18 +92,13 @@ public class EditUser extends AppCompatActivity {
     }
 
     private void updateUser() {
-        //Arreglar la lista de usuarios
-        for (int i = 0; i < Manager.getPersonList().size(); i++){
-            //Toast.makeText(getBaseContext(), Manager.getPersonList().get(i).getUserName(), Toast.LENGTH_LONG).show();
-            if(tvUserName.getText().toString().equals(Manager.getPersonList().get(i).getUserName())){
-                Manager.getPersonList().get(i).setFirstName(firstNameChange.getText().toString());
-                Manager.getPersonList().get(i).setLastName(lastNameChange.getText().toString());
-                Manager.getPersonList().get(i).setPassword(passwordChange.getText().toString());
-                Manager.getPersonList().get(i).setPhoto(imageUri.toString());
-                goToHome(Manager.getPersonList().get(i));
-                return;
-            }
-        }
+        person.setFirstName(firstNameChange.getText().toString());
+        person.setLastName(lastNameChange.getText().toString());
+        person.setPassword(passwordChange.getText().toString());
+        person.setPhoto(imageUri.toString());
+        Manager.removePerson(person.getId());
+        Manager.addPerson(person);
+        goToHome(person);
     }
 
     private void goToHome(Person current) {

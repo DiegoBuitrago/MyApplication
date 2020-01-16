@@ -132,6 +132,7 @@ public class SettingsFragment extends Fragment {
         editUserIntent.putExtra("password", person.getPassword());
         editUserIntent.putExtra("typeUser", person.getTypeUser());
         editUserIntent.putExtra("userName", person.getUserName());
+        editUserIntent.putExtra("user", person);
         editUserIntent.putExtra("photo", person.getPhoto());
         startActivity(editUserIntent);
     }
