@@ -36,6 +36,8 @@
     <string name="surname">Apellidos</string>
     <string name="change_image">Cambiar Imagen</string>
     <string name="update">Actualizar</string>
+    <string name="passwordSring">Contraseña</string>
+    <string name="foto_app_digital">Foto App Digital</string>
 
     <string-array name="types">
         <item>Seleccione</item>

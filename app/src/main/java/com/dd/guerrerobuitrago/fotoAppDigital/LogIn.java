@@ -13,13 +13,14 @@ import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
 public class LogIn extends AppCompatActivity {
 
-    private EditText etUsername;
-    private EditText etPassword;
+    private TextInputLayout etUsername;
+    private TextInputLayout etPassword;
 
     private Button btnIntro;
     private TextView txtAddUser;
@@ -36,8 +37,8 @@ public class LogIn extends AppCompatActivity {
 
     public void init(){
         personList = Manager.getPersonList();
-        etUsername = findViewById(R.id.et_username_logIn);
-        etPassword = findViewById(R.id.et_password_logIn);
+        etUsername = findViewById(R.id.text_input_userName_login);
+        etPassword = findViewById(R.id.text_input_password_login);
 
         btnIntro = findViewById(R.id.btn_intro);
         btnIntro.setOnClickListener(new View.OnClickListener(){
@@ -56,21 +57,67 @@ public class LogIn extends AppCompatActivity {
         });
     }
 
-    public void getIntroActivity(View view) {
-        if(etUsername.getText().toString() != null || etPassword.getText().toString() != null){
-            for (int i = 0; i < personList.size(); i++){
-                if(personList.get(i).getUserName().equals(etUsername.getText().toString())){
-                    if(personList.get(i).getPassword().equals(etPassword.getText().toString())){
-                        enterIntoActivity(personList.get(i));
-                        return;
-                    }
-                    Toast.makeText(getBaseContext(), "Contraseña Incorrecta", Toast.LENGTH_LONG).show();
-                    return;
+    public void getIntroActivity(View view){
+        if(passwordIsCorrect() && userNameIsCorrect()){
+            int index = validateList(etUsername.getEditText().getText().toString().trim());
+            if(index != -1){
+                enterIntoActivity(personList.get(index));
+                return;
+            }
+        }
+    }
+//    public void getIntroActivity(View view) {
+//        if(passwordIsCorrect()){
+//            for (int i = 0; i < personList.size(); i++){
+//                if(personList.get(i).getUserName().equals(etUsername.getEditText().getText().toString())){
+//                    if(personList.get(i).getPassword().equals(etPassword.getEditText().getText().toString())){
+//                        enterIntoActivity(personList.get(i));
+//                        return;
+//                    }
+//                    Toast.makeText(getBaseContext(), "Contraseña Incorrecta", Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+//            }
+//        }
+//    }
+
+    private boolean userNameIsCorrect(){
+        String userNameInput = etUsername.getEditText().getText().toString().trim();
+        if(userNameInput.isEmpty()){
+            etUsername.setError("El campo se encuentra vacio.");
+            return false;
+        }else{
+            etUsername.setError(null);
+            etUsername.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private int validateList(String userNameIn){
+        for (int i = 0; i < personList.size(); i++){
+            if(personList.get(i).getUserName().equals(userNameIn)){
+                if(personList.get(i).getPassword().equals(etPassword.getEditText().getText().toString().trim())){
+                    return i;
+                }else{
+                    etPassword.setError("Usuario y contraseña no coinciden");
+                    return -1;
                 }
             }
-            Toast.makeText(getBaseContext(), "Usuario no encontrado", Toast.LENGTH_LONG).show();
         }
+        etUsername.setError("Usuario no encontrado en la Base de Datos.");
+        return -1;
+    }
 
+    private boolean passwordIsCorrect(){
+        String passwordInput = etPassword.getEditText().getText().toString().trim();
+        if(passwordInput.isEmpty()){
+            etPassword.setError("El campo se encuentra vacio");
+            return false;
+        }else{
+            etPassword.setError(null);
+            etPassword.setErrorEnabled(false);
+            return true;
+        }
     }
 
     public void enterIntoActivity(Person person){

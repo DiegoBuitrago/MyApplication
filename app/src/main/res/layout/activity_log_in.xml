@@ -14,7 +14,7 @@
         android:background="@drawable/abstract2"
         android:fontFamily="cursive"
         android:paddingVertical="50dp"
-        android:text="Foto App Digital"
+        android:text="@string/foto_app_digital"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="30sp"
@@ -33,14 +33,16 @@
         app:layout_constraintTop_toBottomOf="@+id/txtVLogIn">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_userName_login"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:errorEnabled="true">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_username_logIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre"
+                android:hint="Usuario"
                 android:inputType="textPersonName"
                 android:padding="22dp"
                 android:text="d"
@@ -48,23 +50,24 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:counterEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_password_logIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
+                android:hint="@string/passwordSring"
                 android:inputType="textPassword"
                 android:padding="22dp"
                 android:text="12345678"
                 android:textSize="15sp" />
-        </com.google.android.material.textfield.TextInputLayout>
 
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <Button
