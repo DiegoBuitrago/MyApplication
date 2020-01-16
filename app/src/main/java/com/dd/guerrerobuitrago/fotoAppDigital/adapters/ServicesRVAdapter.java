@@ -3,6 +3,7 @@ package com.dd.guerrerobuitrago.fotoAppDigital.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,7 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
         TextView tvDay;
         TextView tvHour;
         TextView tvType;
+        private FloatingActionButton btnDelete;
 
         public ServicesViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);

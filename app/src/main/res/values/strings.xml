@@ -43,8 +43,8 @@
     <string-array name="types">
         <item>Seleccione</item>
         <item>Foto Documento</item>
-        <item>Diseños</item>
-        <item>Restauraciones</item>
+        <item>Diseño</item>
+        <item>Restauración</item>
     </string-array>
 
     <string-array name="roles">

@@ -1,7 +1,6 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
 public class Booked {
-
     private int id;
     private int year;
     private int month;
