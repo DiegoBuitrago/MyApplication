@@ -1,6 +1,7 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Person implements Serializable {
 
@@ -11,6 +12,7 @@ public class Person implements Serializable {
     private String password;
     private String photo;
     private String typeUser;
+    private ArrayList<Booked> bookedList;
 
     public Person(int id, String firstName, String lastName, String userName, String password, String photo) {
         this.id = id;
@@ -20,6 +22,7 @@ public class Person implements Serializable {
         this.password = password;
         this.photo = photo;
         this.typeUser = "Cliente";
+        this.bookedList = new ArrayList<Booked>();
     }
 
     public int getId() {
@@ -72,5 +75,29 @@ public class Person implements Serializable {
 
     public String getUserName() {
         return userName;
+    }
+
+    public void addBooked(Booked booked){
+        bookedList.add(booked);
+    }
+
+    public void removeBooked(int index){ //static
+        bookedList.remove(bookedList.get(index));
+    }
+
+    public Booked getBooked(int index){
+        return bookedList.get(index);
+    }
+
+    public ArrayList<Booked> getBookedList(){
+        return this.bookedList;
+    }
+
+    public void setBookedList(ArrayList<Booked> bookedList){
+        this.bookedList = bookedList;
+    }
+
+    public int getSizeBookedList(){
+        return bookedList.size();
     }
 }

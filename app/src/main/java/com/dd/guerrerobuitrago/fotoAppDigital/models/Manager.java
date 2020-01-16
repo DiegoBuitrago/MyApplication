@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Manager {
     private static ArrayList<Person> personList;
+
     private static ArrayList<Booked> bookedList;
 
     private static ArrayList<Promotion> promotionList;
@@ -56,6 +57,10 @@ public class Manager {
 
     public static void setBookedList(ArrayList<Booked> bookeds){
         bookedList = bookeds;
+    }
+
+    public static int getSizeBookedList(){
+        return bookedList.size();
     }
 
     //----------------promociones

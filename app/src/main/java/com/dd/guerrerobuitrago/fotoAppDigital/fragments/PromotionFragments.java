@@ -34,7 +34,6 @@ public class PromotionFragments extends Fragment {
     private RecyclerView rvPromotion;
     private PromotionRVAdapter rvAdapter;
     private FloatingActionButton btnFloat;
-    private int a;
 
     private Uri imageUri;
 
@@ -56,7 +55,6 @@ public class PromotionFragments extends Fragment {
             @Override
             public void onClick(View v) {
                 loadImage();
-                countTest();
             }
         });
     }
@@ -99,7 +97,7 @@ public class PromotionFragments extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
             this.imageUri = data.getData();
-            Manager.addPromotion(new Promotion(String.valueOf(a), imageUri.toString()));
+            Manager.addPromotion(new Promotion("", imageUri.toString()));
             rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
 
 //            promotionsList.add(new Promotion(String.valueOf(a), imageUri.toString()));
@@ -116,9 +114,5 @@ public class PromotionFragments extends Fragment {
         PromotionFragments fragment = new PromotionFragments();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    private void countTest(){
-        this.a++;
     }
 }
