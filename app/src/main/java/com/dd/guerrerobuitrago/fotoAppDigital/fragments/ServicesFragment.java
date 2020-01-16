@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +39,7 @@ public class ServicesFragment extends Fragment {
 
     private Spinner spHour;
     private Calendar currentDate;
+    private Person person;
 
     private ArrayList<String> hourList;
 
@@ -140,7 +143,7 @@ public class ServicesFragment extends Fragment {
     }
 
     private void acceptService() {
-
+        Log.d("Persona", this.person.getFirstName());
     }
 
     private void verifyHours(View view, int dayC, int monthC, int yearC) {
@@ -191,11 +194,10 @@ public class ServicesFragment extends Fragment {
         hourList.add("06:30pm");
     }
 
-    public static ServicesFragment newInstance(){
-
+    public static ServicesFragment newInstance(Person person){
         Bundle args = new Bundle();
-
         ServicesFragment fragment = new ServicesFragment();
+        fragment.person = person;
         fragment.setArguments(args);
         return fragment;
     }

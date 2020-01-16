@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.ServicesRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
 import java.util.ArrayList;
 
 public class ServicesActivity extends AppCompatActivity {
+
+    private RecyclerView rvServices;
+    private ServicesRVAdapter rvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +22,6 @@ public class ServicesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_services);
         initComponents();
     }
-
-    private ArrayList<Booked> bookedList;
-
-    private RecyclerView rvServices;
-    private ServicesRVAdapter rvAdapter;
-
 
     private void initComponents() {
         rvServices = findViewById(R.id.rv_services);
@@ -37,16 +35,23 @@ public class ServicesActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView(){
-        bookedList = new ArrayList<>();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,
-                false);
-        rvAdapter = new ServicesRVAdapter(bookedList);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,
+//                false);
+//        rvAdapter = new ServicesRVAdapter(bookedList);
 
-        rvServices.setLayoutManager(layoutManager);
-        rvServices.setAdapter(rvAdapter);
+//        rvAdapter.setListener(new ServicesRVAdapter.onItemClickListener() {
+//            @Override
+//            public void onDeleteClick(int position) {
+//                Person.removePromotion(position);
+//                rvAdapter.notifyItemRemoved(position);
+//            }
+//        });
+
+//        rvServices.setLayoutManager(layoutManager);
+//        rvServices.setAdapter(rvAdapter);
     }
 
-    private void addProductToList(View view){
+    private void addProductToList(){
 //        AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
 ////        View mView = getLayoutInflater().inflate(R.layout.custom_dialog_add_store, null);
 ////

@@ -27,6 +27,7 @@ public class Home extends AppCompatActivity {
     private String photo;
     private BottomNavigationView buttonNav;
     private FrameLayout frameLayout;
+    private Person person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Intent i = getIntent();
         Person userCurrent = (Person) i.getSerializableExtra("user");
+        this.person = (Person) i.getSerializableExtra("user");
             firstName = userCurrent.getFirstName();
             lastName = userCurrent.getLastName();
             password = userCurrent.getPassword();
@@ -62,7 +64,7 @@ public class Home extends AppCompatActivity {
                         launchFragment(storeFragment);
                         break;
                     case R.id.item_service:
-                        Fragment serviceFragment = ServicesFragment.newInstance();
+                        Fragment serviceFragment = ServicesFragment.newInstance(person);
                         launchFragment(serviceFragment);
                         break;
                     case R.id.item_settings:
