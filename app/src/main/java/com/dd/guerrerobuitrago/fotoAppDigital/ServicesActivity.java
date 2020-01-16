@@ -51,9 +51,7 @@ public class ServicesActivity extends AppCompatActivity {
 //        rvServices.setAdapter(rvAdapter);
     }
 
-    private void addProductToList(){
-//        AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
-////        View mView = getLayoutInflater().inflate(R.layout.custom_dialog_add_store, null);
+    private void addProductToList(){ ;
 ////
 ////        txtInputNameProduct = mView.findViewById(R.id.txt_input_name_product);
 ////        txtInputDesProduct = mView.findViewById(R.id.txt_input_desc_product);

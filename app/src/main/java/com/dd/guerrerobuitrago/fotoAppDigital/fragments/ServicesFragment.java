@@ -23,6 +23,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.TypeBooked;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,10 +35,16 @@ public class ServicesFragment extends Fragment {
 
     private TextView txtDate;
 
-//    private int day;
-//    private int month;
+    private int myDay;
+    private int myMonth;
+    private int myYear;
+
+    private String myHour;
+    private TypeBooked myType;
 
     private Spinner spHour;
+    private Spinner spTypeBooked;
+
     private Calendar currentDate;
     private Person person;
 
@@ -81,7 +88,9 @@ public class ServicesFragment extends Fragment {
         Button btnChooseDate = mView.findViewById(R.id.btn_choose_date);
         txtDate = mView.findViewById(R.id.txt_date_service);
         spHour = mView.findViewById(R.id.sp_hour_serivce);
-        //Spinner spTypeBooked = mView.findViewById(R.id.sp_type_service);
+
+        spTypeBooked = mView.findViewById(R.id.sp_type_service);
+
         Button btnCancel = mView.findViewById(R.id.btn_cancel_service);
         Button btnAccept = mView.findViewById(R.id.btn_accept_service);
 
@@ -143,11 +152,34 @@ public class ServicesFragment extends Fragment {
     }
 
     private void acceptService() {
-        Log.d("Persona", this.person.getFirstName());
+        if(verifyData(spTypeBooked.getSelectedItem().toString())) {
+            Booked booked = new Booked(Manager.getBookedList().size(), myYear, myMonth, myDay, myHour, myType, person);
+            Manager.addBooked(booked);
+            person.addBooked(booked);
+        }
+    }
+
+    private boolean verifyData(String cc) {
+        if(cc.equals("Foto Documento")){
+            myType = TypeBooked.PHOTO_DESIGN;
+            return true;
+        }else if(cc.equals("Restauración")){
+            myType = TypeBooked.RESTAURATION;
+            return true;
+        }else if(cc.equals("Diseño")){
+            myType = TypeBooked.PHOTO_DESIGN;
+            return true;
+        }else{
+            //No ha seleccionado el tipo ERRORRRR
+            return false;
+        }
     }
 
     private void verifyHours(View view, int dayC, int monthC, int yearC) {
         fillListHours();
+        this.myYear = yearC;
+        this.myMonth = monthC+1;
+        this.myDay = dayC;
         for(int i = 0; i < Manager.getBookedList().size(); i++){
             Booked currentBooked = Manager.getBookedList().get(i);
             if(yearC ==  currentBooked.getYear()){
@@ -159,6 +191,7 @@ public class ServicesFragment extends Fragment {
             }
         }
         spHour.setAdapter(new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, hourList));
+        myHour = spHour.getSelectedItem().toString();
     }
 
     public void removeHour(String hour){
