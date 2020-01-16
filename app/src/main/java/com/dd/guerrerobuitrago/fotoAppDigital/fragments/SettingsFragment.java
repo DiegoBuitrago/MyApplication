@@ -29,7 +29,7 @@ public class SettingsFragment extends Fragment {
 
     private View cardEdit;
     private View cardServices;
-    private View cardPurchases;
+    //private View cardPurchases;
     private View cardLogout;
     private View cardRemoveUser;
     private TextView txtNameUser;
@@ -37,13 +37,7 @@ public class SettingsFragment extends Fragment {
     private TextView txtUserName;
     private ImageView imageUser;
 
-    private String firstName;
-    private String lastName;
-    private String password;
-    private String typeUser;
-    private String userName;
-    private String photo;
-
+    private Person person;
     private Uri pathUri;
 
 
@@ -62,28 +56,19 @@ public class SettingsFragment extends Fragment {
         txtUserName = view.findViewById(R.id.txt_userName_set);
         imageUser = view.findViewById(R.id.image_user_change);
         //
-
-        Bundle bun = getArguments();
-        firstName = bun.getString("firstName");
-        lastName = bun.getString("lastName");
-        password = bun.getString("password");
-        typeUser = bun.getString("typeUser");
-        userName = bun.getString("userName");
-        photo = bun.getString("photo");
-
-        pathUri = Uri.parse(photo);
+        pathUri = Uri.parse(person.getPhoto());
         loadPathImage();
 
-        txtNameUser.setText(firstName + " " + lastName);
-        txtUserName.setText(userName);
-        txtDescUser.setText(typeUser);
+        txtNameUser.setText(person.getFirstName() + " " + person.getLastName());
+        txtUserName.setText(person.getUserName());
+        txtDescUser.setText(person.getTypeUser());
         cardEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editUser();
             }
         });
-        cardPurchases = view.findViewById(R.id.cv_purchase_set);
+        //cardPurchases = view.findViewById(R.id.cv_purchase_set);
         cardServices = view.findViewById(R.id.cv_services_set);
         cardLogout = view.findViewById(R.id.cv_logout_set);
         cardRemoveUser = view.findViewById(R.id.cv_remove_user_set);
@@ -112,12 +97,8 @@ public class SettingsFragment extends Fragment {
     }
 
     private void removeUser() {
-        //Mejorar enviando el id
-        for (int i= 0; i < Manager.getPersonList().size(); i++){
-            if(Manager.getPersonList().get(i).getUserName().equals(userName)){
-                Manager.removePerson(i);
-            }
-        }
+        Manager.removePerson(person);
+        Toast.makeText(getContext(), "Usuario borrado con exito.", Toast.LENGTH_LONG).show();
     }
 
     private void showAlert(View view, final String titleMesage, String descMessage) {
@@ -129,7 +110,6 @@ public class SettingsFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 if(titleMesage.equals("Eliminar Usuario")){
                     removeUser();
-                    Toast.makeText(getContext(), "Usuario borrado con exito.", Toast.LENGTH_LONG).show();
                 }
                 closeSession();
             }
@@ -147,12 +127,12 @@ public class SettingsFragment extends Fragment {
 
     public void editUser(){
         Intent editUserIntent = new Intent(getActivity(), EditUser.class);
-        editUserIntent.putExtra("firstName", firstName);
-        editUserIntent.putExtra("lastName", lastName);
-        editUserIntent.putExtra("password", password);
-        editUserIntent.putExtra("typeUser", typeUser);
-        editUserIntent.putExtra("userName", userName);
-        editUserIntent.putExtra("photo", photo);
+        editUserIntent.putExtra("firstName", person.getFirstName());
+        editUserIntent.putExtra("lastName", person.getLastName());
+        editUserIntent.putExtra("password", person.getPassword());
+        editUserIntent.putExtra("typeUser", person.getTypeUser());
+        editUserIntent.putExtra("userName", person.getUserName());
+        editUserIntent.putExtra("photo", person.getPhoto());
         startActivity(editUserIntent);
     }
 
@@ -161,15 +141,10 @@ public class SettingsFragment extends Fragment {
         startActivity(loginIntent);
     }
 
-    public static SettingsFragment newInstance(String firstName, String lastName, String password, String typeUser, String userName, String photo){
+    public static SettingsFragment newInstance(Person person){
         Bundle args = new Bundle();
-        args.putString("firstName", firstName);
-        args.putString("lastName", lastName);
-        args.putString("password", password);
-        args.putString("typeUser", typeUser);
-        args.putString("userName", userName);
-        args.putString("photo", photo);
         SettingsFragment fragment = new SettingsFragment();
+        fragment.person = person;
         fragment.setArguments(args);
         return fragment;
     }

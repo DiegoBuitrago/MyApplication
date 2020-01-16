@@ -68,7 +68,7 @@ public class Home extends AppCompatActivity {
                         launchFragment(serviceFragment);
                         break;
                     case R.id.item_settings:
-                        Fragment settingsFragment = SettingsFragment.newInstance(firstName, lastName, password, typeUser, userName, photo);
+                        Fragment settingsFragment = SettingsFragment.newInstance(person);
                         launchFragment(settingsFragment);
                         break;
                 }

@@ -26,6 +26,10 @@ public class Manager {
         personList.remove(personList.get(index));
     }
 
+    public static void removePerson(Person person){ //static
+        personList.remove(person);
+    }
+
     public static Person getPerson(int index){
         return personList.get(index);
     }
