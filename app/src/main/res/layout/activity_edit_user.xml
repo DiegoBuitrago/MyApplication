@@ -67,33 +67,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_firstName_change"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/names"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/et_lastName_change"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/surname"
-            android:inputType="textPersonName" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:passwordToggleEnabled="true">
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="30">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_password_change"
+                android:id="@+id/et_firstName_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
-                android:inputType="textPassword" />
+                android:inputType="textPersonName"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_lastName_change"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:counterEnabled="true"
+            app:counterMaxLength="30">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lastName_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_password_change"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:passwordToggleEnabled="true"
+            app:counterEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -121,10 +121,10 @@ public class Register extends AppCompatActivity {
     private boolean lastNameIsCorrect(){
         String lastNameInput = lastName.getEditText().getText().toString().trim();
         if(lastNameInput.isEmpty()){
-            userName.setError("El campo se encuentra vacio");
+            lastName.setError("El campo se encuentra vacio");
             return false;
         }else if(lastNameInput.length() > 30){
-            firstName.setError("Excede el numero maximo de caracteres");
+            lastName.setError("Excede el numero maximo de caracteres");
             return false;
         }else{
             lastName.setError(null);

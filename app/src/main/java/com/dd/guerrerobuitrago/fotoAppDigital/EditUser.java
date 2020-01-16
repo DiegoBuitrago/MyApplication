@@ -19,12 +19,13 @@ import android.widget.Toast;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.SettingsFragment;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class EditUser extends AppCompatActivity {
 
-    private EditText firstNameChange;
-    private EditText lastNameChange;
-    private EditText passwordChange;
+    private TextInputLayout firstNameChange;
+    private TextInputLayout lastNameChange;
+    private TextInputLayout passwordChange;
 
     private TextView tvNamePerson;
     private TextView tvTypePerson;
@@ -62,13 +63,13 @@ public class EditUser extends AppCompatActivity {
 
         Intent i = getIntent();
         person = (Person) i.getSerializableExtra("user");
-        firstNameChange.setText(person.getFirstName());
-        lastNameChange.setText(person.getLastName());
+        firstNameChange.getEditText().setText(person.getFirstName());
+        lastNameChange.getEditText().setText(person.getLastName());
         tvUserName.setText(person.getUserName());
-        passwordChange.setText(person.getPassword());
+        passwordChange.getEditText().setText(person.getPassword());
         imageUri = Uri.parse(person.getPhoto());
         tvTypePerson.setText(person.getTypeUser());
-        tvNamePerson.setText(firstNameChange.getText().toString() + " " + lastNameChange.getText().toString());
+        tvNamePerson.setText(firstNameChange.getEditText().getText().toString() + " " + lastNameChange.getEditText().getText().toString());
 
         loadPathImage(person.getPhoto());
 
@@ -92,13 +93,15 @@ public class EditUser extends AppCompatActivity {
     }
 
     private void updateUser() {
-        person.setFirstName(firstNameChange.getText().toString());
-        person.setLastName(lastNameChange.getText().toString());
-        person.setPassword(passwordChange.getText().toString());
-        person.setPhoto(imageUri.toString());
-        Manager.removePerson(person.getId());
-        Manager.addPerson(person);
-        goToHome(person);
+        if(firstNameIsCorrect() && lastNameIsCorrect() && passwordIsCorrect()){
+            person.setFirstName(firstNameChange.getEditText().getText().toString());
+            person.setLastName(lastNameChange.getEditText().getText().toString());
+            person.setPassword(passwordChange.getEditText().getText().toString());
+            person.setPhoto(imageUri.toString());
+            Manager.removePerson(person.getId());
+            Manager.addPerson(person);
+            goToHome(person);
+        }
     }
 
     private void goToHome(Person current) {
@@ -127,6 +130,51 @@ public class EditUser extends AppCompatActivity {
         if(!(pathString == null || pathString =="")) {
             this.imageUri = Uri.parse(pathString);
             this.imageUser.setImageURI(imageUri);
+        }
+    }
+
+    private boolean firstNameIsCorrect(){
+        String firstNameInput = firstNameChange.getEditText().getText().toString().trim();
+        if(firstNameInput.isEmpty()){
+            firstNameChange.setError("El campo se encuentra vacio");
+            return false;
+        }else if(firstNameInput.length() > 30){
+            firstNameChange.setError("Excede el numero maximo de caracteres");
+            return false;
+        } else{
+            firstNameChange.setError(null);
+            firstNameChange.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean lastNameIsCorrect(){
+        String lastNameInput = lastNameChange.getEditText().getText().toString().trim();
+        if(lastNameInput.isEmpty()){
+            lastNameChange.setError("El campo se encuentra vacio");
+            return false;
+        }else if(lastNameInput.length() > 30){
+            lastNameChange.setError("Excede el numero maximo de caracteres");
+            return false;
+        }else{
+            lastNameChange.setError(null);
+            lastNameChange.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean passwordIsCorrect(){
+        String passwordInput = passwordChange.getEditText().getText().toString().trim();
+        if(passwordInput.isEmpty()){
+            passwordChange.setError("El campo se encuentra vacio");
+            return false;
+        }else if(passwordInput.length() < 8){
+            passwordChange.setError("Contraseña debe tener minimo 8 caracteres");
+            return false;
+        }else{
+            passwordChange.setError(null);
+            passwordChange.setErrorEnabled(false);
+            return true;
         }
     }
 }
