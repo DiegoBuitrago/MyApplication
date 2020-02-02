@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.ServicesRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
 import java.util.ArrayList;
@@ -26,32 +27,25 @@ public class ServicesActivity extends AppCompatActivity {
     private void initComponents() {
         rvServices = findViewById(R.id.rv_services);
         initRecyclerView();
-//        btnFloatStore.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                addProductToList(v);
-//            }
-//        });
     }
 
     private void initRecyclerView(){
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,
-//                false);
-//        rvAdapter = new ServicesRVAdapter(bookedList);
-
-//        rvAdapter.setListener(new ServicesRVAdapter.onItemClickListener() {
-//            @Override
-//            public void onDeleteClick(int position) {
-//                Person.removePromotion(position);
-//                rvAdapter.notifyItemRemoved(position);
-//            }
-//        });
-
-//        rvServices.setLayoutManager(layoutManager);
-//        rvServices.setAdapter(rvAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,
+                false);
+        rvAdapter = new ServicesRVAdapter(Manager.getBookedList());
+        rvAdapter.setListener(new ServicesRVAdapter.onItemClickListener() {
+            @Override
+            public void onDeleteClick(int position) {
+                Manager.removeBooked(position);
+                rvAdapter.notifyItemRemoved(position);
+            }
+        });
+        rvServices.setLayoutManager(layoutManager);
+        rvServices.setAdapter(rvAdapter);
+        rvAdapter.notifyItemInserted(Manager.getSizeBookedList());
     }
 
-    private void addProductToList(){ ;
+    public static void addProductToList(){
 ////
 ////        txtInputNameProduct = mView.findViewById(R.id.txt_input_name_product);
 ////        txtInputDesProduct = mView.findViewById(R.id.txt_input_desc_product);
@@ -64,28 +58,10 @@ public class ServicesActivity extends AppCompatActivity {
 ////        final AlertDialog alertDialog = alert.create();
 ////        alertDialog.setCanceledOnTouchOutside(true);
 ////
-////        btnCancel.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                alertDialog.dismiss();
-////            }
-////        });
-////
-////        btnAccept.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                productList.add(new Product(txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), imageUri.toString()));
-////                rvAdapter.notifyItemInserted(productList.size());
-////                alertDialog.dismiss();
-////            }
-////        });
-////
-////        btnAddImage.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                loadImage();
-////            }
-////        });
 ////        alertDialog.show();
+    }
+
+    public ServicesRVAdapter getServicesRVAdapter(){
+        return this.rvAdapter;
     }
 }

@@ -25,6 +25,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.TypeBooked;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -109,6 +110,7 @@ public class ServicesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+//                Log.e("Cancel", "Numero de objetos:  " + Manager.getSizeBookedList());
             }
         });
 
@@ -156,6 +158,7 @@ public class ServicesFragment extends Fragment {
             Booked booked = new Booked(Manager.getBookedList().size(), myYear, myMonth, myDay, myHour, myType, person);
             Manager.addBooked(booked);
             person.addBooked(booked);
+//            Log.e("DDDDDD", "guardo:  " + booked.getDay());
         }
     }
 

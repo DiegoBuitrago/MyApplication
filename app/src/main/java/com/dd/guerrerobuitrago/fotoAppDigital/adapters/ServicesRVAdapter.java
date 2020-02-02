@@ -1,5 +1,6 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,33 +32,41 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
 
         TextView tvNameOwner;
         TextView tvNameUser;
-        TextView tvYear;
-        TextView tvMonth;
-        TextView tvDay;
+        TextView tvDate;
         TextView tvHour;
         TextView tvType;
-        private FloatingActionButton btnDelete;
+        private ImageButton btnDelete;
 
         public ServicesViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);
-            tvNameOwner = itemView.findViewById(R.id.tv_products_name);
-            tvNameUser = itemView.findViewById(R.id.iv_product);
-            tvYear = itemView.findViewById(R.id.tv_products_des);
-            tvMonth = itemView.findViewById(R.id.tv_products_des);
-            tvDay = itemView.findViewById(R.id.tv_products_des);
-            tvHour = itemView.findViewById(R.id.tv_products_des);
-            tvType = itemView.findViewById(R.id.tv_products_des);
+            tvNameOwner = itemView.findViewById(R.id.tv_name_person_service);
+            tvNameUser = itemView.findViewById(R.id.tv_userName_person_service);
+            tvDate = itemView.findViewById(R.id.tv_date_input_service);
+            tvHour = itemView.findViewById(R.id.tv_hour_input_service);
+            tvType = itemView.findViewById(R.id.tv_type_input_service);
+            btnDelete = itemView.findViewById(R.id.btn_delete_booked);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
-    public ServicesRVAdapter(ArrayList<Booked> bookeds) {
-        this.bookeds = bookeds;
+    public ServicesRVAdapter(ArrayList<Booked> booked) {
+        this.bookeds = booked;
     }
 
     @NonNull
     @Override
     public ServicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View cardViewServices = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_store, parent, false);
+        View cardViewServices = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_service, parent, false);
         ServicesViewHolder viewHolder = new ServicesViewHolder(cardViewServices, listener);
         return viewHolder;
     }
@@ -67,9 +76,7 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
         Booked booked = bookeds.get(position);
         holder.tvNameOwner.setText(booked.getOwner().getFirstName() +" "+ booked.getOwner().getLastName());
         holder.tvNameUser.setText(booked.getOwner().getUserName());
-        holder.tvYear.setText(booked.getYear());
-        holder.tvMonth.setText(booked.getMonth());
-        holder.tvDay.setText(booked.getDay());
+        holder.tvDate.setText(booked.getDay()+"/"+booked.getMonth()+"/"+booked.getDay());
         holder.tvHour.setText(booked.getHour());
         holder.tvType.setText(booked.getTypeBooked().getMyName());
     }

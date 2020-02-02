@@ -20,8 +20,8 @@
 
             <TextView
                 android:id="@+id/tv_name_person_service"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="361dp"
+                android:layout_height="65dp"
                 android:text="@string/name"
                 android:textSize="30sp" />
 
@@ -102,7 +102,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/btn_delete_product"
+            android:id="@+id/btn_delete_booked"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"
