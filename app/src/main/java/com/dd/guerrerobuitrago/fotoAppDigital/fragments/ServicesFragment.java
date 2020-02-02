@@ -3,6 +3,7 @@ package com.dd.guerrerobuitrago.fotoAppDigital.fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.guerrerobuitrago.fotoAppDigital.Home;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
@@ -154,10 +156,20 @@ public class ServicesFragment extends Fragment {
             for (int i=0; i < Manager.getPersonList().size(); i++){
                 if(Manager.getPersonList().get(i).getUserName().equals(person.getUserName())){
                     Manager.getPersonList().get(i).addBooked(booked);
+                    goToHome(Manager.getPersonList().get(i));
+                    return;
                 }
             }
+
 //            Log.e("DDDDDD", "guardo:  " + booked.getDay());
         }
+    }
+
+    private void goToHome(Person current) {
+        Intent homeIntent = new Intent(getActivity(), Home.class);
+        homeIntent.putExtra("user", current);
+        startActivity(homeIntent);
+        //finish();
     }
 
     private boolean verifyData(String cc) {

@@ -22,7 +22,7 @@ public class Person implements Serializable {
         this.password = password;
         this.photo = photo;
         this.typeUser = "Cliente";
-        this.bookedList = new ArrayList<Booked>();
+        this.bookedList = new ArrayList();
     }
 
     public int getId() {
