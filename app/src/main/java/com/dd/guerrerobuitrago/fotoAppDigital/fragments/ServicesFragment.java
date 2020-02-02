@@ -151,6 +151,7 @@ public class ServicesFragment extends Fragment {
             Booked booked = new Booked(Manager.getBookedList().size(), myYear, myMonth, myDay, myHour, myType, person);
             Manager.addBooked(booked);
             person.addBooked(booked);
+
 //            Log.e("DDDDDD", "guardo:  " + booked.getDay());
         }
     }
