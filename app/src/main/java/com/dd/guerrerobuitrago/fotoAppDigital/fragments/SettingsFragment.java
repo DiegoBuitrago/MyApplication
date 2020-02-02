@@ -129,16 +129,14 @@ public class SettingsFragment extends Fragment {
     public void editUser(){
         Intent editUserIntent = new Intent(getActivity(), EditUser.class);
         editUserIntent.putExtra("user", person);
-        //editUserIntent.putExtra("photo", person.getPhoto());
+        editUserIntent.putExtra("photo", person.getPhoto());
         startActivity(editUserIntent);
     }
 
     public void servicesAct(){
         Intent servicesIntent = new Intent(getActivity(), ServicesActivity.class);
-//        servicesIntent.putExtra("us", person.getBookedList());
-        servicesIntent.putExtra("us", person.getFirstName());
-//        servicesIntent.putExtra("us", person.getFirstName());
-        servicesIntent.putExtra("usere", person);
+        servicesIntent.putExtra("hola", person.getPhoto());
+        servicesIntent.putExtra("user", person);
         startActivity(servicesIntent);
     }
 
