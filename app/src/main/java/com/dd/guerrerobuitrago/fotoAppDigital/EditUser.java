@@ -6,9 +6,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +24,8 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.ByteArrayOutputStream;
+
 public class EditUser extends AppCompatActivity {
 
     private TextInputLayout firstNameChange;
@@ -32,7 +37,7 @@ public class EditUser extends AppCompatActivity {
     private TextView tvUserName;
 
     private ImageView imageUser;
-    private Uri imageUri;
+    private Bitmap imageUri;
 
     private Person person;
 
@@ -67,7 +72,7 @@ public class EditUser extends AppCompatActivity {
         lastNameChange.getEditText().setText(person.getLastName());
         tvUserName.setText(person.getUserName());
         passwordChange.getEditText().setText(person.getPassword());
-        imageUri = Uri.parse(person.getPhoto());
+        imageUri = stringToBitMap(person.getPhoto());
         tvTypePerson.setText(person.getTypeUser());
         tvNamePerson.setText(firstNameChange.getEditText().getText().toString() + " " + lastNameChange.getEditText().getText().toString());
 
@@ -88,6 +93,17 @@ public class EditUser extends AppCompatActivity {
         });
     }
 
+    public Bitmap stringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
     private void changeImage() {
         loadImage();
     }
@@ -97,7 +113,7 @@ public class EditUser extends AppCompatActivity {
             person.setFirstName(firstNameChange.getEditText().getText().toString());
             person.setLastName(lastNameChange.getEditText().getText().toString());
             person.setPassword(passwordChange.getEditText().getText().toString());
-            person.setPhoto(imageUri.toString());
+            person.setPhoto(bitMapToString(imageUri));
             Manager.removePerson(person.getId());
             Manager.addPerson(person);
             goToHome(person);
@@ -114,22 +130,46 @@ public class EditUser extends AppCompatActivity {
     private void loadImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
-        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
+        intent.putExtra("crop", "true");
+        intent.putExtra("scale", true);
+        intent.putExtra("outputX", 256);
+        intent.putExtra("outputY", 256);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, 1);
+        //startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(resultCode == Activity.RESULT_OK){
-            imageUser.setImageURI(data.getData());
-            imageUri = data.getData();
+            final Bundle extras = data.getExtras();
+            if (extras != null) {
+                //Get image
+                Bitmap newProfilePic = extras.getParcelable("data");
+                this.imageUri = newProfilePic;
+                imageUser.setImageBitmap(newProfilePic);
+            }
+//            imageUser.setImageURI(data.getData());
+//            imageUri = data.getData();
         }
+    }
+
+    public String bitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 
     private void loadPathImage(String pathString){
         if(!(pathString == null || pathString =="")) {
-            this.imageUri = Uri.parse(pathString);
-            this.imageUser.setImageURI(imageUri);
+            this.imageUri = stringToBitMap(pathString);
+            this.imageUser.setImageBitmap(imageUri);
         }
     }
 

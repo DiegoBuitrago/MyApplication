@@ -3,11 +3,14 @@ package com.dd.guerrerobuitrago.fotoAppDigital.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +41,7 @@ public class SettingsFragment extends Fragment {
     private ImageView imageUser;
 
     private Person person;
-    private Uri pathUri;
+    private Bitmap pathUri;
 
 
     @Override
@@ -56,7 +59,8 @@ public class SettingsFragment extends Fragment {
         txtUserName = view.findViewById(R.id.txt_userName_set);
         imageUser = view.findViewById(R.id.image_user_change);
         //
-        pathUri = Uri.parse(person.getPhoto());
+        //pathUri = Uri.parse(person.getPhoto());
+        pathUri = stringToBitMap(person.getPhoto());
         loadPathImage();
 
         txtNameUser.setText(person.getFirstName() + " " + person.getLastName());
@@ -151,8 +155,22 @@ public class SettingsFragment extends Fragment {
     }
 
     private void loadPathImage(){
-        if(pathUri != null) {
-            imageUser.setImageURI(pathUri);
+//        if(pathUri != null) {
+//            imageUser.setImageURI(pathUri);
+//        }
+        if(pathUri != null){
+            imageUser.setImageBitmap(pathUri);
+        }
+    }
+
+    public Bitmap stringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 }

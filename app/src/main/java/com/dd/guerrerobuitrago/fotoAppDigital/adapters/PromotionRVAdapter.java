@@ -1,6 +1,9 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.adapters;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +74,19 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
     public void onBindViewHolder(@NonNull PromotionRVAdapter.PromotionViewHolder holder, int position) {
         Promotion promotion = promotions.get(position);
 //        holder.tvPromotionName.setText(promotion.getName());
-        holder.imagePromotion.setImageURI(Uri.parse(promotion.getPhoto()));
+        holder.imagePromotion.setImageBitmap(stringToBitMap(promotion.getPhoto()));
+        //holder.imagePromotion.setImageURI(Uri.parse(promotion.getPhoto()));
+    }
+
+    public Bitmap stringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
     @Override

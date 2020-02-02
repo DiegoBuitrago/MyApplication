@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class Register extends AppCompatActivity {
@@ -27,7 +31,7 @@ public class Register extends AppCompatActivity {
     private TextInputLayout userName;
     private TextInputLayout password;
     private ImageView imageUser;
-    private Uri path;
+    private String path;
 
     private ArrayList<Person> personList;
 
@@ -170,23 +174,60 @@ public class Register extends AppCompatActivity {
 //        lastName.setText("");
 //        userName.setText("");
 //        password.setText("");
-        path = null;
-        this.imageUser = findViewById(R.id.image_user_change);
+        Intent loginIntent = new Intent(getBaseContext(), LogIn.class);
+        startActivity(loginIntent);
+        //path = null;
+        //this.imageUser = findViewById(R.id.image_user_change);
     }
 
     private void loadImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
-        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
+        intent.putExtra("crop", "true");
+        intent.putExtra("scale", true);
+        intent.putExtra("outputX", 256);
+        intent.putExtra("outputY", 256);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, 1);
+        //startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
-            this.path = data.getData();
+            //this.path = data.getData();
 //          this.imageUser = (ImageView) findViewById(R.id.image_user_change);
-            imageUser.setImageURI(path);
+            //imageUser.setImageURI(path);
+
+            final Bundle extras = data.getExtras();
+            if (extras != null) {
+                //Get image
+                Bitmap newProfilePic = extras.getParcelable("data");
+                this.path = bitMapToString(newProfilePic);
+                imageUser.setImageBitmap(newProfilePic);
+            }
+        }
+    }
+
+    public String bitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    public Bitmap stringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 

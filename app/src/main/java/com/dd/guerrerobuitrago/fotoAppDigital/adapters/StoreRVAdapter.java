@@ -1,6 +1,9 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.adapters;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +76,18 @@ public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreVie
         Product product = products.get(position);
         holder.tvProductName.setText(product.getName());
         holder.tvProductDes.setText(product.getDescription());
-        holder.imageProduct.setImageURI(Uri.parse(product.getPhoto()));
+        holder.imageProduct.setImageBitmap(stringToBitMap(product.getPhoto()));
+    }
+
+    public Bitmap stringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
     @Override

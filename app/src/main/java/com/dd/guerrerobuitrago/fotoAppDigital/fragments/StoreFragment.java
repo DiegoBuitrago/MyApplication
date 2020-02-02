@@ -1,9 +1,9 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.StoreRVAdapter;
@@ -25,7 +27,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
+import java.io.ByteArrayOutputStream;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +43,9 @@ public class StoreFragment extends Fragment {
 
     private ImageView imageCustomDialog;
 
-    private Uri imageUri;
+    private Bitmap imageUri;
+
+    private boolean isImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,7 +59,7 @@ public class StoreFragment extends Fragment {
     private void initComponents(View view) {
         btnFloatStore = view.findViewById(R.id.btn_float_store);
         rvStore = view.findViewById(R.id.rv_store);
-        this.imageUri = Uri.parse("");
+        //this.imageUri = stringToBitMap("");
 
         initRecyclerView();
         btnFloatStore.setOnClickListener(new View.OnClickListener() {
@@ -117,9 +121,14 @@ public class StoreFragment extends Fragment {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Manager.addProduct(new Product(txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), imageUri.toString()));
-                rvAdapter.notifyItemInserted(Manager.getSizeProductList());
-                alertDialog.dismiss();
+                if(isImage){
+                    Manager.addProduct(new Product(txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), bitMapToString(imageUri)));
+                    rvAdapter.notifyItemInserted(Manager.getSizeProductList());
+                    alertDialog.dismiss();
+                }else{
+                    Toast.makeText(getContext(), "Ingrese una imagen", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -132,6 +141,14 @@ public class StoreFragment extends Fragment {
         alertDialog.show();
     }
 
+    public String bitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
     public static StoreFragment newInstance(){
         Bundle args = new Bundle();
         StoreFragment fragment = new StoreFragment();
@@ -142,15 +159,25 @@ public class StoreFragment extends Fragment {
     private void loadImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
-        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
+        intent.putExtra("crop", "true");
+        intent.putExtra("scale", true);
+        intent.putExtra("outputX", 256);
+        intent.putExtra("outputY", 256);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, 1);
+        //startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            this.imageUri = data.getData();
-            this.imageCustomDialog.setImageURI(imageUri);
+        final Bundle extras = data.getExtras();
+        if (extras != null) {
+            //Get image
+            isImage = true;
+            Bitmap newProfilePic = extras.getParcelable("data");
+            this.imageUri = newProfilePic;
+            this.imageCustomDialog.setImageBitmap(imageUri);
         }
     }
 }
