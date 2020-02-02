@@ -149,14 +149,15 @@ public class ServicesFragment extends Fragment {
     private void acceptService() {
         if(verifyData(spTypeBooked.getSelectedItem().toString())) {
             Booked booked = new Booked(Manager.getBookedList().size(), myYear, myMonth, myDay, myHour, myType, person);
-            //Manager.addBooked(booked);
-            //person.addBooked(booked);
-            for (int i=0; i < Manager.getPersonList().size(); i++){
-                if(Manager.getPersonList().get(i).getUserName().equals(person.getUserName())){
-                    Manager.getPersonList().get(i).addBooked(booked);
-                }
-            }
+            Manager.addBooked(booked);
+//            person.addBooked(booked);
+//            for (int i=0; i < Manager.getPersonList().size(); i++){
+//                if(Manager.getPersonList().get(i).getUserName().equals(person.getUserName())){
+//                    Manager.getPersonList().get(i).addBooked(booked);
+//                }
+//            }
 //            Log.e("DDDDDD", "guardo:  " + booked.getDay());
+
         }
     }
 

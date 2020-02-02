@@ -135,8 +135,8 @@ public class SettingsFragment extends Fragment {
 
     public void servicesAct(){
         Intent servicesIntent = new Intent(getActivity(), ServicesActivity.class);
-        servicesIntent.putExtra("hola", person.getPhoto());
-        servicesIntent.putExtra("user", person);
+        servicesIntent.putExtra("userr", person.getUserName());
+//        servicesIntent.putExtra("user", person);
         startActivity(servicesIntent);
     }
 

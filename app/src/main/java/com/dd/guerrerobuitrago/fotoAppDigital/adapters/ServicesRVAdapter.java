@@ -76,7 +76,7 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
         Booked booked = bookeds.get(position);
         holder.tvNameOwner.setText(booked.getOwner().getFirstName() +" "+ booked.getOwner().getLastName());
         holder.tvNameUser.setText(booked.getOwner().getUserName());
-        holder.tvDate.setText(booked.getDay()+"/"+booked.getMonth()+"/"+booked.getDay());
+        holder.tvDate.setText(booked.getDay()+"/"+booked.getMonth()+"/"+booked.getYear());
         holder.tvHour.setText(booked.getHour());
         holder.tvType.setText(booked.getTypeBooked().getMyName());
     }
