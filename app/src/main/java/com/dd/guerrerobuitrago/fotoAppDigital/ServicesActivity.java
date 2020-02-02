@@ -31,7 +31,7 @@ public class ServicesActivity extends AppCompatActivity {
     private void initComponents() {
         rvServices = findViewById(R.id.rv_services);
         Intent i = getIntent();
-        person = (Person) i.getSerializableExtra("usere");
+        person = (Person) i.getSerializableExtra("user");
         initRecyclerView();
     }
 
