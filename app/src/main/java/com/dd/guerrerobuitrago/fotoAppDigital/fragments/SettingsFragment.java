@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,7 +31,6 @@ public class SettingsFragment extends Fragment {
 
     private View cardEdit;
     private View cardServices;
-    //private View cardPurchases;
     private View cardLogout;
     private View cardRemoveUser;
     private TextView txtNameUser;
@@ -94,8 +92,7 @@ public class SettingsFragment extends Fragment {
         cardServices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent servicesIntent = new Intent(getActivity(), ServicesActivity.class);
-                startActivity(servicesIntent);
+                servicesAct();
             }
         });
     }
@@ -139,6 +136,13 @@ public class SettingsFragment extends Fragment {
         editUserIntent.putExtra("user", person);
         editUserIntent.putExtra("photo", person.getPhoto());
         startActivity(editUserIntent);
+    }
+
+    public void servicesAct(){
+        Intent servicesIntent = new Intent(getActivity(), ServicesActivity.class);
+        servicesIntent.putExtra("hola", "mundoooo");
+        //servicesIntent.putExtra("usere", person);
+        startActivity(servicesIntent);
     }
 
     public void closeSession(){

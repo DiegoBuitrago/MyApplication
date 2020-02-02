@@ -3,7 +3,10 @@ package com.dd.guerrerobuitrago.fotoAppDigital;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.ServicesRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
@@ -16,6 +19,7 @@ public class ServicesActivity extends AppCompatActivity {
 
     private RecyclerView rvServices;
     private ServicesRVAdapter rvAdapter;
+    private Person person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +30,21 @@ public class ServicesActivity extends AppCompatActivity {
 
     private void initComponents() {
         rvServices = findViewById(R.id.rv_services);
+        Intent i = getIntent();
+        person = (Person) i.getSerializableExtra("usere");
         initRecyclerView();
     }
 
     private void initRecyclerView(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,
                 false);
-        rvAdapter = new ServicesRVAdapter(Manager.getBookedList());
+        rvAdapter = new ServicesRVAdapter(person.getBookedList());
+        //rvAdapter = new ServicesRVAdapter(Manager.getBookedList());
         rvAdapter.setListener(new ServicesRVAdapter.onItemClickListener() {
             @Override
             public void onDeleteClick(int position) {
                 Manager.removeBooked(position);
+                person.removeBooked(position);
                 rvAdapter.notifyItemRemoved(position);
             }
         });
@@ -45,21 +53,6 @@ public class ServicesActivity extends AppCompatActivity {
         rvAdapter.notifyItemInserted(Manager.getSizeBookedList());
     }
 
-    public static void addProductToList(){
-////
-////        txtInputNameProduct = mView.findViewById(R.id.txt_input_name_product);
-////        txtInputDesProduct = mView.findViewById(R.id.txt_input_desc_product);
-////        imageCustomDialog = mView.findViewById(R.id.imageView4);
-////        Button btnAddImage = mView.findViewById(R.id.btn_choose_img_product);
-////        Button btnCancel = mView.findViewById(R.id.btn_cancel_add_product);
-////        Button btnAccept = mView.findViewById(R.id.btn_add_product_to_list);
-////
-////        alert.setView(mView);
-////        final AlertDialog alertDialog = alert.create();
-////        alertDialog.setCanceledOnTouchOutside(true);
-////
-////        alertDialog.show();
-    }
 
     public ServicesRVAdapter getServicesRVAdapter(){
         return this.rvAdapter;
