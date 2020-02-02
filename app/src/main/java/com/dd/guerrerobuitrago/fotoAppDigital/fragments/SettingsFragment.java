@@ -131,27 +131,14 @@ public class SettingsFragment extends Fragment {
 
     public void editUser(){
         Intent editUserIntent = new Intent(getActivity(), EditUser.class);
-        editUserIntent.putExtra("firstName", person.getFirstName());
-        editUserIntent.putExtra("lastName", person.getLastName());
-        editUserIntent.putExtra("password", person.getPassword());
-        editUserIntent.putExtra("typeUser", person.getTypeUser());
-        editUserIntent.putExtra("userName", person.getUserName());
         editUserIntent.putExtra("user", person);
-        editUserIntent.putExtra("photo", person.getPhoto());
+        //editUserIntent.putExtra("photo", person.getPhoto());
         startActivity(editUserIntent);
     }
 
     public void closeSession(){
         Intent loginIntent = new Intent(getActivity(), LogIn.class);
         startActivity(loginIntent);
-    }
-
-    public static SettingsFragment newInstance(Person person){
-        Bundle args = new Bundle();
-        SettingsFragment fragment = new SettingsFragment();
-        fragment.person = person;
-        fragment.setArguments(args);
-        return fragment;
     }
 
     private void loadPathImage(){
@@ -172,5 +159,13 @@ public class SettingsFragment extends Fragment {
             e.getMessage();
             return null;
         }
+    }
+
+    public static SettingsFragment newInstance(Person person){
+        Bundle args = new Bundle();
+        SettingsFragment fragment = new SettingsFragment();
+        fragment.person = person;
+        fragment.setArguments(args);
+        return fragment;
     }
 }

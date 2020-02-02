@@ -118,6 +118,7 @@ public class ServicesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 acceptService();
+                alertDialog.dismiss();
             }
         });
 
@@ -133,23 +134,15 @@ public class ServicesFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int yearC, int monthC, int dayOfMonth) {
-                if(year == yearC){
-                    if(month <= monthC){
-                        if(day < dayOfMonth){
-                            txtDate.setText(dayOfMonth + "/" + (monthC+1) + "/" + yearC);
-                            verifyHours(view, dayOfMonth, monthC+1, yearC);
-                        }else{
-                            Toast.makeText(getContext(), "Fecha no valida", Toast.LENGTH_LONG).show();
-                        }
-                    }else{
-                        Toast.makeText(getContext(), "Fecha no valida", Toast.LENGTH_LONG).show();
-                    }
+                if(day < dayOfMonth){
+                    txtDate.setText(dayOfMonth + "/" + (monthC+1) + "/" + yearC);
+                    verifyHours(view, dayOfMonth, monthC+1, yearC);
                 }else{
                     Toast.makeText(getContext(), "Fecha no valida", Toast.LENGTH_LONG).show();
                 }
-
             }
         }, year, month, day);
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
         datePickerDialog.show();
     }
 
