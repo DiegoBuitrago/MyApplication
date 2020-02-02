@@ -4,17 +4,15 @@ import java.util.ArrayList;
 
 public class Manager {
     private static ArrayList<Person> personList;
-
     private static ArrayList<Booked> bookedList;
-
     private static ArrayList<Promotion> promotionList;
     private static ArrayList<Product> productList;
 
     public Manager(){
-        personList = new ArrayList<>();
-        bookedList = new ArrayList<>();
-        promotionList = new ArrayList<>();
-        productList = new ArrayList<>();
+        personList = new ArrayList<Person>();
+        bookedList = new ArrayList<Booked>();
+        promotionList = new ArrayList<Promotion>();
+        productList = new ArrayList<Product>();
     }
 
     //--------------personas
