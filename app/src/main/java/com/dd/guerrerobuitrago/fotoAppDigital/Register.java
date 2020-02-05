@@ -22,6 +22,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Register extends AppCompatActivity {
@@ -181,23 +182,15 @@ public class Register extends AppCompatActivity {
     }
 
     private void loadImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/");
-        intent.putExtra("crop", "true");
-        intent.putExtra("scale", true);
-        intent.putExtra("outputX", 256);
-        intent.putExtra("outputY", 256);
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("return-data", true);
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
         startActivityForResult(intent, 1);
-        //startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK){
+        /*if(resultCode == Activity.RESULT_OK){
             //this.path = data.getData();
 //          this.imageUser = (ImageView) findViewById(R.id.image_user_change);
             //imageUser.setImageURI(path);
@@ -209,6 +202,16 @@ public class Register extends AppCompatActivity {
                 this.path = bitMapToString(newProfilePic);
                 imageUser.setImageBitmap(newProfilePic);
             }
+        }*/
+        if (requestCode == 1){
+            //Uri uri = data.getData();
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
+                imageUser.setImageBitmap(bitmap);
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

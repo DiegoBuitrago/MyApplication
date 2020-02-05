@@ -88,9 +88,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="30dp"
-        android:text="¿No tienes una cuenta aun?"
+        android:text="@string/no_account_yet"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="23sp"
         app:layout_constraintTop_toBottomOf="@+id/btn_intro" />
 
     <LinearLayout
@@ -98,9 +98,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_add_user">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Siguenos en: "
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:layout_marginTop="17dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_whatsapp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:onClick="facebookIntent"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/facebook" />
 
         <ImageButton
             android:id="@+id/btn_facebook"
@@ -110,7 +132,6 @@
             android:onClick="facebookIntent"
             android:scaleType="fitCenter"
             android:layout_weight="1"
-            android:layout_marginStart="70dp"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/facebook" />
 
@@ -123,7 +144,6 @@
             android:onClick="instagramIntent"
             android:scaleType="fitCenter"
             android:layout_weight="1"
-            android:layout_marginEnd="70dp"
             app:srcCompat="@drawable/instagram" />
     </LinearLayout>
 

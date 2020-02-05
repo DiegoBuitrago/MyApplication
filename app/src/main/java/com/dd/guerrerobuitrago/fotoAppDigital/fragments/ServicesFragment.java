@@ -148,15 +148,11 @@ public class ServicesFragment extends Fragment {
 
     private void acceptService() {
         if(verifyData(spTypeBooked.getSelectedItem().toString())) {
+            myHour = spHour.getSelectedItem().toString();
             Booked booked = new Booked(Manager.getBookedList().size(), myYear, myMonth, myDay, myHour, myType, person);
             Manager.addBooked(booked);
-            //person.addBooked(booked);
-//            for (int i=0; i < Manager.getPersonList().size(); i++){
-//                if(Manager.getPersonList().get(i).getUserName().equals(person.getUserName())){
-//                    Manager.getPersonList().get(i).addBooked(booked);
-//                }
-//            }
-//            Log.e("DDDDDD", "guardo:  " + booked.getDay());
+        }else{
+            Toast.makeText(getContext(), "Elija un tipo de Servicio", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -171,7 +167,6 @@ public class ServicesFragment extends Fragment {
             myType = TypeBooked.PHOTO_DESIGN;
             return true;
         }else{
-            //No ha seleccionado el tipo ERRORRRR
             return false;
         }
     }
@@ -179,27 +174,26 @@ public class ServicesFragment extends Fragment {
     private void verifyHours(View view, int dayC, int monthC, int yearC) {
         fillListHours();
         this.myYear = yearC;
-        this.myMonth = monthC+1;
+        this.myMonth = monthC;
         this.myDay = dayC;
         for(int i = 0; i < Manager.getBookedList().size(); i++){
             Booked currentBooked = Manager.getBookedList().get(i);
-            if(yearC ==  currentBooked.getYear()){
-                if (monthC == currentBooked.getMonth()){
-                    if (dayC == currentBooked.getDay()){
+            if(myYear ==  currentBooked.getYear()){
+                if (myMonth == currentBooked.getMonth()){
+                    if (myDay == currentBooked.getDay()){
                         removeHour(currentBooked.getHour());
                     }
                 }
             }
         }
         spHour.setAdapter(new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, hourList));
-        myHour = spHour.getSelectedItem().toString();
     }
 
     public void removeHour(String hour){
         for (int i=0; i< hourList.size(); i++){
-            if(hour.equals(hourList.get(i))){
-                hourList.remove(i);
-                return;
+            if(hourList.get(i).equals(hour)){
+                hourList.remove(hourList.get(i));
+
             }
         }
     }

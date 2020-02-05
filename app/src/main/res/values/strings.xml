@@ -39,12 +39,17 @@
     <string name="passwordSring">Contraseña</string>
     <string name="foto_app_digital">Foto App Digital</string>
     <string name="image_user">imagen del usuario</string>
+    <string name="no_account_yet">¿No tienes una cuenta aún?</string>
 
     <string-array name="types">
         <item>Seleccione</item>
-        <item>Foto Documento</item>
-        <item>Diseño</item>
-        <item>Restauración</item>
+        <item>Estudio a Diseño</item>
+        <item>Princesitas</item>
+        <item>Mameluco</item>
+        <item>Estrellitas</item>
+        <item>Sin Diseño</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 
     <string-array name="roles">

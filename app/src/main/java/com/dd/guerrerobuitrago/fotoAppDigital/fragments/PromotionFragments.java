@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +39,6 @@ public class PromotionFragments extends Fragment {
     private RecyclerView rvPromotion;
     private PromotionRVAdapter rvAdapter;
     private FloatingActionButton btnFloat;
-
-    private Bitmap imageUri;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,62 +90,19 @@ public class PromotionFragments extends Fragment {
     }
 
     private void loadImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/");
-        intent.putExtra("crop", "true");
-        intent.putExtra("scale", true);
-        intent.putExtra("outputX", 280);
-        intent.putExtra("outputY", 256);
-        intent.putExtra("return-data", true);
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
         startActivityForResult(intent, 1);
-        //startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        final Bundle extras = data.getExtras();
-        if (extras != null) {
-            //Get image
-            Bitmap newProfilePic = extras.getParcelable("data");
-            this.imageUri = newProfilePic;
-            Manager.addPromotion(new Promotion("", bitMapToString(imageUri)));
+        if (requestCode == 1){
+            Uri uri = data.getData();
+            Manager.addPromotion(new Promotion("", uri));
             rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
-            //imageUser.setImageBitmap(newProfilePic);
-        }
-
-
-//        if(resultCode == Activity.RESULT_OK){
-//            this.imageUri = data.getData();
-//            Manager.addPromotion(new Promotion("", imageUri.toString()));
-//            rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
-
-//            promotionsList.add(new Promotion(String.valueOf(a), imageUri.toString()));
-//            rvAdapter.notifyItemInserted(promotionsList.size());
-//            setPathImage(data.getData());
-//            Uri path = data.getData();
-//            ImageView image = getView().findViewById(R.id.iv_promotion);
-//            image.setImageURI(path);
-//        }
-    }
-
-    public String bitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
-
-    public Bitmap stringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
         }
     }
 
