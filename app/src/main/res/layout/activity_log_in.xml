@@ -17,7 +17,7 @@
         android:text="@string/foto_app_digital"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +45,7 @@
                 android:inputType="textPersonName"
                 android:padding="22dp"
                 android:text="d"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +64,7 @@
                 android:inputType="textPassword"
                 android:padding="22dp"
                 android:text="12345678"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -107,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Siguenos en: "
+            android:text="Contactanos en: "
             android:textSize="15sp"
             android:gravity="center"
             android:layout_weight="2"
@@ -118,11 +118,11 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"
-            android:onClick="facebookIntent"
+            android:onClick="whatsappIntent"
             android:scaleType="fitCenter"
             android:layout_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/facebook" />
+            app:srcCompat="@drawable/whatsapp" />
 
         <ImageButton
             android:id="@+id/btn_facebook"
@@ -146,6 +146,4 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/instagram" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--android:textColorHint="@color/md_blue_900"-->

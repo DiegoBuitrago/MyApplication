@@ -155,4 +155,11 @@ public class LogIn extends AppCompatActivity {
         i.setData(Uri.parse(url));
         startActivity(i);
     }
+
+    public void whatsappIntent(View view){
+        String url = "whatsapp://send?phone=\" + \"57 + 3123753875\"";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
 }
