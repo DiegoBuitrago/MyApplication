@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.ServicesRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
@@ -26,6 +29,9 @@ public class ServicesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_services);
         initComponents();
     }
@@ -46,7 +52,6 @@ public class ServicesActivity extends AppCompatActivity {
             @Override
             public void onDeleteClick(int position) {
                 Manager.removeBooked(position);
-//                person.remove(position);
                 rvAdapter.notifyItemRemoved(position);
             }
         });
