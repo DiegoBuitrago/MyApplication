@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -146,12 +147,18 @@ public class SettingsFragment extends Fragment {
     }
 
     private void loadPathImage(){
-//        if(pathUri != null) {
-//            imageUser.setImageURI(pathUri);
-//        }
-        if(pathUri != null){
+        if(pathUri != null) {
             imageUser.setImageBitmap(pathUri);
         }
+//        if(pathUri != null){
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), person.getPhoto());
+//                imageUser.setImageBitmap(bitmap);
+//                imageUser.setImageBitmap(pathUri);
+//            }catch (Exception e){
+//                e.getMessage();
+//            }
+//        }
     }
 
     public Bitmap stringToBitMap(String encodedString){

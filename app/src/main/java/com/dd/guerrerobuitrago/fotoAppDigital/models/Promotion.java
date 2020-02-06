@@ -8,11 +8,11 @@ public class Promotion {
     private String photo;
     private Uri photo2;
 
-    public Promotion(int id_product, String name, String photo) {
-        this.id_product = id_product;
-        this.name = name;
-        this.photo = photo;
-    }
+//    public Promotion(int id_product, String name, String photo) {
+//        this.id_product = id_product;
+//        this.name = name;
+//        this.photo = photo;
+//    }
 
     public Promotion(String name, Uri photo){
         this.id_product = 0;
