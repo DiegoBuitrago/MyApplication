@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -42,8 +43,7 @@ public class StoreFragment extends Fragment {
     private EditText txtInputDesProduct;
 
     private ImageView imageCustomDialog;
-
-    private Bitmap imageUri;
+    private Uri uri;
 
     private boolean isImage;
 
@@ -59,7 +59,6 @@ public class StoreFragment extends Fragment {
     private void initComponents(View view) {
         btnFloatStore = view.findViewById(R.id.btn_float_store);
         rvStore = view.findViewById(R.id.rv_store);
-        //this.imageUri = stringToBitMap("");
 
         initRecyclerView();
         btnFloatStore.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +121,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isImage){
-                    Manager.addProduct(new Product(txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), bitMapToString(imageUri)));
+                    Manager.addProduct(new Product(txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri));
                     rvAdapter.notifyItemInserted(Manager.getSizeProductList());
                     alertDialog.dismiss();
                 }else{
@@ -141,13 +140,6 @@ public class StoreFragment extends Fragment {
         alertDialog.show();
     }
 
-    public String bitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
 
     public static StoreFragment newInstance(){
         Bundle args = new Bundle();
@@ -157,27 +149,16 @@ public class StoreFragment extends Fragment {
     }
 
     private void loadImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/");
-        intent.putExtra("crop", "true");
-        intent.putExtra("scale", true);
-        intent.putExtra("outputX", 256);
-        intent.putExtra("outputY", 256);
-        intent.putExtra("return-data", true);
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
         startActivityForResult(intent, 1);
-        //startActivityForResult(intent.createChooser(intent, "Seleccione la aplicacion"), 10);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        final Bundle extras = data.getExtras();
-        if (extras != null) {
-            //Get image
-            isImage = true;
-            Bitmap newProfilePic = extras.getParcelable("data");
-            this.imageUri = newProfilePic;
-            this.imageCustomDialog.setImageBitmap(imageUri);
+        if (requestCode == 1) {
+            uri = data.getData();
         }
     }
 }

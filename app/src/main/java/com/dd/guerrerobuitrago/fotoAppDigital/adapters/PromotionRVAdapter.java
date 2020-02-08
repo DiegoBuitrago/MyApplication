@@ -80,7 +80,7 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
     public void onBindViewHolder(@NonNull PromotionRVAdapter.PromotionViewHolder holder, int position) {
         Promotion promotion = promotions.get(position);
         try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(holder.context.getContentResolver(), promotion.getPhoto2());
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(holder.context.getContentResolver(), promotion.getPhoto());
             holder.imagePromotion.setImageBitmap(bitmap);
         } catch (IOException e) {
             e.printStackTrace();

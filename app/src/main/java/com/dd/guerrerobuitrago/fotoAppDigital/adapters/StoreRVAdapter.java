@@ -1,9 +1,8 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.adapters;
 
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.util.Base64;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreViewHolder>{
@@ -37,13 +37,15 @@ public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreVie
         private TextView tvProductDes;
         private ImageView imageProduct;
         private ImageButton btnDelete;
+        private Context context;
 
-        public StoreViewHolder(@NonNull View itemView, final onItemClickListener listener) {
+        public StoreViewHolder(@NonNull View itemView, final onItemClickListener listener, Context context) {
             super(itemView);
             tvProductName = itemView.findViewById(R.id.tv_products_name);
             imageProduct = itemView.findViewById(R.id.iv_product);
             tvProductDes = itemView.findViewById(R.id.tv_products_des);
             btnDelete = itemView.findViewById(R.id.btn_delete_product);
+            this.context = context;
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,7 +68,7 @@ public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreVie
     @Override
     public StoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View cardViewStore = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_store, parent, false);
-        StoreViewHolder viewHolder = new StoreViewHolder(cardViewStore, listener);
+        StoreViewHolder viewHolder = new StoreViewHolder(cardViewStore, listener, parent.getContext());
         return viewHolder;
     }
 
@@ -76,17 +78,11 @@ public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreVie
         Product product = products.get(position);
         holder.tvProductName.setText(product.getName());
         holder.tvProductDes.setText(product.getDescription());
-        holder.imageProduct.setImageBitmap(stringToBitMap(product.getPhoto()));
-    }
-
-    public Bitmap stringToBitMap(String encodedString){
         try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(holder.context.getContentResolver(), product.getPhoto());
+            holder.imageProduct.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

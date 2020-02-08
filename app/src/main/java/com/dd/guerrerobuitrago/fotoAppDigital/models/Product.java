@@ -1,12 +1,14 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
+import android.net.Uri;
+
 public class Product {
 
     private String name;
     private String description;
-    private String photo;
+    private Uri photo;
 
-    public Product(String name, String description, String photo) {
+    public Product(String name, String description, Uri photo) {
         this.name = name;
         this.description = description;
         this.photo = photo;
@@ -28,12 +30,11 @@ public class Product {
         this.description = description;
     }
 
-    public String getPhoto() {
+    public Uri getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Uri photo) {
         this.photo = photo;
     }
-
 }

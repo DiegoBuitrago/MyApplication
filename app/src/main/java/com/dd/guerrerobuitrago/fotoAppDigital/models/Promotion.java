@@ -5,8 +5,7 @@ import android.net.Uri;
 public class Promotion {
     private int id_product;
     private String name;
-    private String photo;
-    private Uri photo2;
+    private Uri photo;
 
 //    public Promotion(int id_product, String name, String photo) {
 //        this.id_product = id_product;
@@ -17,23 +16,19 @@ public class Promotion {
     public Promotion(String name, Uri photo){
         this.id_product = 0;
         this.name = name;
-        this.photo2 = photo;
+        this.photo = photo;
     }
 
     public int getId_product() {
         return id_product;
     }
 
-    public Uri getPhoto2() {
-        return photo2;
+    public Uri getPhoto() {
+        return photo;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getPhoto() {
-        return photo;
     }
 
     public void setId_product(int id_product) {
@@ -44,7 +39,7 @@ public class Promotion {
         this.name = name;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Uri photo) {
         this.photo = photo;
     }
 
