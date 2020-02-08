@@ -18,7 +18,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
 import java.util.ArrayList;
 
-public class ServicesActivity extends AppCompatActivity {
+public class Services extends AppCompatActivity {
 
     private RecyclerView rvServices;
     private ServicesRVAdapter rvAdapter;

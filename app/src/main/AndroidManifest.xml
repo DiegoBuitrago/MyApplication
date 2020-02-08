@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".EditUser"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".ServicesActivity"
+        <activity android:name=".Services"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Home"
             android:screenOrientation="portrait"/>

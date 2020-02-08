@@ -9,7 +9,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ import android.widget.Toast;
 import com.dd.guerrerobuitrago.fotoAppDigital.EditUser;
 import com.dd.guerrerobuitrago.fotoAppDigital.LogIn;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
-import com.dd.guerrerobuitrago.fotoAppDigital.ServicesActivity;
+import com.dd.guerrerobuitrago.fotoAppDigital.Services;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
@@ -59,7 +58,7 @@ public class SettingsFragment extends Fragment {
         imageUser = view.findViewById(R.id.image_user_change);
         //
         //pathUri = Uri.parse(person.getPhoto());
-        pathUri = stringToBitMap(person.getPhoto());
+        pathUri              = stringToBitMap(person.getPhoto());
         loadPathImage();
 
         txtNameUser.setText(person.getFirstName() + " " + person.getLastName());
@@ -135,7 +134,7 @@ public class SettingsFragment extends Fragment {
     }
 
     public void servicesAct(){
-        Intent servicesIntent = new Intent(getActivity(), ServicesActivity.class);
+        Intent servicesIntent = new Intent(getActivity(), Services.class);
         servicesIntent.putExtra("userr", person.getUserName());
 //        servicesIntent.putExtra("user", person);
         startActivity(servicesIntent);
