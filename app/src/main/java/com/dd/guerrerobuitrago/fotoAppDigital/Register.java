@@ -44,7 +44,7 @@ public class Register extends AppCompatActivity {
     private TextInputLayout userName;
     private TextInputLayout password;
     private ImageView imageUser;
-    private String path;
+    private Uri path;
 
     private ArrayList<Person> personList;
 
@@ -222,6 +222,7 @@ public class Register extends AppCompatActivity {
         if (requestCode == 1){
             //Uri uri = data.getData();
             try{
+                path = data.getData();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
                 imageUser.setImageBitmap(bitmap);
             }catch (IOException e) {
@@ -254,7 +255,7 @@ public class Register extends AppCompatActivity {
         Person person;
         if(path != null){
         person =  new Person(personList.size(), firstName.getEditText().getText().toString().trim(), "" +
-                lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), "" + password.getEditText().getText().toString(), new Utilities().stringToBase64(this.path), "Cliente");
+                lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), "" + password.getEditText().getText().toString(), path, "Cliente");
         } else {
         person =  new Person(personList.size(), firstName.getEditText().getText().toString().trim(), "" +
                 lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), password.getEditText().getText().toString(), "Cliente");
@@ -269,7 +270,7 @@ public class Register extends AppCompatActivity {
         datos.put("lastName",person.getLastName());
         datos.put("userName",person.getUserName());
         datos.put("password",person.getPassword());
-        datos.put("photo",person.getPhoto());
+        datos.put("photo",person.getPhoto().toString());
         datos.put("type",person.getTypeUser());
 
         JSONObject jsonData = new JSONObject(datos);

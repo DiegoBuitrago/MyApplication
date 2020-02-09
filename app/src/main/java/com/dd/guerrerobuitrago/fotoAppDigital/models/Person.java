@@ -1,5 +1,7 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class Person implements Serializable {
@@ -9,10 +11,10 @@ public class Person implements Serializable {
     private String lastName;
     private String userName;
     private String password;
-    private String photo;
+    private Uri photo;
     private String typeUser;
 
-    public Person(int id, String firstName, String lastName, String userName, String password, String photo, String typeUser) {
+    public Person(int id, String firstName, String lastName, String userName, String password, Uri photo, String typeUser) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,11 +66,11 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-    public String getPhoto() {
+    public Uri getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Uri photo) {
         this.photo = photo;
     }
 

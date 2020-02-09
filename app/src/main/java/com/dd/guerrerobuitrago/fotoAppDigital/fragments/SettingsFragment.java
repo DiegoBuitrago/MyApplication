@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.Services;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,7 +42,7 @@ public class SettingsFragment extends Fragment {
     private ImageView imageUser;
 
     private Person person;
-    private Bitmap pathUri;
+    private Bitmap pathBitmap;
 
 
     @Override
@@ -57,9 +60,13 @@ public class SettingsFragment extends Fragment {
         txtUserName = view.findViewById(R.id.txt_userName_set);
         imageUser = view.findViewById(R.id.image_user_change);
         //
-        //pathUri = Uri.parse(person.getPhoto());
-        pathUri              = stringToBitMap(person.getPhoto());
-        loadPathImage();
+        pathBitmap = null;
+        try {
+            pathBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), person.getPhoto());
+            loadPathImage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         txtNameUser.setText(person.getFirstName() + " " + person.getLastName());
         txtUserName.setText(person.getUserName());
@@ -146,28 +153,8 @@ public class SettingsFragment extends Fragment {
     }
 
     private void loadPathImage(){
-        if(pathUri != null) {
-            imageUser.setImageBitmap(pathUri);
-        }
-//        if(pathUri != null){
-//            try {
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), person.getPhoto());
-//                imageUser.setImageBitmap(bitmap);
-//                imageUser.setImageBitmap(pathUri);
-//            }catch (Exception e){
-//                e.getMessage();
-//            }
-//        }
-    }
-
-    public Bitmap stringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
+        if(pathBitmap != null) {
+            imageUser.setImageBitmap(pathBitmap);
         }
     }
 

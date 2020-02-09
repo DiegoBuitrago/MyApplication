@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,6 +29,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class EditUser extends AppCompatActivity {
 
@@ -40,7 +42,7 @@ public class EditUser extends AppCompatActivity {
     private TextView tvUserName;
 
     private ImageView imageUser;
-    private Bitmap imageUri;
+    private Bitmap imageBitmap;
 
     private Person person;
 
@@ -79,11 +81,16 @@ public class EditUser extends AppCompatActivity {
         lastNameChange.getEditText().setText(person.getLastName());
         tvUserName.setText(person.getUserName());
         passwordChange.getEditText().setText(person.getPassword());
-        imageUri = stringToBitMap(person.getPhoto());
+        imageBitmap = null;
         tvTypePerson.setText(person.getTypeUser());
         tvNamePerson.setText(firstNameChange.getEditText().getText().toString() + " " + lastNameChange.getEditText().getText().toString());
 
-        loadPathImage(person.getPhoto());
+        try {
+            imageBitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), person.getPhoto());
+            loadPathImage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         btnChangeImageEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,11 +127,18 @@ public class EditUser extends AppCompatActivity {
             person.setFirstName(firstNameChange.getEditText().getText().toString());
             person.setLastName(lastNameChange.getEditText().getText().toString());
             person.setPassword(passwordChange.getEditText().getText().toString());
-            person.setPhoto(bitMapToString(imageUri));
+            person.setPhoto(getImageUri(getBaseContext(), imageBitmap));
             Manager.removePerson(person.getId());
             Manager.addPerson(person);
             goToHome(person);
         }
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
     private void goToHome(Person current) {
@@ -157,11 +171,11 @@ public class EditUser extends AppCompatActivity {
             if (extras != null) {
                 //Get image
                 Bitmap newProfilePic = extras.getParcelable("data");
-                this.imageUri = newProfilePic;
+                this.imageBitmap = newProfilePic;
                 imageUser.setImageBitmap(newProfilePic);
             }
-//            imageUser.setImageURI(data.getData());
-//            imageUri = data.getData();
+//            imageUser.setimageBitmap(data.getData());
+//            imageBitmap = data.getData();
         }
     }
 
@@ -173,10 +187,9 @@ public class EditUser extends AppCompatActivity {
         return temp;
     }
 
-    private void loadPathImage(String pathString){
-        if(!(pathString == null || pathString =="")) {
-            this.imageUri = stringToBitMap(pathString);
-            this.imageUser.setImageBitmap(imageUri);
+    private void loadPathImage(){
+        if(imageBitmap != null) {
+            this.imageUser.setImageBitmap(imageBitmap);
         }
     }
 

@@ -98,7 +98,7 @@ public class Open extends AppCompatActivity {
                                      String password = jsonPerson.getString("password");
                                      String photo = jsonPerson.getString("photo");
                                      String type = jsonPerson.getString("type");
-                                     Manager.addPerson(new Person(id,firstName,lastName,userName,password,photo,type));
+                                     Manager.addPerson(new Person(id,firstName,lastName,userName,password,Uri.parse(photo),type));
                                 }
                             }else{
                                 Log.e("Datos vacios", "Error");
