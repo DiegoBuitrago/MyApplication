@@ -270,7 +270,11 @@ public class Register extends AppCompatActivity {
         datos.put("lastName",person.getLastName());
         datos.put("userName",person.getUserName());
         datos.put("password",person.getPassword());
-        datos.put("photo",person.getPhoto().toString());
+        if(person.getPhoto()!=null) {
+            datos.put("photo", person.getPhoto().toString());
+        }else{
+            datos.put("photo", null);
+        }
         datos.put("type",person.getTypeUser());
 
         JSONObject jsonData = new JSONObject(datos);

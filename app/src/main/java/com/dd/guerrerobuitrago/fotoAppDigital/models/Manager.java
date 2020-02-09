@@ -1,20 +1,6 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.dd.guerrerobuitrago.fotoAppDigital.utilities.Utilities;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Manager {
     private static ArrayList<Person> personList;
@@ -32,44 +18,6 @@ public class Manager {
     //--------------personas
     public static void addPerson(Person person){
         personList.add(person);
-
-//        Map<String,String> datos = new HashMap<>();
-//        datos.put("id",""+person.getId());
-//        datos.put("firstName",person.getFirstName());
-//        datos.put("lastName",person.getLastName());
-//        datos.put("userName",person.getUserName());
-//        datos.put("password",person.getPassword());
-//        datos.put("photo",person.getPhoto());
-//        datos.put("type",person.getTypeUser());
-//
-////        Map<String,String> header = new HashMap<>();
-////        datos.put("Content_Type","application/json");
-//
-//
-//        JSONObject jsonData = new JSONObject(datos);
-//
-//        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPerson_INSERT.php")
-//                .addJSONObjectBody(jsonData)
-//                .setPriority(Priority.MEDIUM)
-//                .setContentType("application/json")
-//                .build()
-//                .getAsJSONObject(new JSONObjectRequestListener() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            String state = response.getString("estado");
-//                            Log.d("estado","blablabla"+state);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            Log.e("Error","blablabla");
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(ANError anError) {
-//                        Log.e("Error",anError.getErrorDetail());
-//                    }
-//                });
     }
 
     public static void removePerson(int index){ //static
