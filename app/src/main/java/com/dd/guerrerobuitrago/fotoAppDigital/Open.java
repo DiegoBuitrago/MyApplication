@@ -3,6 +3,7 @@ package com.dd.guerrerobuitrago.fotoAppDigital;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -17,6 +18,9 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.Utilities;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +51,8 @@ public class Open extends AppCompatActivity {
             public void run() {
                 getLogIn();
                 loadPerson();
+                loadProduct();
+                loadPromotion();
                 finish();
                 progressBar.setVisibility(View.GONE);
             }
@@ -84,7 +90,6 @@ public class Open extends AppCompatActivity {
                             if(respuesta.equals("200")){
                                 JSONArray arrayPerson = response.getJSONArray("data");
                                 for (int i=0; i<arrayPerson.length();i++){
-                                    Log.e("entro al for", "Error");
                                      JSONObject jsonPerson = arrayPerson.getJSONObject(i);
                                      int id = jsonPerson.getInt("id");
                                      String firstName = jsonPerson.getString("first_name");
@@ -99,15 +104,83 @@ public class Open extends AppCompatActivity {
                                 Log.e("Datos vacios", "Error");
                             }
                         } catch (JSONException e) {
-                            Log.e("Error consultadddd", "Error");
+                            Log.e("Error Consulta Json", "Error Consulta JSON");
                             e.printStackTrace();
                         }
-
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        Log.e("Error consulta", "Error");
+                        Log.e("Error consulta", "Error consulta metodo conexion onError");
+                    }
+                });
+    }
+
+    public void loadProduct(){
+        AndroidNetworking.get("https://polar-plains-39256.herokuapp.com/SQLProduct_GET.php")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String respuesta = response.getString("respuesta");
+                            if(respuesta.equals("200")){
+                                JSONArray arrayProduct = response.getJSONArray("data");
+                                for (int i=0; i<arrayProduct.length();i++){
+                                    JSONObject jsonProduct = arrayProduct.getJSONObject(i);
+                                    int id = jsonProduct.getInt("id");
+                                    String name = jsonProduct.getString("name");
+                                    String description = jsonProduct.getString("description");
+                                    String photo = jsonProduct.getString("photo");
+                                    Manager.addProduct(new Product(id, name, description, Uri.parse(photo)));
+                                }
+                            }else{
+                                Log.e("Datos vacios", "Error");
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Error Consulta Json", "Error Consulta JSON");
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("Error consulta", "Error consulta metodo conexion onError");
+                    }
+                });
+    }
+
+    public void loadPromotion(){
+        AndroidNetworking.get("https://polar-plains-39256.herokuapp.com/SQLPromotion_GET.php")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String respuesta = response.getString("respuesta");
+                            if(respuesta.equals("200")){
+                                JSONArray arrayPromotion = response.getJSONArray("data");
+                                for (int i=0; i<arrayPromotion.length();i++){
+                                    JSONObject jsonPromotion = arrayPromotion.getJSONObject(i);
+                                    int id = jsonPromotion.getInt("id");
+                                    String name = jsonPromotion.getString("name");
+                                    String photo = jsonPromotion.getString("photo");
+                                    Manager.addPromotion(new Promotion(id, name, Uri.parse(photo)));
+                                }
+                            }else{
+                                Log.e("Datos vacios", "Error");
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Error Consulta Json", "Error Consulta JSON");
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("Error consulta", "Error consulta metodo conexion onError");
                     }
                 });
     }

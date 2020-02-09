@@ -121,7 +121,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isImage){
-                    Manager.addProduct(new Product(txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri));
+                    Manager.addProduct(new Product(Manager.getSizeProductList(),txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri));
                     rvAdapter.notifyItemInserted(Manager.getSizeProductList());
                     alertDialog.dismiss();
                 }else{

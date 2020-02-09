@@ -265,7 +265,6 @@ public class Register extends AppCompatActivity {
 
     public void loadDataBasePerson(Person person){
         Map<String,String> datos = new HashMap<>();
-//        datos.put("id",""+person.getId());
         datos.put("firstName",person.getFirstName());
         datos.put("lastName",person.getLastName());
         datos.put("userName",person.getUserName());
@@ -291,7 +290,6 @@ public class Register extends AppCompatActivity {
                             Log.e("Error","blablabla");
                         }
                     }
-
                     @Override
                     public void onError(ANError anError) {
                         Log.e("Error",anError.getErrorDetail());
