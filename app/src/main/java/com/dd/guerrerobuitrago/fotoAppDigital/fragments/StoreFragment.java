@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.StoreRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -121,7 +132,9 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isImage){
-                    Manager.addProduct(new Product(Manager.getSizeProductList(),txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri));
+                    Product product = new Product(Manager.getSizeProductList(),txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri);
+                    Manager.addProduct(product);
+                    loadDataBaseProduct(product);
                     rvAdapter.notifyItemInserted(Manager.getSizeProductList());
                     alertDialog.dismiss();
                 }else{
@@ -160,5 +173,36 @@ public class StoreFragment extends Fragment {
         if (requestCode == 1) {
             uri = data.getData();
         }
+    }
+
+    public void loadDataBaseProduct(Product product){
+        Map<String,String> datos = new HashMap<>();
+        datos.put("name",product.getName());
+        datos.put("description",product.getDescription());
+        datos.put("photo",product.getPhoto().toString());
+
+        JSONObject jsonData = new JSONObject(datos);
+
+        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPerson_INSERT.php")
+                .addJSONObjectBody(jsonData)
+                .setPriority(Priority.MEDIUM)
+                .setContentType("application/json")
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String   state = response.getString("estado");
+                            Log.d("Estado","blablabla"+state);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("Error","blablabla");
+                        }
+                    }
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("Error",anError.getErrorDetail());
+                    }
+                });
     }
 }

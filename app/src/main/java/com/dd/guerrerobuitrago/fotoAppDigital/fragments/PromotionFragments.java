@@ -9,15 +9,27 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.PromotionRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -100,5 +112,35 @@ public class PromotionFragments extends Fragment {
         PromotionFragments fragment = new PromotionFragments();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void loadDataBasePromotion(Promotion promotion){
+        Map<String,String> datos = new HashMap<>();
+        datos.put("name",promotion.getName());
+        datos.put("photo",promotion.getPhoto().toString());
+
+        JSONObject jsonData = new JSONObject(datos);
+
+        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPerson_INSERT.php")
+                .addJSONObjectBody(jsonData)
+                .setPriority(Priority.MEDIUM)
+                .setContentType("application/json")
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String   state = response.getString("estado");
+                            Log.d("Estado","blablabla"+state);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("Error","blablabla");
+                        }
+                    }
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("Error",anError.getErrorDetail());
+                    }
+                });
     }
 }
