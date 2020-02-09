@@ -12,14 +12,24 @@ public class Person implements Serializable {
     private String photo;
     private String typeUser;
 
-    public Person(int id, String firstName, String lastName, String userName, String password, String photo) {
+    public Person(int id, String firstName, String lastName, String userName, String password, String photo, String typeUser) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.photo = photo;
-        this.typeUser = "Cliente";
+        this.typeUser = typeUser;
+    }
+
+    public Person(int id, String firstName, String lastName, String userName, String password, String typeUser) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.photo = null;
+        this.typeUser = typeUser;
     }
 
     public int getId() {

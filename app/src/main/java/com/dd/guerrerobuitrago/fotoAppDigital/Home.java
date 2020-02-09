@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import com.androidnetworking.AndroidNetworking;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.PromotionFragments;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.ServicesFragment;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.SettingsFragment;
@@ -32,6 +33,7 @@ public class Home extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
+        AndroidNetworking.initialize(getApplicationContext());
         Intent i = getIntent();
         this.person = (Person) i.getSerializableExtra("user");
         init();

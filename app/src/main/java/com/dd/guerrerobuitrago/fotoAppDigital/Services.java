@@ -6,15 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.androidnetworking.AndroidNetworking;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.ServicesRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
-import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 
 import java.util.ArrayList;
 
@@ -32,6 +30,7 @@ public class Services extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        AndroidNetworking.initialize(getApplicationContext());
         setContentView(R.layout.activity_services);
         initComponents();
     }
