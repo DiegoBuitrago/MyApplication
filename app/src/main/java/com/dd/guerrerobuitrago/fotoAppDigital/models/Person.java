@@ -11,7 +11,7 @@ public class Person implements Serializable {
     private String lastName;
     private String userName;
     private String password;
-    private Uri photo;
+    private transient Uri photo;
     private String typeUser;
 
     public Person(int id, String firstName, String lastName, String userName, String password, Uri photo, String typeUser) {
@@ -20,7 +20,7 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.photo = null;
+        this.photo = photo;
         this.typeUser = typeUser;
     }
 
