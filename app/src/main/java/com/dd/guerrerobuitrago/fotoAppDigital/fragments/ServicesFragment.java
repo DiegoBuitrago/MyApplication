@@ -117,8 +117,9 @@ public class ServicesFragment extends Fragment {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                acceptService();
-                alertDialog.dismiss();
+                if(acceptService()){
+                    alertDialog.dismiss();
+                }
             }
         });
 
@@ -146,25 +147,36 @@ public class ServicesFragment extends Fragment {
         datePickerDialog.show();
     }
 
-    private void acceptService() {
+    private boolean acceptService() {
         if(verifyData(spTypeBooked.getSelectedItem().toString())) {
             myHour = spHour.getSelectedItem().toString();
             Booked booked = new Booked(Manager.getBookedList().size(), myYear, myMonth, myDay, myHour, myType, person);
             Manager.addBooked(booked);
+            Toast.makeText(getContext(), "Servicio creado", Toast.LENGTH_LONG).show();
+            return true;
         }else{
             Toast.makeText(getContext(), "Elija un tipo de Servicio", Toast.LENGTH_LONG).show();
+            return false;
         }
     }
 
     private boolean verifyData(String cc) {
-        if(cc.equals("Foto Documento")){
+        if(cc.equals("Estudio a Diseño")){
             myType = TypeBooked.PHOTO_DESIGN;
             return true;
-        }else if(cc.equals("Restauración")){
-            myType = TypeBooked.RESTAURATION;
+        }else if(cc.equals("Princesitas")){
+            myType = TypeBooked.STARS;
             return true;
-        }else if(cc.equals("Diseño")){
-            myType = TypeBooked.PHOTO_DESIGN;
+        }else if(cc.equals("Mameluco")){
+            myType = TypeBooked.MAMELUCO;
+            return true;
+        }
+        else if(cc.equals("Estrellitas")){
+            myType = TypeBooked.STARS;
+            return true;
+        }
+        else if(cc.equals("Sin Diseño")){
+            myType = TypeBooked.NO_DESIGN;
             return true;
         }else{
             return false;

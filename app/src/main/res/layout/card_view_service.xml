@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/date"
                     android:layout_weight="1"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_date_input_service"
@@ -59,9 +59,9 @@
                     android:id="@+id/tv_hour_person_service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hora"
+                    android:text="Hora:"
                     android:layout_weight="1"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_hour_input_service"
@@ -93,9 +93,9 @@
                     android:layout_height="wrap_content"
                     android:text="Foto Documento"
                     android:textStyle="bold"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:layout_weight="1"
-                    android:textSize="25sp" />
+                    android:textSize="23sp" />
 
             </LinearLayout>
 

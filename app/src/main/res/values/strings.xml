@@ -27,7 +27,7 @@
 
     <string name="urlFacebook">https://www.facebook.com/FOTO-Digital-1147679955261694/</string>
     <string name="urlInstagram">"https://instagram.com/fotodigital_tunja?igshid=1odjoksrhkzh1"</string>
-    <string name="date">Fecha</string>
+    <string name="date">Fecha:</string>
     <string name="promotions">Promociones</string>
     <string name="store">Tienda</string>
     <string name="services">Servicios</string>
@@ -48,8 +48,6 @@
         <item>Mameluco</item>
         <item>Estrellitas</item>
         <item>Sin Diseño</item>
-        <item>3</item>
-        <item>4</item>
     </string-array>
 
     <string-array name="roles">

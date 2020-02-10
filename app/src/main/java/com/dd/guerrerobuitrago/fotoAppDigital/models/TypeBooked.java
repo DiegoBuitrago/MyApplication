@@ -1,7 +1,7 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
 public enum TypeBooked {
-    PHOTO_DOCUMENT("Foto Documento"), PHOTO_DESIGN("Diseños"), RESTAURATION("Restauraciones");
+    PHOTO_DESIGN("Estudio a Diseño"), PRINCESS("Princesitas"), MAMELUCO("Mameluco"), STARS("Estrellitas"), NO_DESIGN("Sin Diseño");
 
     private String myName;
 
