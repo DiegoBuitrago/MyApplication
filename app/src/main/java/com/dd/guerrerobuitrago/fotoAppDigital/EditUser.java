@@ -86,11 +86,8 @@ public class EditUser extends AppCompatActivity {
         tvNamePerson.setText(firstNameChange.getEditText().getText().toString() + " " + lastNameChange.getEditText().getText().toString());
 
         try {
-            if(person.getPhoto() != null){
-                imageBitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), person.getPhoto());
-                loadPathImage();
-            }
-
+            imageBitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), person.getPhoto());
+            loadPathImage();
         } catch (IOException e) {
             e.printStackTrace();
         }
