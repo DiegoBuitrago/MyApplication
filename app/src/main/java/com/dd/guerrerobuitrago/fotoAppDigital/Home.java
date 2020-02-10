@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.PromotionFragments;
@@ -34,8 +35,11 @@ public class Home extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
         AndroidNetworking.initialize(getApplicationContext());
-        Intent i = getIntent();
-        this.person = (Person) i.getSerializableExtra("user");
+        Intent i = this.getIntent();
+        Bundle bundle = i.getExtras();
+        this.person = (Person) bundle.getSerializable("user");
+        //this.person = (Person) i.getSerializableExtra("user");
+        Toast.makeText(getBaseContext(), "photoUser" + person.getPhoto(), Toast.LENGTH_LONG).show();
         init();
     }
 

@@ -181,7 +181,7 @@ public class Register extends AppCompatActivity {
 
     public void sendPersons(){
         Manager.setPersonList(personList);
-        Toast.makeText(getBaseContext(), "Usuario creado con exito", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(), "Usuario creado con exito", Toast.LENGTH_LONG).show();
         Intent loginIntent = new Intent(getBaseContext(), LogIn.class);
         startActivity(loginIntent);
     }
@@ -206,21 +206,7 @@ public class Register extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if(resultCode == Activity.RESULT_OK){
-            //this.path = data.getData();
-//          this.imageUser = (ImageView) findViewById(R.id.image_user_change);
-            //imageUser.setImageURI(path);
-
-            final Bundle extras = data.getExtras();
-            if (extras != null) {
-                //Get image
-                Bitmap newProfilePic = extras.getParcelable("data");
-                this.path = bitMapToString(newProfilePic);
-                imageUser.setImageBitmap(newProfilePic);
-            }
-        }*/
         if (requestCode == 1){
-            //Uri uri = data.getData();
             try{
                 path = data.getData();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
@@ -261,6 +247,7 @@ public class Register extends AppCompatActivity {
                 lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), password.getEditText().getText().toString(), "Cliente");
         }
         loadDataBasePerson(person);
+        Toast.makeText(getBaseContext(), "photoUseRegister" + person.getPhoto(), Toast.LENGTH_LONG).show();
         return person;
     }
 

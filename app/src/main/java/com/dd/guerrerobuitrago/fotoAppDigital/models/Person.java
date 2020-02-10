@@ -11,7 +11,7 @@ public class Person implements Serializable {
     private String lastName;
     private String userName;
     private String password;
-    private transient Uri photo;
+    private Uri photo;
     private String typeUser;
 
     public Person(int id, String firstName, String lastName, String userName, String password, Uri photo, String typeUser) {
