@@ -32,12 +32,14 @@ import com.dd.guerrerobuitrago.fotoAppDigital.adapters.StoreRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -98,7 +100,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (!recyclerView.canScrollVertically(1) && Manager.getSizeProductList() > 2) {
+                if (!recyclerView.canScrollVertically(1) && Manager.getSizeProductList() > 3) {
                     btnFloatStore.hide();
                 } else {
                     btnFloatStore.show();
@@ -136,7 +138,7 @@ public class StoreFragment extends Fragment {
                     Product product = new Product(Manager.getSizeProductList(),txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri);
                     if(product.getPhoto() != null) {
                         Manager.addProduct(product);
-                        loadDataBaseProduct(product);
+                        //loadDataBaseProduct(product);
                         rvAdapter.notifyItemInserted(Manager.getSizeProductList());
                     }
                     alertDialog.dismiss();
@@ -175,6 +177,15 @@ public class StoreFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             uri = data.getData();
+            if (uri != null) {
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+                    imageCustomDialog.setImageBitmap(bitmap);
+                    isImage = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

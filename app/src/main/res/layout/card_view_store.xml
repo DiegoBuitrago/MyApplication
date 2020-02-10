@@ -22,6 +22,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:padding="13dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/photo_user"
                 android:contentDescription="@string/desc_photo_product"/>
 

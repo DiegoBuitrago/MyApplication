@@ -61,7 +61,7 @@ public class PromotionFragments extends Fragment {
         btnFloat = view.findViewById(R.id.btn_float);
         rvPromotion = view.findViewById(R.id.rv_promotion);
         //this.imageUri = stringToBitMap("");
-//        initRecyclerView();
+        initRecyclerView();
         btnFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +111,7 @@ public class PromotionFragments extends Fragment {
             Promotion promotion = new Promotion("promo", uri);
             if (uri != null) {
                 Manager.addPromotion(promotion);
-                loadDataBasePromotion(promotion);
+                //loadDataBasePromotion(promotion);
                 rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
             }
         }

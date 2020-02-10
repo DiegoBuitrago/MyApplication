@@ -67,7 +67,7 @@ public class LogIn extends AppCompatActivity {
         if(passwordIsCorrect() && userNameIsCorrect()){
             int index = validateList(etUsername.getEditText().getText().toString().trim());
             if(index != -1){
-                Toast.makeText(getBaseContext(), "photoUserLogIn" + personList.get(index).getPhoto(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "photoUserLogIn" + personList.get(index).getPhoto(), Toast.LENGTH_LONG).show();
                 enterIntoActivity(personList.get(index));
                 return;
             }

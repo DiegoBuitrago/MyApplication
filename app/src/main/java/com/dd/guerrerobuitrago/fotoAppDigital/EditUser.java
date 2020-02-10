@@ -117,7 +117,7 @@ public class EditUser extends AppCompatActivity {
             person.setLastName(lastNameChange.getEditText().getText().toString());
             person.setPassword(passwordChange.getEditText().getText().toString());
             person.setPhoto(imageUri);
-            Manager.removePerson(person);
+            Manager.removePerson(person.getId());
             Manager.addPerson(person);
             goToHome(person);
         }
@@ -139,11 +139,10 @@ public class EditUser extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(resultCode == Activity.RESULT_OK){
             try {
                 imageUri = data.getData();
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), imageUri);
                 imageUser.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();

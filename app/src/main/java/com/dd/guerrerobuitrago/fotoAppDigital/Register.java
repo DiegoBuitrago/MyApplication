@@ -247,7 +247,6 @@ public class Register extends AppCompatActivity {
                 lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), password.getEditText().getText().toString(), "Cliente");
         }
         //loadDataBasePerson(person);
-        Toast.makeText(getBaseContext(), "photoUseRegister" + person.getPhoto(), Toast.LENGTH_LONG).show();
         return person;
     }
 

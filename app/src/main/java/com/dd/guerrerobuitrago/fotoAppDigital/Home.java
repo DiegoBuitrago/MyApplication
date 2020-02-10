@@ -39,7 +39,6 @@ public class Home extends AppCompatActivity {
         //Bundle bundle = i.getExtras();
         //this.person = (Person) bundle.getSerializable("user");
         this.person = (Person) i.getSerializableExtra("user");
-        Toast.makeText(getBaseContext(), "photoUser" + person.getPhoto(), Toast.LENGTH_LONG).show();
         init();
     }
 

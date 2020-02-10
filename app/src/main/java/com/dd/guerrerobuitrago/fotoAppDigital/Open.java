@@ -51,8 +51,8 @@ public class Open extends AppCompatActivity {
             public void run() {
                 getLogIn();
                 loadPerson();
-                loadProduct();
-                loadPromotion();
+                //loadProduct();
+                //loadPromotion();
                 finish();
                 progressBar.setVisibility(View.GONE);
             }
