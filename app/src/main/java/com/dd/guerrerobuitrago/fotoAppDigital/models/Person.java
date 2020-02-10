@@ -20,7 +20,7 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.photo = photo;
+        this.photo = null;
         this.typeUser = typeUser;
     }
 

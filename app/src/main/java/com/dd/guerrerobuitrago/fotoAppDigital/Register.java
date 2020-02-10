@@ -255,7 +255,7 @@ public class Register extends AppCompatActivity {
         Person person;
         if(path != null){
         person =  new Person(personList.size(), firstName.getEditText().getText().toString().trim(), "" +
-                lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), "" + password.getEditText().getText().toString(), path, "Cliente");
+                lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), password.getEditText().getText().toString(), path, "Cliente");
         } else {
         person =  new Person(personList.size(), firstName.getEditText().getText().toString().trim(), "" +
                 lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), password.getEditText().getText().toString(), "Cliente");

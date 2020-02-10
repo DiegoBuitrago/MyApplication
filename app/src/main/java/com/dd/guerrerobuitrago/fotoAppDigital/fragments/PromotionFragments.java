@@ -46,6 +46,7 @@ public class PromotionFragments extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragmentloadImage();
         View promotionView = inflater.inflate(R.layout.fragment_promotion_fragments, container, false);
+        AndroidNetworking.initialize(getContext());
         initComponents(promotionView);
         return promotionView;
     }
@@ -102,8 +103,12 @@ public class PromotionFragments extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
             Uri uri = data.getData();
-            Manager.addPromotion(new Promotion("", uri));
-            rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
+            Promotion promotion = new Promotion("", uri);
+            if (promotion.getPhoto() != null) {
+                Manager.addPromotion(promotion);
+                loadDataBasePromotion(promotion);
+                rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
+            }
         }
     }
 
@@ -117,8 +122,7 @@ public class PromotionFragments extends Fragment {
     public void loadDataBasePromotion(Promotion promotion){
         Map<String,String> datos = new HashMap<>();
         datos.put("name",promotion.getName());
-        datos.put("photo",promotion.getPhoto().toString());
-
+        datos.put("photo", promotion.getPhoto().toString());
         JSONObject jsonData = new JSONObject(datos);
 
         AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPerson_INSERT.php")
@@ -134,7 +138,7 @@ public class PromotionFragments extends Fragment {
                             Log.d("Estado","blablabla"+state);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.e("Error","blablabla");
+                            Log.e("Error","blablablapromotion");
                         }
                     }
                     @Override

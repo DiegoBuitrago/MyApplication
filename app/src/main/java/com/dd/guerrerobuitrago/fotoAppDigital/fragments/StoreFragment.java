@@ -63,6 +63,7 @@ public class StoreFragment extends Fragment {
                          Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View storeView = inflater.inflate(R.layout.fragment_store, container, false);
+        AndroidNetworking.initialize(getContext());
         initComponents(storeView);
         return storeView;
     }
@@ -133,9 +134,11 @@ public class StoreFragment extends Fragment {
             public void onClick(View v) {
                 if(isImage){
                     Product product = new Product(Manager.getSizeProductList(),txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri);
-                    Manager.addProduct(product);
-                    loadDataBaseProduct(product);
-                    rvAdapter.notifyItemInserted(Manager.getSizeProductList());
+                    if(product.getPhoto() != null) {
+                        Manager.addProduct(product);
+                        loadDataBaseProduct(product);
+                        rvAdapter.notifyItemInserted(Manager.getSizeProductList());
+                    }
                     alertDialog.dismiss();
                 }else{
                     Toast.makeText(getContext(), "Ingrese una imagen", Toast.LENGTH_LONG).show();
