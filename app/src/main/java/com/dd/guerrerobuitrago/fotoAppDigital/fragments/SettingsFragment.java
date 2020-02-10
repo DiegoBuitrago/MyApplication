@@ -62,8 +62,11 @@ public class SettingsFragment extends Fragment {
         //
         pathBitmap = null;
         try {
-            pathBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), person.getPhoto());
-            loadPathImage();
+            if(person.getPhoto() != null){
+                pathBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), person.getPhoto());
+                loadPathImage();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

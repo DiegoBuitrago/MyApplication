@@ -1,6 +1,8 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.fragments;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,10 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -103,8 +107,8 @@ public class PromotionFragments extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
             Uri uri = data.getData();
-            Promotion promotion = new Promotion("", uri);
-            if (promotion.getPhoto() != null) {
+            Promotion promotion = new Promotion("promo", uri);
+            if (uri != null) {
                 Manager.addPromotion(promotion);
                 loadDataBasePromotion(promotion);
                 rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
@@ -122,10 +126,12 @@ public class PromotionFragments extends Fragment {
     public void loadDataBasePromotion(Promotion promotion){
         Map<String,String> datos = new HashMap<>();
         datos.put("name",promotion.getName());
+        Log.d("name", datos.get("name"));
         datos.put("photo", promotion.getPhoto().toString());
+        Log.d("name", datos.get("photo"));
         JSONObject jsonData = new JSONObject(datos);
 
-        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPerson_INSERT.php")
+        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPromotion_INSERT.php")
                 .addJSONObjectBody(jsonData)
                 .setPriority(Priority.MEDIUM)
                 .setContentType("application/json")
