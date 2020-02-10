@@ -36,9 +36,9 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         AndroidNetworking.initialize(getApplicationContext());
         Intent i = this.getIntent();
-        Bundle bundle = i.getExtras();
-        this.person = (Person) bundle.getSerializable("user");
-        //this.person = (Person) i.getSerializableExtra("user");
+        //Bundle bundle = i.getExtras();
+        //this.person = (Person) bundle.getSerializable("user");
+        this.person = (Person) i.getSerializableExtra("user");
         Toast.makeText(getBaseContext(), "photoUser" + person.getPhoto(), Toast.LENGTH_LONG).show();
         init();
     }

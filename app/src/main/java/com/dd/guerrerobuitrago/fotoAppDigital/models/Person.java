@@ -11,7 +11,7 @@ public class Person implements Serializable {
     private String lastName;
     private String userName;
     private String password;
-    private Uri photo;
+    private String photo;
     private String typeUser;
 
     public Person(int id, String firstName, String lastName, String userName, String password, Uri photo, String typeUser) {
@@ -20,7 +20,7 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.photo = photo;
+        this.photo = photo.toString();
         this.typeUser = typeUser;
     }
 
@@ -66,12 +66,12 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-    public Uri getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
     public void setPhoto(Uri photo) {
-        this.photo = photo;
+        this.photo = photo.toString();
     }
 
     public String getTypeUser() {

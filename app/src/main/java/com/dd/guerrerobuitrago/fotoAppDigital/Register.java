@@ -246,7 +246,7 @@ public class Register extends AppCompatActivity {
         person =  new Person(personList.size(), firstName.getEditText().getText().toString().trim(), "" +
                 lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), password.getEditText().getText().toString(), "Cliente");
         }
-        loadDataBasePerson(person);
+        //loadDataBasePerson(person);
         Toast.makeText(getBaseContext(), "photoUseRegister" + person.getPhoto(), Toast.LENGTH_LONG).show();
         return person;
     }
@@ -258,7 +258,7 @@ public class Register extends AppCompatActivity {
         datos.put("userName",person.getUserName());
         datos.put("password",person.getPassword());
         if(person.getPhoto()!=null) {
-            datos.put("photo", person.getPhoto().toString());
+            datos.put("photo", person.getPhoto());
         }else{
             datos.put("photo", null);
         }

@@ -131,9 +131,9 @@ public class LogIn extends AppCompatActivity {
         Manager.setPersonList(personList);
         //TODO Error aqui
         Intent homeIntent = new Intent(this, Home.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("user", person);
-        homeIntent.putExtras(bundle);
+        //Bundle bundle = new Bundle();
+        //bundle.putSerializable("user", person);
+        homeIntent.putExtra("user", person);
         //homeIntent.putExtra("user", person);
         startActivity(homeIntent);
         finish();

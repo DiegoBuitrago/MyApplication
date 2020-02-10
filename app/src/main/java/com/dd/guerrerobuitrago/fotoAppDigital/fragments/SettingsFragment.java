@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -63,7 +64,7 @@ public class SettingsFragment extends Fragment {
         pathBitmap = null;
         try {
             if(person.getPhoto() != null) {
-                pathBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), person.getPhoto());
+                pathBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(person.getPhoto()));
                 loadPathImage();
             }
         } catch (IOException e) {
