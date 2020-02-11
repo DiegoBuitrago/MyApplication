@@ -131,10 +131,7 @@ public class LogIn extends AppCompatActivity {
         Manager.setPersonList(personList);
         //TODO Error aqui
         Intent homeIntent = new Intent(this, Home.class);
-        //Bundle bundle = new Bundle();
-        //bundle.putSerializable("user", person);
         homeIntent.putExtra("user", person);
-        //homeIntent.putExtra("user", person);
         startActivity(homeIntent);
         finish();
     }
@@ -164,7 +161,7 @@ public class LogIn extends AppCompatActivity {
     }
 
     public void whatsappIntent(View view){
-        String url = "whatsapp://send?phone=\" + \"57 + 3123753875\"";
+        String url = "whatsapp://send?phone=\" + \"57 + 3007825168\"";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
