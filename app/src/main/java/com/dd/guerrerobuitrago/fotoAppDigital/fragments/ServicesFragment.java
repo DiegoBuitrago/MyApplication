@@ -3,6 +3,7 @@ package com.dd.guerrerobuitrago.fotoAppDigital.fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.guerrerobuitrago.fotoAppDigital.PersonList;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
@@ -79,7 +81,8 @@ public class ServicesFragment extends Fragment {
     }
 
     private void onSearch() {
-
+        Intent editUserIntent = new Intent(getActivity(), PersonList.class);
+        startActivity(editUserIntent);
     }
 
     private void onBooked(View view) {

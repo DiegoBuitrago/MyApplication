@@ -4,29 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Services">
+    tools:context=".PersonList">
 
     <TextView
         android:id="@+id/txtHeader"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:fontFamily="cursive"
         android:paddingVertical="20dp"
-        android:text="Servicios"
+        android:text="Lista de personas"
         android:background="@drawable/abstract7"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="35sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_services"
+        android:id="@+id/rv_person_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
