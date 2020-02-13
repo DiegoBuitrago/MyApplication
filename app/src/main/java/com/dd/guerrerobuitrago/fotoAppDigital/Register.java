@@ -108,8 +108,8 @@ public class Register extends AppCompatActivity {
     }
 
     private void chooseImage() {
-        //loadImage();
-        galleryIntent();
+        loadImage();
+        //galleryIntent();
     }
 
     public void getRegister(View view){
@@ -208,11 +208,11 @@ public class Register extends AppCompatActivity {
         //this.imageUser = findViewById(R.id.image_user_change);
     }
 
-//    private void loadImage() {
-//        Intent intent = new Intent(Intent.ACTION_PICK);
-//        intent.setType("image/*");
-//        startActivityForResult(intent, RESULT_LOAD_IMG);
-//    }
+    private void loadImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 1);
+    }
 
     private void galleryIntent(){
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
@@ -224,62 +224,20 @@ public class Register extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        try {
-            if (resultCode == RESULT_OK) {
-                Uri imageUri = data.getData();
-                InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                encodeImage(selectedImage);
-                //imageUser = findViewById(R.id.image_user_change);
-                // Set the Image in ImageView after decoding the String
-                Log.d("Llega1",imgDecodableString);
-                imageUser.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
-                Log.d("Llega2",imgDecodableString);
-                Uri selectedImages = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-                Log.d("Llega3",imgDecodableString);
-                // Get the cursor
-                Cursor cursor = getContentResolver().query(selectedImages,
-                        filePathColumn, null, null, null);
-                // Move to first row
-                cursor.moveToFirst();
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                imgDecodableString = cursor.getString(columnIndex);
+        if (resultCode == RESULT_OK){
+            try{
+                path = data.getData();
 
-                imgDecodableString = encodeImages(imgDecodableString);
-                cursor.close();
-                Log.d("Main",imgDecodableString);
+                Bitmap one = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
+                Bitmap bitmap = Bitmap.createScaledBitmap(one, 400, 400, true);
 
-                imageUser = findViewById(R.id.image_user_change);
-                // Set the Image in ImageView after decoding the String
-
-                Bitmap myBitmapAgain = decodeBase64(imgDecodableString);
-                imageUser.setImageBitmap(myBitmapAgain);
-            } else {
-                Toast.makeText(this, "No haz escogido una imagen",
-                        Toast.LENGTH_LONG).show();
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
+                imageUser.setImageBitmap(bitmap);
+            }catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_LONG)
-                    .show();
+
         }
-
-
-
-
-
-
-//        if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK){
-//            try{
-//                path = data.getData();
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
-//                imageUser.setImageBitmap(bitmap);
-//            }catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
     }
 
 

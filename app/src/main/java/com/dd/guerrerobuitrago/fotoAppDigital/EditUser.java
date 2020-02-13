@@ -89,7 +89,10 @@ public class EditUser extends AppCompatActivity {
         try {
             if(person.getPhoto() != null) {
                 imageUri = Uri.parse(person.getPhoto());
-                imageBitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), imageUri);
+                //imageBitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), imageUri);
+
+                Bitmap one = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), imageUri);
+                imageBitmap = Bitmap.createScaledBitmap(one, 400, 400, true);
                 loadPathImage();
             }
         } catch (IOException e) {

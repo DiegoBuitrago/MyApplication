@@ -179,7 +179,8 @@ public class StoreFragment extends Fragment {
             uri = data.getData();
             if (uri != null) {
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+                    Bitmap one = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+                    Bitmap bitmap = Bitmap.createScaledBitmap(one, 400, 400, true);
                     imageCustomDialog.setImageBitmap(bitmap);
                     isImage = true;
                 } catch (IOException e) {
