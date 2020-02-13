@@ -46,18 +46,18 @@ public class Home extends AppCompatActivity {
         buttonNav = findViewById(R.id.nav);
         frameLayout = findViewById(R.id.frameLayout);
         buttonNav.setSelectedItemId(R.id.item_promotion);
-        Fragment promotionFragment = PromotionFragments.newInstance();
+        Fragment promotionFragment = PromotionFragments.newInstance(person);
         launchFragment(promotionFragment);
         buttonNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()){
                     case R.id.item_promotion:
-                        Fragment promotionFragment = PromotionFragments.newInstance();
+                        Fragment promotionFragment = PromotionFragments.newInstance(person);
                         launchFragment(promotionFragment);
                         break;
                     case R.id.item_store:
-                        Fragment storeFragment = StoreFragment.newInstance();
+                        Fragment storeFragment = StoreFragment.newInstance(person);
                         launchFragment(storeFragment);
                         break;
                     case R.id.item_service:
