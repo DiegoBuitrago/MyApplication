@@ -1,10 +1,18 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
 public class Message {
+    private int id;
     private String nameUser;
     private String message;
 
+    public Message(int id, String nameUser, String message){
+        this.id = id;
+        this.nameUser = nameUser;
+        this.message = message;
+    }
+
     public Message(String nameUser, String message){
+        this.id = id;
         this.nameUser = nameUser;
         this.message = message;
     }

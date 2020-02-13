@@ -10,19 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
+
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.ChatRVAdapter;
-import com.dd.guerrerobuitrago.fotoAppDigital.adapters.PersonRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Message;
-import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +35,7 @@ public class Chat extends AppCompatActivity {
 
     private String name_user_message;
 
-    private Button buttonSend;
+    private ImageButton buttonSend;
     private EditText textMessage;
 
     @Override
@@ -53,8 +51,8 @@ public class Chat extends AppCompatActivity {
 
     private void initComponents() {
         rvChat = findViewById(R.id.rv_chat_message);
-//        buttonSend = findViewById(R.id.btn_send);
-//        textMessage = findViewById(R.id.rv_chat_message);
+        buttonSend = findViewById(R.id.btn_send);
+        textMessage = findViewById(R.id.rv_chat_message);
         Intent i = getIntent();
         name_user_message = i.getSerializableExtra("user_message").toString();
         buttonSend.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +76,9 @@ public class Chat extends AppCompatActivity {
     private void sendMessage(){
         String text = textMessage.getText().toString();
         if (!text.isEmpty()){
-            Message message = new Message("",text);
+            Message message = new Message(name_user_message,text);
+            Manager.addMessage(message);
+            rvAdapter.notifyItemInserted(Manager.getSizeMessageList());
             loadDataBaseMessage(message);
         }
     }

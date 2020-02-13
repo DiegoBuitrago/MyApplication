@@ -17,6 +17,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Message;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
@@ -51,6 +52,7 @@ public class Open extends AppCompatActivity {
             public void run() {
                 getLogIn();
                 loadPerson();
+                loadMessage();
                 //loadProduct();
                 //loadPromotion();
                 finish();
@@ -168,6 +170,40 @@ public class Open extends AppCompatActivity {
                                     String name = jsonPromotion.getString("name");
                                     String photo = jsonPromotion.getString("photo");
                                     Manager.addPromotion(new Promotion(id, name, Uri.parse(photo)));
+                                }
+                            }else{
+                                Log.e("Datos vacios", "Error");
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Error Consulta Json", "Error Consulta JSON");
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("Error consulta", "Error consulta metodo conexion onError");
+                    }
+                });
+    }
+
+    public void loadMessage(){
+        AndroidNetworking.get("https://polar-plains-39256.herokuapp.com/SQLChat_GET.php")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String respuesta = response.getString("respuesta");
+                            if(respuesta.equals("200")){
+                                JSONArray arrayMessage = response.getJSONArray("data");
+                                for (int i=0; i<arrayMessage.length();i++){
+                                    JSONObject jsonMessage = arrayMessage.getJSONObject(i);
+                                    int id = jsonMessage.getInt("id");
+                                    String name = jsonMessage.getString("name");
+                                    String text = jsonMessage.getString("text");
+                                    Manager.addMessage(new Message(id, name, text));
                                 }
                             }else{
                                 Log.e("Datos vacios", "Error");
