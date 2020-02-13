@@ -53,8 +53,8 @@ public class Chat extends AppCompatActivity {
 
     private void initComponents() {
         rvChat = findViewById(R.id.rv_chat_message);
-        buttonSend = findViewById(R.id.btn_send);
-        textMessage = findViewById(R.id.et_chat);
+//        buttonSend = findViewById(R.id.btn_send);
+//        textMessage = findViewById(R.id.rv_chat_message);
         Intent i = getIntent();
         name_user_message = i.getSerializableExtra("user_message").toString();
         buttonSend.setOnClickListener(new View.OnClickListener() {
