@@ -15,9 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PersonList"></activity>
         <activity
             android:name=".EditUser"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Chat"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PersonList"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Services"

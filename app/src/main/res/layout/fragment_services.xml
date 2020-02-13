@@ -164,7 +164,7 @@
                     <!-- Termina -->
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cv_log_out"
+                        android:id="@+id/cv_chat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"

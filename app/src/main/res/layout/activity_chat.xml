@@ -24,7 +24,6 @@
         android:id="@+id/rv_chat_message"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +35,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorLightText"
-        android:padding="14dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
 
@@ -49,12 +48,12 @@
             android:background="@color/colorWhite"
             android:inputType="textAutoComplete"
             android:hint="..."
-            android:padding="20dp" />
+            android:padding="15dp" />
 
         <ImageButton
             android:id="@+id/btn_send"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_margin="16dp"
             android:padding="15dp"
             android:background="@drawable/circle"

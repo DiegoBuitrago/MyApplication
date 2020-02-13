@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.guerrerobuitrago.fotoAppDigital.Chat;
 import com.dd.guerrerobuitrago.fotoAppDigital.PersonList;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
@@ -64,6 +65,7 @@ public class ServicesFragment extends Fragment {
     private void init(View view) {
         View cvSearch = view.findViewById(R.id.cv_search_services);
         View cvBooked = view.findViewById(R.id.cv_booked_services);
+        View cvChat = view.findViewById(R.id.cv_chat);
         //cvSearch.setVisibility(View.GONE);
         cvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +80,18 @@ public class ServicesFragment extends Fragment {
                 onBooked(v);
             }
         });
+
+        cvChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onChat();
+            }
+        });
+    }
+
+    private void onChat() {
+        Intent chatIntent = new Intent(getActivity(), Chat.class);
+        startActivity(chatIntent);
     }
 
     private void onSearch() {
