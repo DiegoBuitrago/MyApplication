@@ -67,6 +67,10 @@ public class ServicesFragment extends Fragment {
         View cvBooked = view.findViewById(R.id.cv_booked_services);
         View cvChat = view.findViewById(R.id.cv_chat);
         //cvSearch.setVisibility(View.GONE);
+        if(person.getTypeUser().equals("Cliente")){
+            cvSearch.setVisibility(View.GONE);
+            cvChat.setVisibility(View.GONE);
+        }
         cvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

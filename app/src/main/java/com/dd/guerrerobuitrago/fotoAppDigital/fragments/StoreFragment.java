@@ -60,6 +60,8 @@ public class StoreFragment extends Fragment {
 
     private boolean isImage;
 
+    private Person person;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
@@ -158,14 +160,6 @@ public class StoreFragment extends Fragment {
         alertDialog.show();
     }
 
-
-    public static StoreFragment newInstance(){
-        Bundle args = new Bundle();
-        StoreFragment fragment = new StoreFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     private void loadImage() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -219,5 +213,13 @@ public class StoreFragment extends Fragment {
                         Log.e("Error",anError.getErrorDetail());
                     }
                 });
+    }
+
+    public static StoreFragment newInstance(Person person){
+        Bundle args = new Bundle();
+        StoreFragment fragment = new StoreFragment();
+        fragment.person = person;
+        fragment.setArguments(args);
+        return fragment;
     }
 }

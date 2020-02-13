@@ -79,7 +79,8 @@ public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreVie
         holder.tvProductName.setText(product.getName());
         holder.tvProductDes.setText(product.getDescription());
         try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(holder.context.getContentResolver(), product.getPhoto());
+            Bitmap one = MediaStore.Images.Media.getBitmap(holder.context.getContentResolver(), product.getPhoto());
+            Bitmap bitmap = Bitmap.createScaledBitmap(one, 500, 500, true);
             holder.imageProduct.setImageBitmap(bitmap);
         } catch (IOException e) {
             e.printStackTrace();

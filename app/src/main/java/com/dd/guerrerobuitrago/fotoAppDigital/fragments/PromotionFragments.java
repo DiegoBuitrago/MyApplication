@@ -25,6 +25,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.PromotionRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,6 +47,7 @@ public class PromotionFragments extends Fragment {
     private RecyclerView rvPromotion;
     private PromotionRVAdapter rvAdapter;
     private FloatingActionButton btnFloat;
+    private Person person;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +64,9 @@ public class PromotionFragments extends Fragment {
         rvPromotion = view.findViewById(R.id.rv_promotion);
         //this.imageUri = stringToBitMap("");
         initRecyclerView();
+        if(person.getTypeUser().equals("Cliente")){
+            btnFloat.hide();
+        }
         btnFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,13 +122,6 @@ public class PromotionFragments extends Fragment {
         }
     }
 
-    public static PromotionFragments newInstance(){
-        Bundle args = new Bundle();
-        PromotionFragments fragment = new PromotionFragments();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     public void loadDataBasePromotion(Promotion promotion){
         Map<String,String> datos = new HashMap<>();
         datos.put("name",promotion.getName());
@@ -153,5 +151,13 @@ public class PromotionFragments extends Fragment {
                         Log.e("Error",anError.getErrorDetail());
                     }
                 });
+    }
+
+    public static PromotionFragments newInstance(Person person){
+        Bundle args = new Bundle();
+        PromotionFragments fragment = new PromotionFragments();
+        fragment.person = person;
+        fragment.setArguments(args);
+        return fragment;
     }
 }
