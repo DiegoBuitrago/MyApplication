@@ -35,30 +35,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/md_red_700"
-        android:padding="20dp"
+        android:background="@color/colorLightText"
+        android:padding="14dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/et_chat"
+            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:inputType="textPersonName"
-            android:padding="25dp"
-            android:text="Name" />
+            android:inputType="textAutoComplete"
+            android:hint="..."
+            android:padding="20dp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_send"
-            android:layout_width="wrap_content"
-            android:layout_height="86dp"
-            android:layout_marginStart="10dp"
-
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="16dp"
+            android:padding="15dp"
             android:background="@drawable/circle"
-            android:drawableTop="@drawable/icon_promotion"
-            android:text="" />
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@id/iv_promotion"
+            app:layout_constraintEnd_toEndOf="@id/iv_promotion"
+            app:srcCompat="@drawable/send" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
