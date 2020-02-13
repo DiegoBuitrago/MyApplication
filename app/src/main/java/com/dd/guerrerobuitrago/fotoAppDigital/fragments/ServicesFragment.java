@@ -91,6 +91,7 @@ public class ServicesFragment extends Fragment {
 
     private void onChat() {
         Intent chatIntent = new Intent(getActivity(), Chat.class);
+        chatIntent.putExtra("nameUser", person.getFirstName() + " " + person.getLastName());
         startActivity(chatIntent);
     }
 
