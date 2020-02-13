@@ -1,15 +1,9 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,20 +28,14 @@ public class ChatRVAdapter extends RecyclerView.Adapter<ChatRVAdapter.ChatViewHo
 
     static class ChatViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvPersonName;
-        private TextView tvPersonType;
-        private ImageView imagePerson;
-        private Button btnUpdate;
-        private Spinner spinner;
+        private TextView tvUserName;
+        private TextView tvMessage;
         private Context context;
 
         public ChatViewHolder(@NonNull View itemView, final ChatRVAdapter.onItemClickListener listener, Context context) {
             super(itemView);
-            tvPersonName = itemView.findViewById(R.id.tv_name_person);
-            tvPersonType = itemView.findViewById(R.id.tv_type_person);
-            imagePerson = itemView.findViewById(R.id.iv_image_person);
-            btnUpdate = itemView.findViewById(R.id.update_person);
-            spinner = itemView.findViewById(R.id.sp_type_user);
+            tvUserName = itemView.findViewById(R.id.tv_name_person_chat);
+            tvMessage = itemView.findViewById(R.id.tv_message);
             this.context = context;
         }
     }
@@ -59,7 +47,7 @@ public class ChatRVAdapter extends RecyclerView.Adapter<ChatRVAdapter.ChatViewHo
     @NonNull
     @Override
     public ChatRVAdapter.ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View cardViewChat = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_person, parent, false);
+        View cardViewChat = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_chat, parent, false);
         ChatRVAdapter.ChatViewHolder viewHolder = new ChatRVAdapter.ChatViewHolder(cardViewChat, listener, parent.getContext());
         return viewHolder;
     }
@@ -68,8 +56,8 @@ public class ChatRVAdapter extends RecyclerView.Adapter<ChatRVAdapter.ChatViewHo
     @Override
     public void onBindViewHolder(@NonNull ChatRVAdapter.ChatViewHolder holder, int position) {
         Message message = messages.get(position);
-//        holder.tvPersonName.setText(person.getFirstName()+"  "+person.getLastName());
-//        holder.tvPersonType.setText(person.getTypeUser());
+        holder.tvUserName.setText(message.getNameUser());
+        holder.tvMessage.setText(message.getNameUser());
     }
 
     @Override
