@@ -7,12 +7,14 @@ public class Manager {
     private static ArrayList<Booked> bookedList;
     private static ArrayList<Promotion> promotionList;
     private static ArrayList<Product> productList;
+    private static ArrayList<Message> messageList;
 
     public Manager(){
         personList = new ArrayList<Person>();
         bookedList = new ArrayList<Booked>();
         promotionList = new ArrayList<Promotion>();
         productList = new ArrayList<Product>();
+        messageList = new ArrayList<Message>();
     }
 
     //--------------personas
@@ -113,5 +115,30 @@ public class Manager {
 
     public static int getSizeProductList(){
         return productList.size();
+    }
+
+    // --------------mensajes
+    public static void addMessage(Message message){
+        messageList.add(message);
+    }
+
+    public static void removeMessage(int index){ //static
+        messageList.remove(messageList.get(index));
+    }
+
+    public static Message getMessage(int index){
+        return messageList.get(index);
+    }
+
+    public static ArrayList<Message> getMessageList(){
+        return messageList;
+    }
+
+    public static void setMessageList(ArrayList<Message> message){
+        messageList = message;
+    }
+
+    public static int getSizeMessageList(){
+        return messageList.size();
     }
 }
