@@ -55,13 +55,15 @@ public class Chat extends AppCompatActivity {
     private void initComponents() {
         rvChat = findViewById(R.id.rv_chat_message);
         buttonSend = findViewById(R.id.btn_send);
-//        textMessage = findViewById(R.id.rv_chat_message);
+        textMessage = findViewById(R.id.et_chat);
         Intent i = getIntent();
         name_user_message = i.getStringExtra("nameUser");
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendMessage();
+                textMessage.setText("");
+
             }
         });
         initRecyclerView();
@@ -73,14 +75,18 @@ public class Chat extends AppCompatActivity {
         rvAdapter = new ChatRVAdapter(Manager.getMessageList());
         rvChat.setLayoutManager(layoutManager);
         rvChat.setAdapter(rvAdapter);
-        rvAdapter.notifyItemInserted(Manager.getSizeBookedList());
+        rvAdapter.notifyItemInserted(Manager.getSizeMessageList());
+        rvChat.scrollToPosition(Manager.getSizeMessageList()-4);
     }
 
     private void sendMessage(){
         String text = textMessage.getText().toString();
         if (!text.isEmpty()){
-            Message message = new Message("",text);
+            Message message = new Message(name_user_message,text);
+            Manager.addMessage(message);
+            rvAdapter.notifyItemInserted(Manager.getSizeMessageList());
             loadDataBaseMessage(message);
+            rvChat.scrollToPosition(Manager.getSizeMessageList()-1);
         }
     }
 

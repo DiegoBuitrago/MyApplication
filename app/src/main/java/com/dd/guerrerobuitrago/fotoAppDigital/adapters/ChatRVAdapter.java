@@ -57,7 +57,7 @@ public class ChatRVAdapter extends RecyclerView.Adapter<ChatRVAdapter.ChatViewHo
     public void onBindViewHolder(@NonNull ChatRVAdapter.ChatViewHolder holder, int position) {
         Message message = messages.get(position);
         holder.tvUserName.setText(message.getNameUser());
-        holder.tvMessage.setText(message.getNameUser());
+        holder.tvMessage.setText(message.getMessage());
     }
 
     @Override
