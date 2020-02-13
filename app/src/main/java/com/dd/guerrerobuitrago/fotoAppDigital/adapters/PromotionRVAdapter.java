@@ -92,4 +92,8 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
     public int getItemCount() {
         return promotions.size();
     }
+
+    public void readDataExternal(){
+
+    }
 }
