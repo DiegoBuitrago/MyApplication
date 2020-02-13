@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -32,7 +33,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +52,11 @@ public class Register extends AppCompatActivity {
     private Uri path;
 
     private ArrayList<Person> personList;
+
+    private  int RESULT_LOAD_IMG = 0;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    String imgDecodableString;
+    private String userChoosenTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +108,8 @@ public class Register extends AppCompatActivity {
     }
 
     private void chooseImage() {
-        loadImage();
+        //loadImage();
+        galleryIntent();
     }
 
     public void getRegister(View view){
@@ -197,45 +208,100 @@ public class Register extends AppCompatActivity {
         //this.imageUser = findViewById(R.id.image_user_change);
     }
 
-    private void loadImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, 1);
+//    private void loadImage() {
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType("image/*");
+//        startActivityForResult(intent, RESULT_LOAD_IMG);
+//    }
+
+    private void galleryIntent(){
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Start the Intent
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
-            try{
-                path = data.getData();
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
-                imageUser.setImageBitmap(bitmap);
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    public String bitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
-
-    public Bitmap stringToBitMap(String encodedString){
         try {
-            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
+            if (resultCode == RESULT_OK) {
+                Uri imageUri = data.getData();
+                InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                encodeImage(selectedImage);
+                //imageUser = findViewById(R.id.image_user_change);
+                // Set the Image in ImageView after decoding the String
+                Log.d("Llega1",imgDecodableString);
+                imageUser.setImageBitmap(BitmapFactory
+                        .decodeFile(imgDecodableString));
+                Log.d("Llega2",imgDecodableString);
+                Uri selectedImages = data.getData();
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                Log.d("Llega3",imgDecodableString);
+                // Get the cursor
+                Cursor cursor = getContentResolver().query(selectedImages,
+                        filePathColumn, null, null, null);
+                // Move to first row
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                imgDecodableString = cursor.getString(columnIndex);
+
+                imgDecodableString = encodeImages(imgDecodableString);
+                cursor.close();
+                Log.d("Main",imgDecodableString);
+
+                imageUser = findViewById(R.id.image_user_change);
+                // Set the Image in ImageView after decoding the String
+
+                Bitmap myBitmapAgain = decodeBase64(imgDecodableString);
+                imageUser.setImageBitmap(myBitmapAgain);
+            } else {
+                Toast.makeText(this, "No haz escogido una imagen",
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_LONG)
+                    .show();
         }
+
+
+
+
+
+
+//        if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK){
+//            try{
+//                path = data.getData();
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), data.getData());
+//                imageUser.setImageBitmap(bitmap);
+//            }catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
     }
+
+
+
+//    public String bitMapToString(Bitmap bitmap){
+//        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+//        byte [] b=baos.toByteArray();
+//        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+//        return temp;
+//    }
+//
+//    public Bitmap stringToBitMap(String encodedString){
+//        try {
+//            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
+//            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+//            return bitmap;
+//        } catch(Exception e) {
+//            e.getMessage();
+//            return null;
+//        }
+//    }
 
     public Person myNewPerson(){
         Person person;
@@ -286,5 +352,37 @@ public class Register extends AppCompatActivity {
                         Log.e("Error",anError.getErrorDetail());
                     }
                 });
+    }
+
+    private void encodeImage(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        imgDecodableString = Base64.encodeToString(b, Base64.DEFAULT);
+
+        //return imgDecodableString;
+    }
+
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedBytes = Base64.decode(input.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
+    private String encodeImages(String path) {
+        File imagefile = new File(path);
+        FileInputStream fis = null;
+        try{
+            fis = new FileInputStream(imagefile);
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        Bitmap bm = BitmapFactory.decodeStream(fis);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        imgDecodableString = Base64.encodeToString(b, Base64.DEFAULT);
+        //Base64.de
+        return imgDecodableString;
+
     }
 }
