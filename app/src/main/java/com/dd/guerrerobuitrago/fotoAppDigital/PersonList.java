@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,9 +11,6 @@ import android.view.WindowManager;
 import com.androidnetworking.AndroidNetworking;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.PersonRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
-import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
-
-import java.util.ArrayList;
 
 public class PersonList extends AppCompatActivity {
 
@@ -48,9 +44,6 @@ public class PersonList extends AppCompatActivity {
             public void onUpdateClick(int position, String textNew) {
                 updateUser(position, textNew);
                 rvAdapter.notifyItemChanged(position);
-//                rvAdapter.notifyDataSetChanged();
-//                Manager.removePerson(position);
-//                Manager.addPerson(person);
             }
         });
         rvPerson.setLayoutManager(layoutManager);
@@ -64,12 +57,5 @@ public class PersonList extends AppCompatActivity {
                 Manager.getPersonList().get(i).setTypeUser(textNew);
             }
         }
-//
-//
-//
-//        Person person =  Manager.getPerson(position);
-//        person.setTypeUser(textNew);
-//
-//        return person;
     }
 }
