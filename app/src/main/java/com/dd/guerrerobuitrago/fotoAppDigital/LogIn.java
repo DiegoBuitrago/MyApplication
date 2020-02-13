@@ -120,7 +120,7 @@ public class LogIn extends AppCompatActivity {
                 }
             }
         }
-        etUsername.setError("Usuario no encontrado en la Base de Datos.");
+        etUsername.setError("Usuario no encontrado.");
         return -1;
     }
 

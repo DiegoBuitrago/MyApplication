@@ -57,8 +57,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
-                android:textSize="25sp"
-                android:text="Diego" />
+                android:textSize="25sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -74,8 +73,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Apellidos"
                 android:inputType="textPersonName"
-                android:textSize="25sp"
-                android:text="Guerrero" />
+                android:textSize="25sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -90,8 +88,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Usuario"
                 android:inputType="textPersonName"
-                android:textSize="25sp"
-                android:text="d" />
+                android:textSize="25sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -107,8 +104,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Contraseña"
                 android:inputType="textPassword"
-                android:textSize="25sp"
-                android:text="12345678" />
+                android:textSize="25sp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

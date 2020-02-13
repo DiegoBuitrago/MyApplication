@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import com.androidnetworking.AndroidNetworking;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.PersonRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 
 public class PersonList extends AppCompatActivity {
 
@@ -30,8 +31,6 @@ public class PersonList extends AppCompatActivity {
 
     private void initComponents() {
         rvPerson = findViewById(R.id.rv_person_list);
-//        Intent i = getIntent();
-//        userName = i.getSerializableExtra("userr").toString();
         initRecyclerView();
     }
 
@@ -55,6 +54,7 @@ public class PersonList extends AppCompatActivity {
         for (int i=0; i< Manager.getPersonList().size();i++){
             if(i == position){
                 Manager.getPersonList().get(i).setTypeUser(textNew);
+                MyConexion.updateDataBasePerson(Manager.getPerson(i));
             }
         }
     }

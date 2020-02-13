@@ -94,10 +94,12 @@ public class PromotionFragments extends Fragment {
                 @Override
                 public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
-                    if (!recyclerView.canScrollVertically(1) && Manager.getSizePromotionList() > 2) {
-                        btnFloat.hide();
-                    } else {
-                        btnFloat.show();
+                    if(!person.getTypeUser().equals("Cliente")) {
+                        if (!recyclerView.canScrollVertically(1) && Manager.getSizePromotionList() > 2) {
+                            btnFloat.hide();
+                        } else {
+                            btnFloat.show();
+                        }
                     }
                 }
             });

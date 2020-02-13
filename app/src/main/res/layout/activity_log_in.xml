@@ -44,7 +44,6 @@
                 android:hint="Usuario"
                 android:inputType="textPersonName"
                 android:padding="22dp"
-                android:text="d"
                 android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +62,6 @@
                 android:hint="@string/passwordSring"
                 android:inputType="textPassword"
                 android:padding="22dp"
-                android:text="12345678"
                 android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
