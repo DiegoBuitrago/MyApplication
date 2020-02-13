@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -37,7 +38,7 @@ public class Chat extends AppCompatActivity {
 
     private String name_user_message;
 
-    private Button buttonSend;
+    private ImageButton buttonSend;
     private EditText textMessage;
 
     @Override
@@ -53,10 +54,10 @@ public class Chat extends AppCompatActivity {
 
     private void initComponents() {
         rvChat = findViewById(R.id.rv_chat_message);
-//        buttonSend = findViewById(R.id.btn_send);
+        buttonSend = findViewById(R.id.btn_send);
 //        textMessage = findViewById(R.id.rv_chat_message);
         Intent i = getIntent();
-        name_user_message = i.getSerializableExtra("user_message").toString();
+        name_user_message = i.getStringExtra("nameUser");
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
