@@ -35,17 +35,14 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
         this.listener = listener;
     }
 
-    static class PromotionViewHolder extends RecyclerView.ViewHolder {
+    public static class PromotionViewHolder extends RecyclerView.ViewHolder {
 
-//        private TextView tvPromotionName;
         private ImageView imagePromotion;
         private ImageButton btnDelete;
         private Context context;
 
         public PromotionViewHolder(@NonNull View itemView, final onItemClickListener listener, Context context) {
             super(itemView);
-//            tvPromotionName = itemView.findViewById(R.id.tv_promotions_name);
-            // image promotion para probar
             imagePromotion = itemView.findViewById(R.id.iv_promotion);
             btnDelete = itemView.findViewById(R.id.btn_delete);
             this.context = context;
@@ -91,9 +88,5 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
     @Override
     public int getItemCount() {
         return promotions.size();
-    }
-
-    public void readDataExternal(){
-
     }
 }

@@ -25,6 +25,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.Services;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 
 import java.io.IOException;
 
@@ -110,7 +111,8 @@ public class SettingsFragment extends Fragment {
     }
 
     private void removeUser() {
-        Manager.removePerson(person);
+        MyConexion.deleteDataBasePerson(person.getUserName());
+        Manager.removePerson(person.getId());
         Toast.makeText(getContext(), "Usuario borrado con exito.", Toast.LENGTH_LONG).show();
     }
 

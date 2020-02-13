@@ -21,7 +21,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Message;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
-import com.dd.guerrerobuitrago.fotoAppDigital.utilities.Utilities;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,18 +43,23 @@ public class Open extends AppCompatActivity {
 
         new Manager();
 
+
+
+
         progressBar = findViewById(R.id.progressBar);
 
         progressBar.setVisibility(View.VISIBLE);
 
         new Handler().postDelayed(new Runnable() {
+
             @Override
             public void run() {
+
                 getLogIn();
-                loadPerson();
-                loadMessage();
-//                loadProduct();
-                loadPromotion();
+                MyConexion.loadPerson();
+                MyConexion.loadMessage();
+                MyConexion.loadProduct();
+                MyConexion.loadPromotion();
                 finish();
                 progressBar.setVisibility(View.GONE);
             }
@@ -80,144 +85,5 @@ public class Open extends AppCompatActivity {
         startActivity(logInIntent);
     }
 
-    public void loadPerson(){
-        AndroidNetworking.get("https://polar-plains-39256.herokuapp.com/SQLPersons_GET.php")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String respuesta = response.getString("respuesta");
-                            if(respuesta.equals("200")){
-                                JSONArray arrayPerson = response.getJSONArray("data");
-                                for (int i=0; i<arrayPerson.length();i++){
-                                     JSONObject jsonPerson = arrayPerson.getJSONObject(i);
-                                     int id = jsonPerson.getInt("id");
-                                     String firstName = jsonPerson.getString("first_name");
-                                     String lastName = jsonPerson.getString("last_name");
-                                     String userName = jsonPerson.getString("user_name");
-                                     String password = jsonPerson.getString("password");
-                                     String photo = jsonPerson.getString("photo");
-                                     String type = jsonPerson.getString("type");
-                                     Manager.addPerson(new Person(id,firstName,lastName,userName,password,Uri.parse(photo),type));
-                                }
-                            }else{
-                                Log.e("Datos vacios", "Error");
-                            }
-                        } catch (JSONException e) {
-                            Log.e("Error Consulta Json", "Error Consulta JSON");
-                            e.printStackTrace();
-                        }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("Error consulta", "Error consulta metodo conexion onError");
-                    }
-                });
-    }
-
-    public void loadProduct(){
-        AndroidNetworking.get("https://polar-plains-39256.herokuapp.com/SQLProduct_GET.php")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String respuesta = response.getString("respuesta");
-                            if(respuesta.equals("200")){
-                                JSONArray arrayProduct = response.getJSONArray("data");
-                                for (int i=0; i<arrayProduct.length();i++){
-                                    JSONObject jsonProduct = arrayProduct.getJSONObject(i);
-                                    int id = jsonProduct.getInt("id");
-                                    String name = jsonProduct.getString("name");
-                                    String description = jsonProduct.getString("description");
-                                    String photo = jsonProduct.getString("photo");
-                                    Manager.addProduct(new Product(id, name, description, Uri.parse(photo)));
-                                }
-                            }else{
-                                Log.e("Datos vacios", "Error");
-                            }
-                        } catch (JSONException e) {
-                            Log.e("Error Consulta Json", "Error Consulta JSON");
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("Error consulta", "Error consulta metodo conexion onError");
-                    }
-                });
-    }
-
-    public void loadPromotion(){
-        AndroidNetworking.get("https://polar-plains-39256.herokuapp.com/SQLPromotion_GET.php")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String respuesta = response.getString("respuesta");
-                            if(respuesta.equals("200")){
-                                JSONArray arrayPromotion = response.getJSONArray("data");
-                                for (int i=0; i<arrayPromotion.length();i++){
-                                    JSONObject jsonPromotion = arrayPromotion.getJSONObject(i);
-                                    int id = jsonPromotion.getInt("id");
-                                    String name = jsonPromotion.getString("name");
-                                    String photo = jsonPromotion.getString("photo");
-                                    Manager.addPromotion(new Promotion(id, name, Uri.parse(photo)));
-                                }
-                            }else{
-                                Log.e("Datos vacios", "Error");
-                            }
-                        } catch (JSONException e) {
-                            Log.e("Error Consulta Json", "Error Consulta JSON");
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("Error consulta", "Error consulta metodo conexion onError");
-                    }
-                });
-    }
-
-    public void loadMessage(){
-        AndroidNetworking.get("https://polar-plains-39256.herokuapp.com/SQLChat_GET.php")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String respuesta = response.getString("respuesta");
-                            if(respuesta.equals("200")){
-                                JSONArray arrayMessage = response.getJSONArray("data");
-                                for (int i=0; i<arrayMessage.length();i++){
-                                    JSONObject jsonMessage = arrayMessage.getJSONObject(i);
-                                    int id = jsonMessage.getInt("id");
-                                    String name = jsonMessage.getString("name");
-                                    String text = jsonMessage.getString("text");
-                                    Manager.addMessage(new Message(id, name, text));
-                                }
-                            }else{
-                                Log.e("Datos vacios", "Error");
-                            }
-                        } catch (JSONException e) {
-                            Log.e("Error Consulta Json", "Error Consulta JSON");
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("Error consulta", "Error consulta metodo conexion onError");
-                    }
-                });
-    }
 }

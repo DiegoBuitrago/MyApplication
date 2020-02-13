@@ -26,6 +26,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.dd.guerrerobuitrago.fotoAppDigital.fragments.SettingsFragment;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
@@ -120,6 +121,7 @@ public class EditUser extends AppCompatActivity {
             person.setLastName(lastNameChange.getEditText().getText().toString());
             person.setPassword(passwordChange.getEditText().getText().toString());
             person.setPhoto(imageUri);
+            MyConexion.updateDataBasePerson(person);
             Manager.removePerson(person.getId());
             Manager.addPerson(person);
             goToHome(person);

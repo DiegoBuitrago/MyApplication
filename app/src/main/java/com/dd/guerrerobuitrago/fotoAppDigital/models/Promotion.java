@@ -1,6 +1,8 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.models;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
+
 
 public class Promotion {
     private int id_product;
@@ -9,12 +11,6 @@ public class Promotion {
 
     public Promotion(int id_product, String name, Uri photo) {
         this.id_product = id_product;
-        this.name = name;
-        this.photo = photo;
-    }
-
-    public Promotion(String name, Uri photo){
-        this.id_product = 0;
         this.name = name;
         this.photo = photo;
     }

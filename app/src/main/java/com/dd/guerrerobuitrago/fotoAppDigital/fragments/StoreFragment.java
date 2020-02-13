@@ -33,6 +33,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
@@ -91,6 +92,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onDeleteClick(int position) {
                 Manager.removeProduct(position);
+                MyConexion.deleteDataBaseProduct(position);
                 rvAdapter.notifyItemRemoved(position);
             }
         });
@@ -138,7 +140,7 @@ public class StoreFragment extends Fragment {
                     Product product = new Product(Manager.getSizeProductList(),txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri);
                     if(product.getPhoto() != null) {
                         Manager.addProduct(product);
-                        //loadDataBaseProduct(product);
+                        MyConexion.loadDataBaseProduct(product);
                         rvAdapter.notifyItemInserted(Manager.getSizeProductList());
                     }
                     alertDialog.dismiss();
@@ -188,36 +190,5 @@ public class StoreFragment extends Fragment {
                 }
             }
         }
-    }
-
-    public void loadDataBaseProduct(Product product){
-        Map<String,String> datos = new HashMap<>();
-        datos.put("name",product.getName());
-        datos.put("description",product.getDescription());
-        datos.put("photo",product.getPhoto().toString());
-
-        JSONObject jsonData = new JSONObject(datos);
-
-        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPerson_INSERT.php")
-                .addJSONObjectBody(jsonData)
-                .setPriority(Priority.MEDIUM)
-                .setContentType("application/json")
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String   state = response.getString("estado");
-                            Log.d("Estado","blablabla"+state);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.e("Error","blablabla");
-                        }
-                    }
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("Error",anError.getErrorDetail());
-                    }
-                });
     }
 }

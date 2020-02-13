@@ -1,12 +1,16 @@
 package com.dd.guerrerobuitrago.fotoAppDigital.fragments;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,11 +31,13 @@ import com.dd.guerrerobuitrago.fotoAppDigital.adapters.PromotionRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +47,7 @@ import java.util.Map;
 public class PromotionFragments extends Fragment {
 
 //  private ArrayList<Promotion> promotionsList;
-
+    private static final int MY_PERMISSIONS_REQUEST_READ_MEDIA = 1;
 
     private RecyclerView rvPromotion;
     private PromotionRVAdapter rvAdapter;
@@ -60,7 +66,6 @@ public class PromotionFragments extends Fragment {
     private void initComponents(View view) {
         btnFloat = view.findViewById(R.id.btn_float);
         rvPromotion = view.findViewById(R.id.rv_promotion);
-        //this.imageUri = stringToBitMap("");
         initRecyclerView();
         btnFloat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +76,6 @@ public class PromotionFragments extends Fragment {
     }
 
     private void initRecyclerView() {
-//      promotionsList = Manager.getSizePromotionList();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,
                 false);
             rvAdapter = new PromotionRVAdapter(Manager.getPromotionList());
@@ -79,6 +83,7 @@ public class PromotionFragments extends Fragment {
                 @Override
                 public void onDeleteClick(int position) {
                     Manager.removePromotion(position);
+                    MyConexion.deleteDataBasePromotion(position);
                     rvAdapter.notifyItemRemoved(position);
                 }
             });
@@ -108,10 +113,10 @@ public class PromotionFragments extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
             Uri uri = data.getData();
-            Promotion promotion = new Promotion("promo", uri);
+            Promotion promotion = new Promotion(Manager.getSizePromotionList(), "promo", uri);
             if (uri != null) {
                 Manager.addPromotion(promotion);
-                //loadDataBasePromotion(promotion);
+                MyConexion.loadDataBasePromotion(promotion);
                 rvAdapter.notifyItemInserted(Manager.getSizePromotionList());
             }
         }
@@ -122,36 +127,5 @@ public class PromotionFragments extends Fragment {
         PromotionFragments fragment = new PromotionFragments();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public void loadDataBasePromotion(Promotion promotion){
-        Map<String,String> datos = new HashMap<>();
-        datos.put("name",promotion.getName());
-        Log.d("name", datos.get("name"));
-        datos.put("photo", promotion.getPhoto().toString());
-        Log.d("name", datos.get("photo"));
-        JSONObject jsonData = new JSONObject(datos);
-
-        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPromotion_INSERT.php")
-                .addJSONObjectBody(jsonData)
-                .setPriority(Priority.MEDIUM)
-                .setContentType("application/json")
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String   state = response.getString("estado");
-                            Log.d("Estado","blablabla"+state);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.e("Error","blablablapromotion");
-                        }
-                    }
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("Error",anError.getErrorDetail());
-                    }
-                });
     }
 }

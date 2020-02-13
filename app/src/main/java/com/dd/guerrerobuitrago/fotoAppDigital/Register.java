@@ -2,9 +2,7 @@ package com.dd.guerrerobuitrago.fotoAppDigital;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -16,7 +14,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,7 +23,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
-import com.dd.guerrerobuitrago.fotoAppDigital.utilities.Utilities;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -37,7 +34,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -240,27 +236,6 @@ public class Register extends AppCompatActivity {
         }
     }
 
-
-
-//    public String bitMapToString(Bitmap bitmap){
-//        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-//        byte [] b=baos.toByteArray();
-//        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-//        return temp;
-//    }
-//
-//    public Bitmap stringToBitMap(String encodedString){
-//        try {
-//            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
-//            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-//            return bitmap;
-//        } catch(Exception e) {
-//            e.getMessage();
-//            return null;
-//        }
-//    }
-
     public Person myNewPerson(){
         Person person;
         if(path != null){
@@ -270,77 +245,7 @@ public class Register extends AppCompatActivity {
         person =  new Person(personList.size(), firstName.getEditText().getText().toString().trim(), "" +
                 lastName.getEditText().getText().toString().trim(), userName.getEditText().getText().toString().trim(), password.getEditText().getText().toString(), "Cliente");
         }
-        //loadDataBasePerson(person);
+        MyConexion.loadDataBasePerson(person);
         return person;
-    }
-
-    public void loadDataBasePerson(Person person){
-        Map<String,String> datos = new HashMap<>();
-        datos.put("firstName",person.getFirstName());
-        datos.put("lastName",person.getLastName());
-        datos.put("userName",person.getUserName());
-        datos.put("password",person.getPassword());
-        if(person.getPhoto()!=null) {
-            datos.put("photo", person.getPhoto());
-        }else{
-            datos.put("photo", null);
-        }
-        datos.put("type",person.getTypeUser());
-
-        JSONObject jsonData = new JSONObject(datos);
-
-        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPerson_INSERT.php")
-                .addJSONObjectBody(jsonData)
-                .setPriority(Priority.MEDIUM)
-                .setContentType("application/json")
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String   state = response.getString("estado");
-                            Log.d("Estado","blablabla"+state);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.e("Error","blablabla");
-                        }
-                    }
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("Error",anError.getErrorDetail());
-                    }
-                });
-    }
-
-    private void encodeImage(Bitmap bm) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
-        byte[] b = baos.toByteArray();
-        imgDecodableString = Base64.encodeToString(b, Base64.DEFAULT);
-
-        //return imgDecodableString;
-    }
-
-    public static Bitmap decodeBase64(String input)
-    {
-        byte[] decodedBytes = Base64.decode(input.getBytes(), Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-    }
-    private String encodeImages(String path) {
-        File imagefile = new File(path);
-        FileInputStream fis = null;
-        try{
-            fis = new FileInputStream(imagefile);
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
-        Bitmap bm = BitmapFactory.decodeStream(fis);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
-        byte[] b = baos.toByteArray();
-        imgDecodableString = Base64.encodeToString(b, Base64.DEFAULT);
-        //Base64.de
-        return imgDecodableString;
-
     }
 }
