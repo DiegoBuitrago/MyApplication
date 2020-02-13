@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.PromotionViewHolder>{
     private ArrayList<Promotion> promotions;
     private onItemClickListener listener;
+    private Person person;
 
     public interface onItemClickListener{
         void onDeleteClick(int position);
@@ -40,11 +42,16 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
         private ImageView imagePromotion;
         private ImageButton btnDelete;
         private Context context;
+        private Person person;
 
-        public PromotionViewHolder(@NonNull View itemView, final onItemClickListener listener, Context context) {
+        public PromotionViewHolder(@NonNull View itemView, final onItemClickListener listener, Context context, Person person) {
             super(itemView);
+            this.person = person;
             imagePromotion = itemView.findViewById(R.id.iv_promotion);
             btnDelete = itemView.findViewById(R.id.btn_delete);
+            if(person.getTypeUser().equals("Cliente")) {
+                btnDelete.setVisibility(View.INVISIBLE);
+            }
             this.context = context;
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,15 +67,16 @@ public class PromotionRVAdapter extends RecyclerView.Adapter<PromotionRVAdapter.
         }
     }
 
-    public PromotionRVAdapter(ArrayList<Promotion> promotions) {
+    public PromotionRVAdapter(ArrayList<Promotion> promotions, Person person) {
         this.promotions = promotions;
+        this.person = person;
     }
 
     @NonNull
     @Override
     public PromotionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View cardViewPromotions = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_promotions, parent, false);
-        PromotionViewHolder viewHolder = new PromotionViewHolder(cardViewPromotions, listener, parent.getContext());
+        PromotionViewHolder viewHolder = new PromotionViewHolder(cardViewPromotions, listener, parent.getContext(), person);
         return viewHolder;
     }
 

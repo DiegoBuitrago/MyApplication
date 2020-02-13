@@ -59,6 +59,7 @@ public class StoreFragment extends Fragment {
     private Uri uri;
 
     private boolean isImage;
+    private Person person;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +74,9 @@ public class StoreFragment extends Fragment {
     private void initComponents(View view) {
         btnFloatStore = view.findViewById(R.id.btn_float_store);
         rvStore = view.findViewById(R.id.rv_store);
+        if(person.getTypeUser().equals("Cliente")){
+            btnFloatStore.hide();
+        }
 
         initRecyclerView();
         btnFloatStore.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +90,7 @@ public class StoreFragment extends Fragment {
     private void initRecyclerView(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,
                 false);
-        rvAdapter = new StoreRVAdapter(Manager.getProductList());
+        rvAdapter = new StoreRVAdapter(Manager.getProductList(), person);
         rvAdapter.setListener(new StoreRVAdapter.onItemClickListener() {
             @Override
             public void onDeleteClick(int position) {
@@ -159,9 +163,10 @@ public class StoreFragment extends Fragment {
     }
 
 
-    public static StoreFragment newInstance(){
+    public static StoreFragment newInstance(Person person){
         Bundle args = new Bundle();
         StoreFragment fragment = new StoreFragment();
+        fragment.person = person;
         fragment.setArguments(args);
         return fragment;
     }

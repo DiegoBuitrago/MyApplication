@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreViewHolder>{
     private ArrayList<Product> products;
     private onItemClickListener listener;
+    private Person person;
 
     public interface onItemClickListener{
         void onDeleteClick(int position);
@@ -38,13 +40,17 @@ public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreVie
         private ImageView imageProduct;
         private ImageButton btnDelete;
         private Context context;
+        private Person person;
 
-        public StoreViewHolder(@NonNull View itemView, final onItemClickListener listener, Context context) {
+        public StoreViewHolder(@NonNull View itemView, final onItemClickListener listener, Context context, Person person) {
             super(itemView);
             tvProductName = itemView.findViewById(R.id.tv_products_name);
             imageProduct = itemView.findViewById(R.id.iv_product);
             tvProductDes = itemView.findViewById(R.id.tv_products_des);
             btnDelete = itemView.findViewById(R.id.btn_delete_product);
+            if(person.getTypeUser().equals("Cliente")) {
+                btnDelete.setVisibility(View.INVISIBLE);
+            }
             this.context = context;
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,15 +66,16 @@ public class StoreRVAdapter extends RecyclerView.Adapter<StoreRVAdapter.StoreVie
         }
     }
 
-    public StoreRVAdapter(ArrayList<Product> products) {
+    public StoreRVAdapter(ArrayList<Product> products, Person person) {
         this.products = products;
+        this.person = person;
     }
 
     @NonNull
     @Override
     public StoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View cardViewStore = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_store, parent, false);
-        StoreViewHolder viewHolder = new StoreViewHolder(cardViewStore, listener, parent.getContext());
+        StoreViewHolder viewHolder = new StoreViewHolder(cardViewStore, listener, parent.getContext(), person);
         return viewHolder;
     }
 

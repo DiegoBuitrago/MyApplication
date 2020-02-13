@@ -25,8 +25,10 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.PromotionRVAdapter;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
@@ -78,7 +80,7 @@ public class PromotionFragments extends Fragment {
 //      promotionsList = Manager.getSizePromotionList();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,
                 false);
-            rvAdapter = new PromotionRVAdapter(Manager.getPromotionList());
+            rvAdapter = new PromotionRVAdapter(Manager.getPromotionList(), person);
             rvAdapter.setListener(new PromotionRVAdapter.onItemClickListener() {
                 @Override
                 public void onDeleteClick(int position) {
@@ -121,41 +123,11 @@ public class PromotionFragments extends Fragment {
         }
     }
 
-    public static PromotionFragments newInstance(){
+    public static PromotionFragments newInstance(Person person){
         Bundle args = new Bundle();
         PromotionFragments fragment = new PromotionFragments();
+        fragment.person = person;
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public void loadDataBasePromotion(Promotion promotion){
-        Map<String,String> datos = new HashMap<>();
-        datos.put("name",promotion.getName());
-        Log.d("name", datos.get("name"));
-        datos.put("photo", promotion.getPhoto().toString());
-        Log.d("name", datos.get("photo"));
-        JSONObject jsonData = new JSONObject(datos);
-
-        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPromotion_INSERT.php")
-                .addJSONObjectBody(jsonData)
-                .setPriority(Priority.MEDIUM)
-                .setContentType("application/json")
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String   state = response.getString("estado");
-                            Log.d("Estado","blablabla"+state);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.e("Error","blablablapromotion");
-                        }
-                    }
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.e("Error",anError.getErrorDetail());
-                    }
-                });
     }
 }
