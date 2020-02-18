@@ -182,7 +182,7 @@ public class StoreFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (resultCode == -1) {
             uri = data.getData();
             if (uri != null) {
                 try {

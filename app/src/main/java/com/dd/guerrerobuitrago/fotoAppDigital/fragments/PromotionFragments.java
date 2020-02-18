@@ -114,7 +114,7 @@ public class PromotionFragments extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
+        if (resultCode == -1){
             Uri uri = data.getData();
             Promotion promotion = new Promotion(Manager.getSizePromotionList(), "promo", uri);
             if (uri != null) {
