@@ -35,6 +35,9 @@
             android:name=".Services"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Statistics"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Home"
             android:screenOrientation="portrait" />
         <activity

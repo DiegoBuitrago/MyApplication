@@ -41,6 +41,11 @@
     <string name="image_user">imagen del usuario</string>
     <string name="no_account_yet">¿No tienes una cuenta aún?</string>
     <string name="users">Usuarios</string>
+    <string name="number_clients">Número de Clientes:</string>
+    <string name="statistics">Estadisticas</string>
+    <string name="chat">Chat</string>
+    <string name="number_employees">Número de Empleados:</string>
+    <string name="number_admins">Número de Administradores:</string>
 
     <string-array name="types">
         <item>Seleccione</item>
