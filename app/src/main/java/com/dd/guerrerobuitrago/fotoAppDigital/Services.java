@@ -50,16 +50,8 @@ public class Services extends AppCompatActivity {
         rvAdapter.setListener(new ServicesRVAdapter.onItemClickListener() {
             @Override
             public void onDeleteClick(int position) {
-                int count = 0;
-                for (int i=0; i < Manager.getPersonList().size();i++){
-                    if(count == position && Manager.getPersonList().get(i).getUserName().equals(userName)){
-                        Manager.removeBooked(position);
-                        rvAdapter.notifyItemRemoved(position);
-                        count++;
-                        return;
-                    }
-                }
-
+                Manager.removeBooked(position);
+                rvAdapter.notifyItemRemoved(position);
             }
         });
         rvServices.setLayoutManager(layoutManager);
