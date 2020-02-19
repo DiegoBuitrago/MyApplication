@@ -38,6 +38,9 @@
             android:name=".Statistics"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".AllServices"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Home"
             android:screenOrientation="portrait" />
         <activity
