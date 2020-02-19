@@ -10,18 +10,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/fragment_back">
 
         <TextView
             android:id="@+id/txtHeaderStore"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/abstract4"
             android:fontFamily="cursive"
             android:paddingVertical="30dp"
             android:text="Tienda"
             android:textAlignment="center"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorBlack"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

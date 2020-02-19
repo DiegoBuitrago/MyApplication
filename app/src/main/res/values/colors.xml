@@ -19,6 +19,8 @@
 
     <color name="md_teal_800">#00695c</color>
 
+    <color name="md_red_200">#ef9a9a</color>
+
     <color name="colorItem1Start">#FE8D1B</color>
     <color name="colorItem1End">#E4A401</color>
 
@@ -35,5 +37,7 @@
     <color name="colorLightText">#ECECEC</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
+
+    <color name="colorFotoDigitalBlue">#0c4591</color>
 
 </resources>
