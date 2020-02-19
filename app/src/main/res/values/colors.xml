@@ -21,6 +21,11 @@
 
     <color name="md_red_200">#ef9a9a</color>
 
+    <color name="md_orange_800">#ef6c00</color>
+
+    <color name="md_blue_grey_400">#78909c</color>
+    <color name="md_blue_grey_800">#37474f</color>
+
     <color name="colorItem1Start">#FE8D1B</color>
     <color name="colorItem1End">#E4A401</color>
 

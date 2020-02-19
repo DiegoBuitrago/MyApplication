@@ -74,6 +74,8 @@ public class ServicesFragment extends Fragment {
         if(person.getTypeUser().equals("Cliente")){
             cvSearch.setVisibility(View.GONE);
             cvChat.setVisibility(View.GONE);
+            cvAllServeces.setVisibility(View.GONE);
+            cvStadistics.setVisibility(View.GONE);
         }
         cvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
