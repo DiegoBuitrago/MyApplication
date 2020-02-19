@@ -31,6 +31,7 @@ public class LogIn extends AppCompatActivity {
 
     private Button btnIntro;
     private TextView txtAddUser;
+    private EditUser editUser;
 
     private ArrayList<Person> personList;
 
@@ -70,6 +71,8 @@ public class LogIn extends AppCompatActivity {
                 getAddUserActivity(v);
             }
         });
+
+
     }
 
     public void getIntroActivity(View view){
@@ -82,20 +85,7 @@ public class LogIn extends AppCompatActivity {
             }
         }
     }
-//    public void getIntroActivity(View view) {
-//        if(passwordIsCorrect()){
-//            for (int i = 0; i < personList.size(); i++){
-//                if(personList.get(i).getUserName().equals(etUsername.getEditText().getText().toString())){
-//                    if(personList.get(i).getPassword().equals(etPassword.getEditText().getText().toString())){
-//                        enterIntoActivity(personList.get(i));
-//                        return;
-//                    }
-//                    Toast.makeText(getBaseContext(), "Contraseña Incorrecta", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-//            }
-//        }
-//    }
+
 
     private boolean userNameIsCorrect(){
         String userNameInput = etUsername.getEditText().getText().toString().trim();
@@ -171,6 +161,13 @@ public class LogIn extends AppCompatActivity {
 
     public void whatsappIntent(View view){
         String url = "whatsapp://send?phone=\" + \"57 + 3007825168\"";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
+
+    public void pdfIntent(View view){
+        String url = "https://docs.google.com/document/d/1EJPVdDDSbH9TxOkpCUyYrOR1D2DauydlyEtm3VNXwiU/edit?usp=sharing";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
