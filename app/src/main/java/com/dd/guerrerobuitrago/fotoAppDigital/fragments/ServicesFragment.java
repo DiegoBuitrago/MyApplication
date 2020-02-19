@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.guerrerobuitrago.fotoAppDigital.AllServices;
 import com.dd.guerrerobuitrago.fotoAppDigital.Chat;
 import com.dd.guerrerobuitrago.fotoAppDigital.PersonList;
 import com.dd.guerrerobuitrago.fotoAppDigital.R;
@@ -68,6 +69,7 @@ public class ServicesFragment extends Fragment {
         View cvBooked = view.findViewById(R.id.cv_booked_services);
         View cvChat = view.findViewById(R.id.cv_chat);
         View cvStadistics = view.findViewById(R.id.cv_stadistics);
+        View cvAllServeces = view.findViewById(R.id.cv_all_services);
         //cvSearch.setVisibility(View.GONE);
         if(person.getTypeUser().equals("Cliente")){
             cvSearch.setVisibility(View.GONE);
@@ -100,6 +102,14 @@ public class ServicesFragment extends Fragment {
                 onStadistics();
             }
         });
+
+        cvAllServeces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAllServeces();
+            }
+        });
+
     }
 
     private void onStadistics() {
@@ -115,6 +125,11 @@ public class ServicesFragment extends Fragment {
 
     private void onSearch() {
         Intent editUserIntent = new Intent(getActivity(), PersonList.class);
+        startActivity(editUserIntent);
+    }
+
+    private void onAllServeces() {
+        Intent editUserIntent = new Intent(getActivity(), AllServices.class);
         startActivity(editUserIntent);
     }
 
