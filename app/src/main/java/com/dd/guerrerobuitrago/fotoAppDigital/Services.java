@@ -22,6 +22,7 @@ public class Services extends AppCompatActivity {
     private ServicesRVAdapter rvAdapter;
 
     private String userName;
+    private ArrayList<Booked> listBooked;
 //    private ArrayList<Booked> bookeds;
 
     @Override
@@ -39,18 +40,20 @@ public class Services extends AppCompatActivity {
         rvServices = findViewById(R.id.rv_services);
         Intent i = getIntent();
         userName = i.getSerializableExtra("userr").toString();
+        listSelectUser();
         initRecyclerView();
     }
 
     private void initRecyclerView(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,
                 false);
-        rvAdapter = new ServicesRVAdapter(listSelectUser());
-        //rvAdapter = new ServicesRVAdapter(Manager.getBookedList());
+//        rvAdapter = new ServicesRVAdapter(listSelectUser());
+        rvAdapter = new ServicesRVAdapter(Manager.getBookedList());
         rvAdapter.setListener(new ServicesRVAdapter.onItemClickListener() {
             @Override
             public void onDeleteClick(int position) {
                 Manager.removeBooked(position);
+                listBooked.remove(position);
                 rvAdapter.notifyItemRemoved(position);
             }
         });
@@ -59,13 +62,13 @@ public class Services extends AppCompatActivity {
         rvAdapter.notifyItemInserted(Manager.getSizeBookedList());
     }
 
-    private ArrayList<Booked> listSelectUser(){
+    private void listSelectUser(){
         ArrayList<Booked> iii = new ArrayList<>();
         for (int i = 0; i < Manager.getSizeBookedList(); i++) {
             if (Manager.getBooked(i).getOwner().getUserName().equals(userName)){
                 iii.add(Manager.getBooked(i));
             }
         }
-        return iii;
+        this.listBooked = iii;
     }
 }

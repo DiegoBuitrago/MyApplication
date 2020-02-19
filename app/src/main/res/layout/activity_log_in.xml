@@ -145,5 +145,19 @@
             android:scaleType="fitCenter"
             android:layout_weight="1"
             app:srcCompat="@drawable/instagram" />
+
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_pdf"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:onClick="pdfIntent"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/question"
+        tools:layout_editor_absoluteX="361dp"
+        tools:layout_editor_absoluteY="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

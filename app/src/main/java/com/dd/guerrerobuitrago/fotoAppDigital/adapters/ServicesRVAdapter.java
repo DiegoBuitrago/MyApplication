@@ -52,6 +52,7 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
                             listener.onDeleteClick(position);
+
                         }
                     }
                 }
