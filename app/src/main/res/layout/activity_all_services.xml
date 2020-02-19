@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Services">
+    tools:context=".Services"
+    android:background="@drawable/fragment_back">
 
     <TextView
         android:id="@+id/txtHeader"
@@ -13,9 +14,8 @@
         android:fontFamily="cursive"
         android:paddingVertical="20dp"
         android:text="Todos los servicios"
-        android:background="@drawable/abstract7"
         android:textAlignment="center"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorBlack"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
