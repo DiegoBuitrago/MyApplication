@@ -234,7 +234,7 @@ public class MyConexion {
 
         JSONObject jsonData = new JSONObject(datos);
 
-        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLPerson_INSERT.php")
+        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLProduct_INSERT.php")
                 .addJSONObjectBody(jsonData)
                 .setPriority(Priority.MEDIUM)
                 .setContentType("application/json")
