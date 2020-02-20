@@ -36,7 +36,6 @@ public class Open extends AppCompatActivity {
 
     private static int SPLASH_TIME = 3000;
     private ProgressBar progressBar;
-    private boolean myConexion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class Open extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         initSplash();
-
 
 //        ImageView btnIsOpen = findViewById(R.id.btnIsOpen);
 //        btnIsOpen.setOnClickListener(new View.OnClickListener(){
@@ -76,18 +74,8 @@ public class Open extends AppCompatActivity {
         startActivity(logInIntent);
     }
 
-    private void conexioRed(){
-        if ((Manager.getPersonList().size() > 1)){
-            this.myConexion = true;
-        }else{
-            Toast.makeText(getBaseContext(), "Comprueba tu conexion a internet", Toast.LENGTH_LONG).show();
-            this.myConexion = false;
-        }
-    }
-
     private void initSplash(){
         new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
                 getLogIn();
