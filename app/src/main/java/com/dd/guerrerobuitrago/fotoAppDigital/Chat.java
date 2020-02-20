@@ -36,6 +36,8 @@ public class Chat extends AppCompatActivity {
     private RecyclerView rvChat;
     private ChatRVAdapter rvAdapter;
 
+    private ImageButton backButton;
+
     private String name_user_message;
 
     private ImageButton buttonSend;
@@ -53,6 +55,13 @@ public class Chat extends AppCompatActivity {
     }
 
     private void initComponents() {
+        backButton = findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         rvChat = findViewById(R.id.rv_chat_message);
         buttonSend = findViewById(R.id.btn_send);
         textMessage = findViewById(R.id.et_chat);

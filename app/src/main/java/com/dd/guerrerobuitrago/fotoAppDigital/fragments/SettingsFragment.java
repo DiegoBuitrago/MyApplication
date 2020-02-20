@@ -63,6 +63,10 @@ public class SettingsFragment extends Fragment {
         imageUser = view.findViewById(R.id.image_user_change);
         //
         pathBitmap = null;
+
+        if(person.getUserName().equals("root")){
+            cardRemoveUser.setVisibility(View.GONE);
+        }
         try {
             if(person.getPhoto() != null) {
                 //pathBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(person.getPhoto()));

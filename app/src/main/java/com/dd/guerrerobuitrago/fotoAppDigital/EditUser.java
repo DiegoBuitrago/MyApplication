@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,8 @@ public class EditUser extends AppCompatActivity {
     private Button btnChangeImageEdit;
     private Button btnUpdateUser;
 
+    private ImageButton backButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,13 @@ public class EditUser extends AppCompatActivity {
     }
 
     private void init(){
+        backButton = findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         firstNameChange = findViewById(R.id.et_firstName_change);
         lastNameChange = findViewById(R.id.et_lastName_change);
         passwordChange = findViewById(R.id.et_password_change);
