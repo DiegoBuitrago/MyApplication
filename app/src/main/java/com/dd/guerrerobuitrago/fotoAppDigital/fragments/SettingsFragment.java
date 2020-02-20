@@ -64,6 +64,10 @@ public class SettingsFragment extends Fragment {
         //
         pathBitmap = null;
 
+        cardServices = view.findViewById(R.id.cv_services_set);
+        cardLogout = view.findViewById(R.id.cv_logout_set);
+        cardRemoveUser = view.findViewById(R.id.cv_remove_user_set);
+
         if(person.getUserName().equals("root")){
             cardRemoveUser.setVisibility(View.GONE);
         }
@@ -88,9 +92,6 @@ public class SettingsFragment extends Fragment {
             }
         });
         //cardPurchases = view.findViewById(R.id.cv_purchase_set);
-        cardServices = view.findViewById(R.id.cv_services_set);
-        cardLogout = view.findViewById(R.id.cv_logout_set);
-        cardRemoveUser = view.findViewById(R.id.cv_remove_user_set);
 
         cardLogout.setOnClickListener(new View.OnClickListener() {
             @Override
