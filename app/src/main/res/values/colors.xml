@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#0c4591</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name='darkSalmon'>#E9967A</color>
@@ -46,3 +46,4 @@
     <color name="colorFotoDigitalBlue">#0c4591</color>
 
 </resources>
+<!--<color name="colorPrimary">#008577</color>-->

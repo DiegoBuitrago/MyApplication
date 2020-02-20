@@ -2,7 +2,11 @@ package com.dd.guerrerobuitrago.fotoAppDigital;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.usage.NetworkStats;
 import android.content.Intent;
+import android.net.Network;
+import android.net.NetworkInfo;
+import android.net.NetworkSpecifier;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -31,6 +36,7 @@ public class Open extends AppCompatActivity {
 
     private static int SPLASH_TIME = 3000;
     private ProgressBar progressBar;
+    private boolean myConexion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +49,12 @@ public class Open extends AppCompatActivity {
 
         new Manager();
 
-
-
-
         progressBar = findViewById(R.id.progressBar);
 
         progressBar.setVisibility(View.VISIBLE);
 
-        new Handler().postDelayed(new Runnable() {
+        initSplash();
 
-            @Override
-            public void run() {
-
-                getLogIn();
-                MyConexion.loadPerson();
-                MyConexion.loadMessage();
-                MyConexion.loadProduct();
-                MyConexion.loadPromotion();
-                finish();
-                progressBar.setVisibility(View.GONE);
-            }
-        },SPLASH_TIME);
 
 //        ImageView btnIsOpen = findViewById(R.id.btnIsOpen);
 //        btnIsOpen.setOnClickListener(new View.OnClickListener(){
@@ -85,5 +76,28 @@ public class Open extends AppCompatActivity {
         startActivity(logInIntent);
     }
 
+    private void conexioRed(){
+        if ((Manager.getPersonList().size() > 1)){
+            this.myConexion = true;
+        }else{
+            Toast.makeText(getBaseContext(), "Comprueba tu conexion a internet", Toast.LENGTH_LONG).show();
+            this.myConexion = false;
+        }
+    }
 
+    private void initSplash(){
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                getLogIn();
+                MyConexion.loadPerson();
+                MyConexion.loadMessage();
+                MyConexion.loadProduct();
+                MyConexion.loadPromotion();
+                finish();
+                progressBar.setVisibility(View.GONE);
+            }
+        },SPLASH_TIME);
+    }
 }
