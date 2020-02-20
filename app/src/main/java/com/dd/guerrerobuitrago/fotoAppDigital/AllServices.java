@@ -2,8 +2,10 @@ package com.dd.guerrerobuitrago.fotoAppDigital;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +24,8 @@ public class AllServices extends AppCompatActivity {
     private RecyclerView rvServices;
     private AllServicesRVAdapter rvAdapter;
 
+    private ImageButton backButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,13 @@ public class AllServices extends AppCompatActivity {
     }
 
     private void initComponents() {
+        backButton = findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         rvServices = findViewById(R.id.rv_all_services);
         initRecyclerView();
     }

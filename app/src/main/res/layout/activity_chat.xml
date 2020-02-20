@@ -5,6 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Chat">
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/back_icon"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
         android:id="@+id/txtHeaderChat"
         android:layout_width="match_parent"
@@ -12,7 +25,6 @@
         android:fontFamily="cursive"
         android:paddingVertical="10dp"
         android:text="Mensajes"
-        android:background="@color/md_blue_grey_400"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="30sp"
@@ -24,7 +36,7 @@
         android:id="@+id/rv_chat_message"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/chat_back"
+        android:background="@drawable/chat_background"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

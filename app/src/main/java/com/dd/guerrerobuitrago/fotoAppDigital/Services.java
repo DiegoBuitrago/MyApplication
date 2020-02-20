@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 
 import com.androidnetworking.AndroidNetworking;
 import com.dd.guerrerobuitrago.fotoAppDigital.adapters.ServicesRVAdapter;
@@ -20,6 +22,7 @@ public class Services extends AppCompatActivity {
 
     private RecyclerView rvServices;
     private ServicesRVAdapter rvAdapter;
+    private ImageButton backButton;
 
     private String userName;
     private ArrayList<Booked> listBooked;
@@ -37,6 +40,13 @@ public class Services extends AppCompatActivity {
     }
 
     private void initComponents() {
+        backButton = findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         rvServices = findViewById(R.id.rv_services);
         Intent i = getIntent();
         userName = i.getSerializableExtra("userr").toString();

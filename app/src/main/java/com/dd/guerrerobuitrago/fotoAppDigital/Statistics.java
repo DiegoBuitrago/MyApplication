@@ -3,6 +3,8 @@ package com.dd.guerrerobuitrago.fotoAppDigital;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
@@ -12,7 +14,7 @@ public class Statistics extends AppCompatActivity {
     private TextView txtNumberClients;
     private TextView txtNumberEmployees;
     private TextView txtNumberAdmins;
-
+    private ImageButton backButton;
 
     private int countClients;
     private int countEmployees;
@@ -30,6 +32,15 @@ public class Statistics extends AppCompatActivity {
         countClients = 0;
         countEmployees = 0;
         countAdmins = 0;
+
+        backButton = findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         txtNumberClients = findViewById(R.id.set_number_clients);
         txtNumberEmployees = findViewById(R.id.set_number_employees);
         txtNumberAdmins = findViewById(R.id.set_number_Admins);
