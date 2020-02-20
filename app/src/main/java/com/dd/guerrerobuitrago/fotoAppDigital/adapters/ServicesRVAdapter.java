@@ -35,7 +35,6 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
         TextView tvDate;
         TextView tvHour;
         TextView tvType;
-        private ImageButton btnDelete;
 
         public ServicesViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);
@@ -44,19 +43,6 @@ public class ServicesRVAdapter extends RecyclerView.Adapter<ServicesRVAdapter.Se
             tvDate = itemView.findViewById(R.id.tv_date_input_service);
             tvHour = itemView.findViewById(R.id.tv_hour_input_service);
             tvType = itemView.findViewById(R.id.tv_type_input_service);
-            btnDelete = itemView.findViewById(R.id.btn_delete_booked);
-            btnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            listener.onDeleteClick(position);
-
-                        }
-                    }
-                }
-            });
         }
     }
 

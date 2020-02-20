@@ -83,6 +83,7 @@ public class Open extends AppCompatActivity {
                 MyConexion.loadMessage();
                 MyConexion.loadProduct();
                 MyConexion.loadPromotion();
+                MyConexion.loadBooked();
                 finish();
                 progressBar.setVisibility(View.GONE);
             }

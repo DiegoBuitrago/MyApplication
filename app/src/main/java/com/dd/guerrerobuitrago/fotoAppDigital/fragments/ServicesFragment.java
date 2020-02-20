@@ -29,6 +29,7 @@ import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.TypeBooked;
+import com.dd.guerrerobuitrago.fotoAppDigital.utilities.MyConexion;
 
 import java.io.Console;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ import java.util.Calendar;
 public class ServicesFragment extends Fragment {
 
     private TextView txtDate;
+    private TextView txtDate1;
 
     private int myDay;
     private int myMonth;
@@ -70,6 +72,7 @@ public class ServicesFragment extends Fragment {
         View cvChat = view.findViewById(R.id.cv_chat);
         View cvStadistics = view.findViewById(R.id.cv_stadistics);
         View cvAllServeces = view.findViewById(R.id.cv_all_services);
+
         //cvSearch.setVisibility(View.GONE);
         if(person.getTypeUser().equals("Cliente")){
             cvSearch.setVisibility(View.GONE);
@@ -139,8 +142,8 @@ public class ServicesFragment extends Fragment {
         AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
         View mView = getLayoutInflater().inflate(R.layout.custom_dialog_booked_service, null);
 
-        Button btnChooseDate = mView.findViewById(R.id.btn_choose_date);
         txtDate = mView.findViewById(R.id.txt_date_service);
+        txtDate1 = mView.findViewById(R.id.txt_title_date_service);
         spHour = mView.findViewById(R.id.sp_hour_serivce);
 
         spTypeBooked = mView.findViewById(R.id.sp_type_service);
@@ -152,7 +155,15 @@ public class ServicesFragment extends Fragment {
         final AlertDialog alertDialog = alert.create();
         alertDialog.setCanceledOnTouchOutside(true);
 
-        btnChooseDate.setOnClickListener(new View.OnClickListener() {
+        txtDate1 = mView.findViewById(R.id.txt_title_date_service);
+        txtDate1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chooseDate(v);
@@ -205,6 +216,7 @@ public class ServicesFragment extends Fragment {
             myHour = spHour.getSelectedItem().toString();
             Booked booked = new Booked(Manager.getBookedList().size(), myYear, myMonth, myDay, myHour, myType, person);
             Manager.addBooked(booked);
+            MyConexion.loadDataBaseBooked(booked);
             Toast.makeText(getContext(), "Servicio creado", Toast.LENGTH_LONG).show();
             return true;
         }else{

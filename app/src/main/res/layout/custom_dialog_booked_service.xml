@@ -6,16 +6,6 @@
     android:padding="16dp"
     android:background="@color/md_blue_100">
 
-    <Button
-        android:id="@+id/btn_choose_date"
-        android:layout_width="163dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/btn_two"
-        android:text="@string/choose_date"
-        android:textColor="@color/colorWhite" />
-
     <TextView
         android:id="@+id/txt_title_date_service"
         android:layout_width="match_parent"

@@ -12,4 +12,5 @@ public enum TypeBooked {
     public String getMyName() {
         return myName;
     }
+
 }

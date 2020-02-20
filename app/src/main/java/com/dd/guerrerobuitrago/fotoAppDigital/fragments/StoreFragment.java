@@ -142,7 +142,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isImage){
-                    Product product = new Product(Manager.getSizeProductList(),txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri);
+                    Product product = new Product( Manager.getProductList().size(),txtInputNameProduct.getText().toString(),txtInputDesProduct.getText().toString(), uri);
                     if(product.getPhoto() != null) {
                         Manager.addProduct(product);
                         MyConexion.loadDataBaseProduct(product);

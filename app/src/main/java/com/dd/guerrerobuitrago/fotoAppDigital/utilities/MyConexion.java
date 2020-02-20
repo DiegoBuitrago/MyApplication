@@ -7,11 +7,13 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.Booked;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Manager;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Message;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Person;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Product;
 import com.dd.guerrerobuitrago.fotoAppDigital.models.Promotion;
+import com.dd.guerrerobuitrago.fotoAppDigital.models.TypeBooked;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -163,6 +165,99 @@ public class MyConexion {
                 });
     }
 
+    public static void loadBooked() {
+        AndroidNetworking.get("https://polar-plains-39256.herokuapp.com/SQLBooked_GET.php")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String respuesta = response.getString("respuesta");
+                            if(respuesta.equals("200")){
+                                JSONArray arrayMessage = response.getJSONArray("data");
+                                for (int i=0; i<arrayMessage.length();i++){
+                                    JSONObject jsonMessage = arrayMessage.getJSONObject(i);
+                                    int id = jsonMessage.getInt("id");
+                                    int year = jsonMessage.getInt("year");
+                                    int month = jsonMessage.getInt("month");
+                                    int day = jsonMessage.getInt("day");
+                                    String hour = jsonMessage.getString("hour");
+                                    String type = jsonMessage.getString("type");
+                                    int idPerson = jsonMessage.getInt("id_person");
+                                    Person person = null;
+                                    for(int j = 0; j < Manager.getPersonList().size(); j++) {
+                                        if (Manager.getPersonList().get(j).getId() == idPerson){
+                                            person = Manager.getPersonList().get(j);
+                                        }
+                                    }
+                                    TypeBooked myType = TypeBooked.PHOTO_DESIGN;
+                                    if(type.equals("Estudio a Diseño")){
+                                        myType = TypeBooked.PHOTO_DESIGN;
+                                    }else if(type.equals("Princesitas")){
+                                        myType = TypeBooked.STARS;
+                                    }else if(type.equals("Mameluco")){
+                                        myType = TypeBooked.MAMELUCO;
+                                    }
+                                    else if(type.equals("Estrellitas")){
+                                        myType = TypeBooked.STARS;
+                                    }
+                                    else if(type.equals("Sin Diseño")){
+                                        myType = TypeBooked.NO_DESIGN;
+                                    }
+                                    Manager.addBooked(new Booked(id,year,month,day,hour,myType,person));
+                                    Log.d("dc","dcsx");
+                                }
+                            }else{
+                                Log.e("Datos vacios", "Error");
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Error Consulta Json", "Error Consulta JSON");
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("Error consulta", "Error consulta metodo conexion onError");
+                    }
+                });
+    }
+
+    public static void loadDataBaseBooked(Booked booked){
+        Map<String,String> datos = new HashMap<>();
+        datos.put("id",String.valueOf(booked.getId()));
+        datos.put("year",String.valueOf(booked.getYear()));
+        datos.put("month", String.valueOf(booked.getMonth()));
+        datos.put("day", String.valueOf(booked.getDay()));
+        datos.put("hour", booked.getHour());
+        datos.put("type", booked.getTypeBooked().getMyName());
+        datos.put("idPerson", String.valueOf(booked.getOwner().getId()));
+        JSONObject jsonData = new JSONObject(datos);
+
+        AndroidNetworking.post("https://polar-plains-39256.herokuapp.com/SQLBooked_INSERT.php")
+                .addJSONObjectBody(jsonData)
+                .setPriority(Priority.MEDIUM)
+                .setContentType("application/json")
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String   state = response.getString("estado");
+                            Log.d("Estado","blablabla"+state);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("Error","blablablapromotion");
+                        }
+                    }
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("Error",anError.getErrorDetail());
+                    }
+                });
+    }
+
     public static void loadDataBasePromotion(Promotion promotion){
         Map<String,String> datos = new HashMap<>();
         datos.put("id",String.valueOf(promotion.getId_product()));
@@ -243,7 +338,7 @@ public class MyConexion {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            String   state = response.getString("estado");
+                            String state = response.getString("estado");
                             Log.d("Estado","blablabla"+state);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -388,4 +483,6 @@ public class MyConexion {
                     }
                 });
     }
+
+
 }

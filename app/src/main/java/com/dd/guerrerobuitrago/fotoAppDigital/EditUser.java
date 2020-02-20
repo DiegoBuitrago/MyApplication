@@ -127,14 +127,17 @@ public class EditUser extends AppCompatActivity {
 
     private void updateUser() {
         if(firstNameIsCorrect() && lastNameIsCorrect() && passwordIsCorrect()){
-            person.setFirstName(firstNameChange.getEditText().getText().toString());
-            person.setLastName(lastNameChange.getEditText().getText().toString());
-            person.setPassword(passwordChange.getEditText().getText().toString());
-            person.setPhoto(imageUri);
             MyConexion.updateDataBasePerson(person);
-            Manager.removePerson(person.getId());
-            Manager.addPerson(person);
-            goToHome(person);
+            for(int i = 0; i < Manager.getPersonList().size(); i++) {
+                if (person.getUserName().equals(Manager.getPersonList().get(i).getUserName())){
+                    Manager.getPersonList().get(i).setFirstName(firstNameChange.getEditText().getText().toString());
+                    Manager.getPersonList().get(i).setLastName(lastNameChange.getEditText().getText().toString());
+                    Manager.getPersonList().get(i).setPassword(passwordChange.getEditText().getText().toString());
+                    Manager.getPersonList().get(i).setPhoto(imageUri);
+                    goToHome(Manager.getPersonList().get(i));
+                    return;
+                }
+            }
         }
     }
 

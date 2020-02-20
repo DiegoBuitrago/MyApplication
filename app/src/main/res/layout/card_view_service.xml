@@ -98,18 +98,6 @@
                     android:textSize="23sp" />
 
             </LinearLayout>
-
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/btn_delete_booked"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/delete_product"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/remove" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
